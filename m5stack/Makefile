@@ -240,6 +240,7 @@ nvs:
 # Build the system and user filesystem firmware
 ifeq ($(TINY_FLAG),1)
 fs: build
+	@rm -rf $(BUILD)/base-files $(BUILD)/fs-user.bin
 	@if [ ! -d $(BUILD)/base-files ]; then \
 		mkdir -p $(BUILD)/base-files; \
 	fi
@@ -255,6 +256,7 @@ fs: build
 			$(BUILD)/partition_table/partition-table.bin
 else
 fs: build
+	@rm -rf $(BUILD)/fs-system $(BUILD)/fs-user $(BUILD)/fs-system.bin $(BUILD)/fs-user.bin
 	$(call system-files/install,fs/system,$(BUILD)/fs-system)
 	$(call system-files/install,boards/$(BOARD)/files/system,$(BUILD)/fs-system)
 	$(call system-files/install,fs/user,$(BUILD)/fs-user)
