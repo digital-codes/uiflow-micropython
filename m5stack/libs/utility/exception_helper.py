@@ -11,7 +11,11 @@ def print_error_msg(e: Exception, lcd=M5.Lcd) -> None:
     error_str = e_msg.read()
     # print error message to lcd
     lcd.setCursor(0, 0)
-    lcd.setTextColor(0xFF0000, 0x000000)
+    board_id = M5.getBoard()
+    if board_id is not M5.BOARD.M5PaperColor:
+        lcd.setTextColor(0xFF0000, 0x000000)
+    else:
+        lcd.setTextColor(0x000000, 0xFFFFFF)
     lcd.setFont(lcd.FONTS.Montserrat12)
     lcd.clear()
     lcd.print(error_str)

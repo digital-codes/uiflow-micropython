@@ -29,6 +29,8 @@ set(SDKCONFIG_DEFAULTS
     boards/sdkconfig.base
     boards/sdkconfig.ble
     boards/sdkconfig.240mhz
+    boards/sdkconfig.spiram
+    boards/sdkconfig.spiram_oct
     boards/sdkconfig.flash_16mb
     boards/sdkconfig.flash_qio
     boards/sdkconfig.freertos

@@ -67,11 +67,13 @@ class Startup:
 
     def __init__(self, network_type: str = "WIFI") -> None:
         self.network_type = network_type
+        print(f"Startup with network type: {network_type}")
         if network_type == "WIFI":
             try:
                 self.network = network.WLAN(network.STA_IF)
                 self.network.active(False)
                 self.network.active(True)
+                print("WiFi initialized")
             except RuntimeError:
                 raise RuntimeError(
                     "External WiFi Co-processor not detected, unable to use WiFi features."
@@ -135,8 +137,59 @@ def _is_psram():
     return True if sum > 520 * 1024 else False
 
 
+def _apply_boot_button_override(boot_opt, nvs):
+    if boot_opt != BOOT_OPT_MENU_NET:
+        M5.update()
+        if M5.BtnA.isPressed():
+            boot_opt = BOOT_OPT_MENU_NET
+            nvs.set_u8("boot_option", boot_opt)
+            # FIXME: remove this file is temporary solution
+            os.remove("/flash/main.py")
+    return boot_opt
+
+
+def _prepare_board(board_id):
+    if board_id != M5.BOARD.M5PaperColor:
+        M5.Lcd.clear()
+    if board_id == M5.BOARD.M5StickCPlus2:
+        from machine import Pin
+
+        pin4 = Pin(4, Pin.OUT)
+        pin4.value(1)
+    if board_id == M5.BOARD.M5Dial:
+        from machine import Pin
+
+        pin4 = Pin(46, Pin.OUT)
+        pin4.value(1)
+    if board_id in (
+        M5.BOARD.M5AtomS3U,
+        M5.BOARD.M5AtomS3Lite,
+        M5.BOARD.M5StampS3,
+        M5.BOARD.M5Capsule,
+    ):
+        # M5AtomS3U may fail to enter the AUTODETECT process, which will cause
+        # m5things to fail to obtain the board id.
+        nvs = esp32.NVS("M5GFX")
+        nvs.set_u32("AUTODETECT", board_id)
+        nvs.commit()
+
+
+def _connect_network_only(board_id, net_mode, ssid, pswd):
+    startup = Startup(network_type=net_mode)
+    lan_if = None
+    if board_id == M5.BOARD.M5Unit_PoEP4:
+        from driver.ip101gri import IP101GRI
+
+        lan_if = IP101GRI(mdc_pin=31, mdio_pin=52, power_pin=51)
+    elif board_id == M5.BOARD.M5StamPLC:
+        from stamplc import PoEStamPLC
+
+        lan_if = PoEStamPLC()
+    startup.connect_network(ssid, pswd, lan_if)
+
+
 def startup(boot_opt, timeout: int = 60) -> None:
-    M5.begin()
+    M5.begin({"clear_display": False})
     # Read saved Wi-Fi information from NVS
     nvs = esp32.NVS("uiflow")
     net_mode = nvs.get_str("net_mode")
@@ -153,38 +206,10 @@ def startup(boot_opt, timeout: int = 60) -> None:
     except:
         pass
 
-    if boot_opt != BOOT_OPT_MENU_NET:
-        M5.update()
-        if M5.BtnA.isPressed():
-            boot_opt = BOOT_OPT_MENU_NET
-            nvs.set_u8("boot_option", boot_opt)
-            # FIXME: remove this file is temporary solution
-            os.remove("/flash/main.py")
+    boot_opt = _apply_boot_button_override(boot_opt, nvs)
 
     board_id = M5.getBoard()
-    # Special operations for some devices
-    if board_id == M5.BOARD.M5StickCPlus2:
-        from machine import Pin
-
-        pin4 = Pin(4, Pin.OUT)
-        pin4.value(1)
-    if board_id == M5.BOARD.M5Dial:
-        from machine import Pin
-
-        pin4 = Pin(46, Pin.OUT)
-        pin4.value(1)
-
-    if board_id in (
-        M5.BOARD.M5AtomS3U,
-        M5.BOARD.M5AtomS3Lite,
-        M5.BOARD.M5StampS3,
-        M5.BOARD.M5Capsule,
-    ):
-        # M5AtomS3U may fail to enter the AUTODETECT process, which will cause
-        # m5things to fail to obtain the board id.
-        nvs = esp32.NVS("M5GFX")
-        nvs.set_u32("AUTODETECT", board_id)
-        nvs.commit()
+    _prepare_board(board_id)
 
     # Do nothing
     if boot_opt is BOOT_OPT_NOTHING:
@@ -399,19 +424,14 @@ def startup(boot_opt, timeout: int = 60) -> None:
 
             stackchan = StackChan_Startup()
             stackchan.startup(ssid, pswd, timeout=timeout)
+        elif board_id == M5.BOARD.M5PaperColor:
+            from .papercolor import PaperColor_Startup
+
+            papercolor = PaperColor_Startup()
+            papercolor.startup(ssid, pswd, timeout=timeout)
 
     # Only connect to network, not show any menu
     elif boot_opt is BOOT_OPT_NETWORK:
-        startup = Startup(network_type=net_mode)
-        lan_if = None
-        if board_id == M5.BOARD.M5Unit_PoEP4:
-            from driver.ip101gri import IP101GRI
-
-            lan_if = IP101GRI(mdc_pin=31, mdio_pin=52, power_pin=51)
-        elif board_id == M5.BOARD.M5StamPLC:
-            from stamplc import PoEStamPLC
-
-            lan_if = PoEStamPLC()
-        startup.connect_network(ssid, pswd, lan_if)
+        _connect_network_only(board_id, net_mode, ssid, pswd)
     else:
         print("Boot options not processed.")

@@ -71,6 +71,7 @@ extern "C" {
     {
         auto cfg = M5.config();
         cfg.output_power = false;
+        cfg.clear_display = false;
         M5.begin(cfg);
         M5.In_I2C.release();
         in_i2c_init();

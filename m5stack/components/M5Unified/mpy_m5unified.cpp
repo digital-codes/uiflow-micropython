@@ -589,9 +589,6 @@ mp_obj_t m5_begin(size_t n_args, const mp_obj_t *args) {
     }
     #endif
 
-    if (cfg.clear_display) {
-        M5.Display.clear();
-    }
     // default display
     m5_display.gfx = (void *)(&(M5.Display));
     // set default font to Montserrat 12, keep same style with UIFlow website UI design.
