@@ -100,6 +100,7 @@ class PaperColorCloudApp(AppBase):
         self._logged_wifi_connected = False
         self._logged_ip = None
         self._logged_pair_code = None
+        self._wait_stage = None
 
     def on_launch(self):
         M5.Lcd.setRotation(1)
@@ -170,6 +171,30 @@ class PaperColorCloudApp(AppBase):
             print(f"Pair code: {state['pair_code']}")
             self._logged_pair_code = state["pair_code"]
 
+    def _log_wait_stage(self, state) -> None:
+        if not state["wifi_ok"]:
+            stage = "wifi"
+            message = f"Waiting for Wi-Fi connection: {self._ssid}"
+        elif not _HAS_SERVER:
+            stage = "server-unavailable"
+            message = "Waiting for server skipped: M5Things unavailable"
+        elif not state["cloud_ok"] and not state["pair_code"]:
+            cloud_status = M5Things.status()
+            if cloud_status != 2:
+                stage = "server"
+                message = "Waiting for server connection"
+            else:
+                stage = "pair-code"
+                message = "Waiting for pair code"
+        else:
+            stage = None
+            message = None
+
+        if stage != self._wait_stage:
+            self._wait_stage = stage
+            if message:
+                print(message)
+
     def _log_refresh_reason(self, old_payload, new_payload, reason: str) -> None:
         if old_payload is None:
             print(f"Screen refresh: {reason} (initial)")
@@ -225,6 +250,7 @@ class PaperColorCloudApp(AppBase):
         while time.ticks_diff(time.ticks_ms(), start) < self._timeout * 1000:
             state = self._collect_state()
             self._log_state_events(state)
+            self._log_wait_stage(state)
             if state["cloud_ok"]:
                 self._had_pair_code = True
                 return state, False
@@ -284,6 +310,24 @@ class PaperColor_Startup:
     def __init__(self) -> None:
         self._wifi = Startup()
 
+    def _show_no_wifi_config(self) -> None:
+        M5.Lcd.setRotation(1)
+        M5.Lcd.setEpdMode(M5.Lcd.EPDMode.EPD_FASTEST)
+
+        cloud_app = PaperColorCloudApp((self._wifi, "", 0))
+        state = {
+            "wifi_ok": False,
+            "cloud_ok": False,
+            "pair_code": "",
+            "nick_name": "-",
+            "ip_addr": "",
+        }
+        cloud_app._render_if_changed(
+            cloud_app._screen_payload(state, "NO WIFI", nick_name="NOT CONFIGURED"),
+            "wifi not configured",
+        )
+        print("Wi-Fi not configured")
+
     def startup(
         self,
         ssid: str,
@@ -295,6 +339,10 @@ class PaperColor_Startup:
         dns: str = "",
         timeout: int = 60,
     ) -> None:
+        if not ssid:
+            self._show_no_wifi_config()
+            return
+
         self._wifi.connect_network(
             ssid, pswd, protocol=protocol, ip=ip, netmask=netmask, gateway=gateway, dns=dns
         )
