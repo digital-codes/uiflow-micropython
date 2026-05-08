@@ -14,7 +14,7 @@ fi
 # code formatting
 
 function uncrustify_setup {
-    if [ uncrustify --version | grep -q "Uncrustify-0.72.0_f" ]; then
+    if command -v uncrustify >/dev/null 2>&1 && uncrustify --version | grep -q "Uncrustify-0.72.0_f"; then
         echo "uncrustify 0.72.0 is already installed."
         return 0
     fi
@@ -331,14 +331,71 @@ function ci_hat_build {
 }
 
 
-function ci_esp32_nightly_build {
-    REQUIRED_VERSION="3.28.3"
-    CURRENT_VERSION=$(cmake --version | head -n1 | awk '{print $3}')
+CI_ESP32_NIGHTLY_M5STACK_BOARDS="
+M5STACK_AirQ
+M5STACK_Atom_Echo
+M5STACK_Atom_Lite
+M5STACK_Atom_Matrix
+M5STACK_Atom_EchoS3R
+M5STACK_AtomS3
+M5STACK_AtomS3_Lite
+M5STACK_AtomS3R
+M5STACK_AtomS3R_CAM
+M5STACK_AtomS3U
+M5STACK_AtomU
+M5STACK_Basic
+M5STACK_Basic_4MB
+M5STACK_Capsule
+M5STACK_Cardputer
+M5STACK_CardputerADV
+M5STACK_Core2
+M5STACK_CoreInk
+M5STACK_CoreS3
+M5STACK_StackChan
+M5STACK_Dial
+M5STACK_DinMeter
+M5STACK_DualKey
+M5STACK_Fire
+M5STACK_NanoC6
+M5STACK_Paper
+M5STACK_PaperS3
+M5STACK_PowerHub
+M5STACK_Stamp_PICO
+M5STACK_StamPLC
+M5STACK_StampS3
+M5STACK_Station
+M5STACK_StickC
+M5STACK_StickC_PLUS
+M5STACK_StickC_PLUS2
+M5STACK_Tab5
+M5STACK_Tough
+M5STACK_Unit_C6L
+Nesso_N1
+M5STACK_StickS3
+M5STACK_Unit_PoEP4
+M5STACK_StampS3Bat
+M5STACK_StampP4
+"
 
-    if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$CURRENT_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
-        echo "❌ CMake version $CURRENT_VERSION is too old! Require >= $REQUIRED_VERSION"
+CI_ESP32_NIGHTLY_THIRD_PARTY_BOARDS="
+ESPRESSIF_ESP32_S3_BOX_3
+SEEED_STUDIO_XIAO_ESP32S3
+"
+
+function ci_esp32_require_cmake_version {
+    local required_version="${1:-3.28.3}"
+    local current_version
+
+    current_version=$(cmake --version | head -n1 | awk '{print $3}')
+
+    if [ "$(printf '%s\n' "$required_version" "$current_version" | sort -V | head -n1)" != "$required_version" ]; then
+        echo "❌ CMake version $current_version is too old! Require >= $required_version"
         exit 1
     fi
+}
+
+function ci_esp32_prepare_build_env {
+    ci_esp32_require_cmake_version 3.28.3
     source esp-idf/export.sh
     pip install future
     make ${MAKEOPTS} -C m5stack unpatch
@@ -346,50 +403,26 @@ function ci_esp32_nightly_build {
     make ${MAKEOPTS} -C m5stack patch
     make ${MAKEOPTS} -C m5stack littlefs
     make ${MAKEOPTS} -C m5stack mpy-cross
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AirQ pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Atom_Echo pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Atom_Lite pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Atom_Matrix pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Atom_EchoS3R pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AtomS3 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AtomS3_Lite pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AtomS3R pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AtomS3R_CAM pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AtomS3U pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_AtomU pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Basic pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Basic_4MB pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Capsule pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Cardputer pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_CardputerADV pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Core2 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_CoreInk pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_CoreS3 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StackChan pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Dial pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_DinMeter pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Fire pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_NanoC6 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Paper pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_PaperS3 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_PowerHub pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Stamp_PICO pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StamPLC pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StampS3 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Station pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StickC pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StickC_PLUS pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StickC_PLUS2 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Tab5 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Tough pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Unit_C6L pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=Nesso_N1 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StickS3 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_Unit_PoEP4 pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StampS3Bat pack_all
-    make ${MAKEOPTS} -C m5stack BOARD=M5STACK_StampP4 pack_all
-    make ${MAKEOPTS} -C third-party BOARD=ESPRESSIF_ESP32_S3_BOX_3 pack_all
-    make ${MAKEOPTS} -C third-party BOARD=SEEED_STUDIO_XIAO_ESP32S3 pack_all
+}
+
+function ci_esp32_build_board_list {
+    local build_root="$1"
+    local board_list="$2"
+    local board
+
+    if [ -z "$board_list" ]; then
+        return 0
+    fi
+
+    for board in $board_list; do
+        make ${MAKEOPTS} -C "$build_root" BOARD="$board" pack_all
+    done
+}
+
+function ci_esp32_nightly_build {
+    ci_esp32_prepare_build_env
+    ci_esp32_build_board_list m5stack "$CI_ESP32_NIGHTLY_M5STACK_BOARDS"
+    ci_esp32_build_board_list third-party "$CI_ESP32_NIGHTLY_THIRD_PARTY_BOARDS"
 }
 
 # BELOW PLATFORM NOT SUPPORTED FOR NOW, MAYBE SUPPORT IN THE FUTURE
