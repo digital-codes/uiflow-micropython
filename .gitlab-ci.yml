@@ -49,6 +49,16 @@ stages:
 code-format:
   stage: code_format
   interruptible: true
+  rules:
+    - changes:
+        - m5stack/**/*
+        - third-party/**/*
+        - micropython/**/*
+        - tools/ci.sh
+        - pyproject.toml
+        - .pre-commit-config.yaml
+        - .gitlab-ci.yml
+    - when: never
   before_script:
     - export PATH="$HOME/.local/bin:$PATH"
   script:
@@ -64,6 +74,14 @@ code-format:
 
 build-firmware:
   extends: .build_firmware_template
+  rules:
+    - changes:
+        - m5stack/**/*
+        - third-party/**/*
+        - micropython/**/*
+        - tools/ci.sh
+        - .gitlab-ci.yml
+    - when: never
   parallel:
     matrix:
       - SHARD_NAME: ["esp32-list1"] # 11 boards
@@ -124,6 +142,12 @@ build-firmware:
 build-docs:
   stage: docs
   interruptible: true
+  rules:
+    - changes:
+        - docs/**/*
+        - m5stack/libs/**/*
+        - .gitlab-ci.yml
+    - when: never
   script:
     - echo "Building the documentation..."
     - cd docs
