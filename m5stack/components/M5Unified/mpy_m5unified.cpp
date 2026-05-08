@@ -307,7 +307,8 @@ mp_obj_t m5_add_display(mp_obj_t i2c_bus_in, mp_obj_t addr_in, mp_obj_t dict) {
             if (strcmp(key_str, "module_display") == 0) {
                 M5ModuleDisplay::config_t cfg;
                 m5_config_helper_module_display(value, cfg);
-                if (board == m5::board_t::board_M5Stack || board == m5::board_t::board_M5StackCore2 || board == m5::board_t::board_M5Tough || board == m5::board_t::board_M5StackCoreS3) {
+                if (board == m5::board_t::board_M5Stack || board == m5::board_t::board_M5StackCore2 || board == m5::board_t::board_M5Tough
+                    || board == m5::board_t::board_M5StackCoreS3 || board == m5::board_t::board_M5StackChan) {
                     M5ModuleDisplay dsp(cfg);
                     if (dsp.init()) {
                         M5.addDisplay(dsp);

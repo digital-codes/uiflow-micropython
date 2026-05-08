@@ -1,0 +1,116 @@
+.. |StackChan| image:: https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1205/K151_stack_chan_main_pictures_01.webp
+    :target: https://docs.m5stack.com/en/products/sku/K151
+    :height: 200px
+    :width: 200px
+
+
+
+
+.. |stackchan_servo_zero_calibrate.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_servo_zero_calibrate_example.png
+.. |stackchan_servo_read_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_servo_read_example.png
+.. |stackchan_servo_control_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_servo_control_example.png
+.. |stackchan_face_tracking_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_face_tracking_example.png
+.. |stackchan_servo_power_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_servo_power_example.png
+.. |stackchan_power_monitor_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_power_monitor_example.png
+.. |stackchan_tp_rgb_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_tp_rgb_example.png
+.. |stackchan_nfc_detect_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_nfc_detect_example.png
+.. |stackchan_ir_tx_rx_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stackchan/stackchan_ir_tx_rx_example.png
+
+.. |stackchan_api_init.png| image:: https://static-cdn.m5stack.com/mpy_docs/system/system/stackchan_init.png
+.. |stackchan_api_get_battery_voltage.png| image:: https://static-cdn.m5stack.com/mpy_docs/system/power/get_battery_voltage.png
+.. |stackchan_api_get_battery_current.png| image:: https://static-cdn.m5stack.com/mpy_docs/system/power/get_battery_current.png
+.. |stackchan_api_get_battery_power.png| image:: https://static-cdn.m5stack.com/mpy_docs/system/power/get_battery_power.png
+.. |stackchan_api_set_rgb_color_all.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/rgb/set_rgb_color_all.png
+.. |stackchan_api_set_rgb_color_strip.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/rgb/set_rgb_color_strip.png
+.. |stackchan_api_set_rgb_color.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/rgb/set_rgb_color.png
+.. |stackchan_api_get_rgb_color.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/rgb/get_rgb_color.png
+.. |stackchan_api_get_touch_all.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/touch_pad/get_touch_all.png
+.. |stackchan_api_get_touch.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/touch_pad/get_touch.png
+.. |stackchan_api_set_servo_power.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/set_servo_power.png
+.. |stackchan_api_set_servo_torque.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/set_servo_torque.png
+.. |stackchan_api_set_servo_x_pwm.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/set_servo_x_pwm.png
+.. |stackchan_api_set_servo_zero.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/set_servo_zero.png
+.. |stackchan_api_get_servo_angle.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/get_servo_angle.png
+.. |stackchan_api_set_servo_angle_time.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/set_servo_angle_time.png
+.. |stackchan_api_set_servo_angle_speed.png| image:: https://static-cdn.m5stack.com/mpy_docs/hardware/servo/set_servo_angle_speed.png
+
+.. |stackchan_servo_zero_calibrate.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_servo_zero_calibrate.m5f2"
+        target="_blank"
+    >
+        stackchan_servo_zero_calibrate.m5f2
+    </a>
+
+.. |stackchan_servo_read_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_servo_read_example.m5f2"
+        target="_blank"
+    >
+        stackchan_servo_read_example.m5f2
+    </a>
+
+.. |stackchan_servo_control_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_servo_control_example.m5f2"
+        target="_blank"
+    >
+        stackchan_servo_control_example.m5f2
+    </a>
+
+.. |stackchan_face_tracking_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_face_tracking_example.m5f2"
+        target="_blank"
+    >
+        stackchan_face_tracking_example.m5f2
+    </a>
+
+.. |stackchan_servo_power_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_servo_power_example.m5f2"
+        target="_blank"
+    >
+        stackchan_servo_power_example.m5f2
+    </a>
+
+.. |stackchan_power_monitor_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_power_monitor_example.m5f2"
+        target="_blank"
+    >
+        stackchan_power_monitor_example.m5f2
+    </a>
+
+.. |stackchan_tp_rgb_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_tp_rgb_example.m5f2"
+        target="_blank"
+    >
+        stackchan_tp_rgb_example.m5f2
+    </a>
+
+.. |stackchan_nfc_detect_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_nfc_detect_example.m5f2"
+        target="_blank"
+    >
+        stackchan_nfc_detect_example.m5f2
+    </a>
+
+.. |stackchan_ir_tx_rx_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stackchan/stackchan_ir_tx_rx_example.m5f2"
+        target="_blank"
+    >
+        stackchan_ir_tx_rx_example.m5f2
+    </a>

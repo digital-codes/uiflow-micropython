@@ -92,7 +92,7 @@ endif()
 # Include main IDF cmake file.
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 
-if (M5_CAMERA_MODULE_ENABLE AND BOARD_TYPE STREQUAL "cores3")
+if (M5_CAMERA_MODULE_ENABLE AND (BOARD_TYPE STREQUAL "cores3" OR BOARD_TYPE STREQUAL "stackchan"))
 list(APPEND EXTRA_COMPONENT_DIRS 
     components/esp_dl/esp-dl
     components/esp_dl/models/human_face_detect

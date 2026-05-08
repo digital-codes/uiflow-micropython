@@ -57,9 +57,15 @@ class Framework:
             self._last_app = self._launcher
 
         self.i2c0 = machine.I2C(0, scl=machine.Pin(1), sda=machine.Pin(2), freq=100000)
-        self._kb = CardKBUnit(self.i2c0)
+        self._kb = None
         self._event = KeyEvent()
         self._kb_status = False
+        # CardKB I2C address 0x5F — only attach when present (avoids init error on Grove port)
+        if 0x5F in self.i2c0.scan():
+            try:
+                self._kb = CardKBUnit(self.i2c0)
+            except Exception:
+                self._kb = None
 
         last_touch_time = time.ticks_ms()
         while True:
@@ -91,19 +97,20 @@ class Framework:
                                 await app._click_event_handler(x, y, self)
                     last_touch_time = time.ticks_ms()
 
-            try:
-                if self._kb.is_pressed():
-                    M5.Speaker.playWavFile("/system/common/wav/click.wav")
-                    self._event.key = self._kb.get_key()
-                    self._event.status = False
-                    await self.handle_input(self._event)
-                if self._kb_status is False:
-                    M5.Speaker.playWavFile("/system/common/wav/insert.wav")
-                    self._kb_status = True
-            except OSError:
-                if self._kb_status is True:
-                    M5.Speaker.playWavFile("/system/common/wav/remove.wav")
-                    self._kb_status = False
+            if self._kb is not None:
+                try:
+                    if self._kb.is_pressed():
+                        M5.Speaker.playWavFile("/system/common/wav/click.wav")
+                        self._event.key = self._kb.get_key()
+                        self._event.status = False
+                        await self.handle_input(self._event)
+                    if self._kb_status is False:
+                        M5.Speaker.playWavFile("/system/common/wav/insert.wav")
+                        self._kb_status = True
+                except OSError:
+                    if self._kb_status is True:
+                        M5.Speaker.playWavFile("/system/common/wav/remove.wav")
+                        self._kb_status = False
 
             await asyncio.sleep_ms(10)
 

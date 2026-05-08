@@ -23,6 +23,7 @@ package(
         "sdcard.py",
         "sen55.py",
         "sht30.py",
+        "stackchan.py",
     ),
     base_path="..",
     # opt=2,

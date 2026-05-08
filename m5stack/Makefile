@@ -52,7 +52,8 @@ boards := \
 	M5STACK_StickS3:sticks3          \
 	M5STACK_Unit_PoEP4:unit_poep4    \
 	M5STACK_StampS3Bat:stamps3bat    \
-	M5STACK_StampP4:stampp4
+	M5STACK_StampP4:stampp4          \
+	M5STACK_StackChan:stackchan
 
 define find_board
 $(if $(filter $(1):%,$(boards)),$(word 2,$(subst :, ,$(filter $(1):%,$(boards)))),none)
@@ -101,7 +102,8 @@ BOARD_TYPE_DEF := \
 	sticks3     \
 	unit_poep4  \
 	stamps3bat  \
-	stampp4
+	stampp4     \
+	stackchan
 
 # Select the board type to build, default is None
 # This value affects which folder in the "./fs/system/" directory is pack into "fs-system.bin"
@@ -346,7 +348,6 @@ M5UNIFIED_PATCH_SERIES = \
 	2010-Support-Nesso-N1.patch \
 	2018-fix-Rtc-setAlarmIRQ.patch \
 	2019-fix-touch-sensor.patch \
-	2022-Fix-compilation-error-on-non-S3-boards.patch
 
 ADF_PATCH_SERIES = \
 	3003-modify-i2s_stream_idf5.5.patch

@@ -19,3 +19,4 @@ Controllers
     nesso-n1.rst
     unit_c6l.rst
     sticks3.rst
+    stackchan.rst

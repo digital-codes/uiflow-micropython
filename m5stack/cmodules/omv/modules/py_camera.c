@@ -30,7 +30,7 @@
 
 #define TAG "camera"
 
-#if BOARD_ID == 10  // CoreS3
+#if BOARD_ID == 10 || BOARD_ID == 27  // CoreS3, StackChan
 
 #define CORES3_CAMERA_POWER_DOWN_PIN -1
 #define CORES3_CAMERA_RESET_PIN      -1

@@ -394,6 +394,11 @@ def startup(boot_opt, timeout: int = 60) -> None:
 
             stampp4 = StampP4_Startup()
             stampp4.startup(net_mode, ssid, pswd, protocol, ip, netmask, gateway, dns, timeout)
+        elif board_id == M5.BOARD.M5StackChan:
+            from .stackchan import StackChan_Startup
+
+            stackchan = StackChan_Startup()
+            stackchan.startup(ssid, pswd, timeout=timeout)
 
     # Only connect to network, not show any menu
     elif boot_opt is BOOT_OPT_NETWORK:

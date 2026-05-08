@@ -13,7 +13,7 @@ endif()
 include(${CMAKE_CURRENT_LIST_DIR}/m5utils/m5utils.cmake)
 
 if (M5_CAMERA_MODULE_ENABLE)
-    if (BOARD_TYPE STREQUAL "cores3")
+    if (BOARD_TYPE STREQUAL "cores3" OR BOARD_TYPE STREQUAL "stackchan")
         # Add OMV modules
         include(${CMAKE_CURRENT_LIST_DIR}/omv/micropython.cmake)
     else()

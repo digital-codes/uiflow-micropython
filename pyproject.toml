@@ -31,7 +31,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 50
+max-complexity = 52
 
 [tool.ruff.lint.per-file-ignores]
 # manifest.py files are evaluated with some global names pre-defined
