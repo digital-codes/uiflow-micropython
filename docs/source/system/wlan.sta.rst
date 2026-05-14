@@ -45,22 +45,23 @@ Methods
     When called with no argument the return value describes the network link status.
     The possible statuses are defined as constants:
 
-        * ``STAT_IDLE`` -- no connection and no activity,
-        * ``STAT_CONNECTING`` -- connecting in progress,
-        * ``STAT_WRONG_PASSWORD`` -- failed due to incorrect password,
-        * ``STAT_NO_AP_FOUND`` -- failed because no access point replied,
-        * ``STAT_CONNECT_FAIL`` -- failed due to other problems,
-        * ``STAT_GOT_IP`` -- connection successful.
+        * ``STAT_IDLE(1000)`` -- no connection and no activity,
+        * ``STAT_CONNECTING(1001)`` -- connecting in progress,
+        * ``STAT_WRONG_PASSWORD(202)`` -- failed due to incorrect password,
+        * ``STAT_NO_AP_FOUND(201)`` -- failed because no access point replied,
+        * ``STAT_CONNECT_FAIL(203)`` -- failed due to other problems,
+        * ``STAT_GOT_IP(1010)`` -- connection successful.
 
     When called with one argument *param* should be a string naming the status
     parameter to retrieve.  
     
-    Supported parameters in WiFI STA mode are: ``'rssi'``.
+    Supported parameters in WiFI STA mode are: ``rssi`` will returns a signal strength indicator value.
 
     UIFLOW2:
 
         |get_rssi.png|
 
+        |get_status.png|
 
 .. method:: WLAN.isconnected()
    :noindex:
