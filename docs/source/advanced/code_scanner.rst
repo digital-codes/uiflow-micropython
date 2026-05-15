@@ -10,7 +10,7 @@ code_scanner
 
 ``code_scanner`` module for qrcode scanning recognition 
 
-Micropython Example 
+Micropython Example
 -------------------
 
 qrcode detect 
