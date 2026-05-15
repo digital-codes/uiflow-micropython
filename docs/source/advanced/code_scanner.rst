@@ -1,5 +1,5 @@
 code_scanner 
-===============================
+============
 
 .. include:: ../refs/advanced.code_scanner.ref
 
@@ -11,10 +11,10 @@ code_scanner
 ``code_scanner`` module for qrcode scanning recognition 
 
 Micropython Example 
---------------------------------
+-------------------
 
 qrcode detect 
-++++++++++++++++++++++++++++
++++++++++++++
 
     .. literalinclude:: ../../../examples/advanced/code_scanner/qrcode_detect_example.py
         :language: python
@@ -22,10 +22,10 @@ qrcode detect
  
 
 UIFlow2.0 Example 
---------------------------------
+-----------------
 
 qrcode detect 
-++++++++++++++++++++++++++++
++++++++++++++
 
     |qrcode_detect_example.png|
 
@@ -33,10 +33,9 @@ qrcode detect
 
     |qrcode_detect_example.m5f2|
 
- 
 
 Methods
---------------------------------
+-------
 
 .. method:: find_qrcodes(img: image.Image) -> image.qrcode
 
