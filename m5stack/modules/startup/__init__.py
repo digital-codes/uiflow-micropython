@@ -189,7 +189,7 @@ def _connect_network_only(board_id, net_mode, ssid, pswd):
 
 
 def startup(boot_opt, timeout: int = 60) -> None:
-    M5.begin({"clear_display": False})
+    M5.begin()
     # Read saved Wi-Fi information from NVS
     nvs = esp32.NVS("uiflow")
     net_mode = nvs.get_str("net_mode")
