@@ -44,7 +44,10 @@ class NeoPixel:
         self.n = n
         self.bpp = bpp
         self.buf = bytearray(n * bpp)
-        self.pin.init(pin.OUT)
+        # Drive LOW immediately so the first bitstream call sees a clean
+        # WS2812 reset, even if this pin was previously used as I2C SDA
+        # (e.g. AtomS3 Lite Port A G2, Fire Port A G21) and left HIGH by pull-up.
+        self.pin.init(pin.OUT, value=0)
         self.timing = (
             ((400, 850, 800, 450) if timing else (800, 1700, 1600, 900))
             if isinstance(timing, int)
