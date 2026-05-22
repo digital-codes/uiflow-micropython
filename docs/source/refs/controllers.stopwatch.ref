@@ -1,0 +1,33 @@
+.. |StopWatch| image:: https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1242/C152_stopwatch_mainpictures_01.webp
+    :target: https://docs.m5stack.com/en/products/sku/C152
+
+.. |stopwatch_rtc_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stopwatch/stopwatch_rtc_example.png
+.. |stopwatch_power_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stopwatch/stopwatch_power_example.png
+.. |stopwatch_aduio_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/controllers/stopwatch/stopwatch_aduio_example.png
+
+.. |stopwatch_rtc_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stopwatch/stopwatch_rtc_example.m5f2"
+        target="_blank"
+    >
+        stopwatch_rtc_example.m5f2
+    </a>
+
+.. |stopwatch_power_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stopwatch/stopwatch_power_example.m5f2"
+        target="_blank"
+    >
+        stopwatch_power_example.m5f2
+    </a>
+
+.. |stopwatch_aduio_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/controllers/stopwatch/stopwatch_aduio_example.m5f2"
+        target="_blank"
+    >
+        stopwatch_aduio_example.m5f2
+    </a>

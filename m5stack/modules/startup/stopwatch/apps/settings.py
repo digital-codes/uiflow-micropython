@@ -1,0 +1,529 @@
+# SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+#
+# SPDX-License-Identifier: MIT
+
+from .. import app_base
+import M5
+import widgets
+import esp32
+from . import status_bar
+from unit import KeyCode
+from .. import res
+from ..layout import SCREEN_W, sx, sy, FONT_SMALL, draw_image, draw_page_bg
+
+
+class WiFiSetting(app_base.AppBase):
+    def __init__(self, icos: dict, data=None) -> None:
+        self._wifi = data
+        super().__init__()
+
+    def on_launch(self):
+        self.get_data()
+        self._option = 0
+        self.focus = True
+
+    def on_view(self):
+        draw_page_bg(res.SETTING_WIFI_IMG)
+        draw_image(res.WIFI_DEFAULT_IMG, 9, 83)
+
+        self._ssid_label = widgets.Label(
+            "ssid",
+            sx(87),
+            sy(98),
+            w=sx(164),
+            h=sy(23) + 16,
+            font_align=widgets.Label.LEFT_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0xFEFEFE,
+            font=FONT_SMALL,
+        )
+        self._ssid_label.set_long_mode(widgets.Label.LONG_DOT)
+        self._ssid_label.set_text(self.ssid)
+
+        self._psk_label = widgets.Label(
+            "psk",
+            sx(87),
+            sy(98 + 33),
+            w=sx(164),
+            h=sy(23) + 16,
+            font_align=widgets.Label.LEFT_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0xFEFEFE,
+            font=FONT_SMALL,
+        )
+        self._psk_label.set_long_mode(widgets.Label.LONG_DOT)
+        if len(self.psk):
+            self._psk_label.set_text("*" * 20)
+        else:
+            self._psk_label.set_text("")
+
+        self._server_label = widgets.Label(
+            "server",
+            sx(88),
+            sy(98 + 33 + 30),
+            w=sx(164),
+            h=sy(23) + 16,
+            font_align=widgets.Label.LEFT_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0xFEFEFE,
+            font=FONT_SMALL,
+        )
+        self._server_label.set_long_mode(widgets.Label.LONG_DOT)
+        self._server_label.set_text(self.server)
+
+        self._option_views = app_base.generator(
+            (
+                (0, self._select_ssid_option),
+                (1, self._select_psk_option),
+                (2, self._select_server_option),
+            )
+        )
+
+        self._option_button = widgets.Button(None)
+        self._option_button.set_pos(sx(145), sy(49))
+        self._option_button.set_size(sx(127), sy(34))
+        self._option_button.add_event(self._handle_option_button)
+
+        self._confirm_button = widgets.Button(None)
+        self._confirm_button.set_pos(0, sy(49))
+        self._confirm_button.set_size(sx(145), sy(34))
+        self._confirm_button.add_event(self._handle_confirm_button)
+
+        self._option1_button = widgets.Button(None)
+        self._option1_button.set_pos(sx(9), sy(83))
+        self._option1_button.set_size(sx(219), sy(95))
+        self._option1_button.add_event(self._handle_option_button)
+
+    def on_ready(self):
+        self._status_bar = status_bar.StatusBarApp(None, self._wifi)
+        self._status_bar.start()
+
+    def on_hide(self):
+        self._status_bar.stop()
+
+    def on_exit(self):
+        del (
+            self._ssid_label,
+            self._psk_label,
+            self._server_label,
+            self._option_views,
+            self.nvs,
+            self.ssid,
+            self.psk,
+            self.server,
+            self.ssid_tmp,
+            self.psk_tmp,
+            self.server_tmp,
+            self._option,
+            self.focus,
+        )
+
+    async def _click_event_handler(self, x, y, fw):
+        self._option_button.handle(x, y)
+        self._confirm_button.handle(x, y)
+        self._option1_button.handle(x, y)
+
+    async def _kb_event_handler(self, event, fw):
+        if event.key == KeyCode.KEYCODE_ENTER:
+            event.status = True
+            self.focus = True
+            self._option, view_fn = next(self._option_views)
+            view_fn()
+            self.set_data()
+
+        if self.focus is False:
+            return
+
+        if event.key == KeyCode.KEYCODE_ESC:
+            self.ssid_tmp = self.ssid
+            self.psk_tmp = self.psk
+            self.server_tmp = self.server
+            self._select_default_option()
+            self.focus = False
+            event.status = True
+            self.set_data()
+
+        if event.key == KeyCode.KEYCODE_BACKSPACE and self._option in (0, 1, 2):
+            if self._option == 0:
+                self.ssid_tmp = self.ssid_tmp[:-1]
+                self._ssid_label.set_text(self.ssid_tmp)
+            elif self._option == 1:
+                if self.psk_tmp == self.psk and len(self.psk):
+                    self.psk_tmp = ""
+                else:
+                    self.psk_tmp = self.psk_tmp[:-1]
+                self._psk_label.set_text(self.psk_tmp)
+            elif self._option == 2:
+                self.server_tmp = self.server_tmp[:-1]
+                self._server_label.set_text(self.server_tmp)
+            event.status = True
+        elif event.key >= 0x20 and event.key <= 126:
+            if self._option == 0:
+                self.ssid_tmp += chr(event.key)
+                self._ssid_label.set_text(self.ssid_tmp)
+            elif self._option == 1:
+                if self.psk_tmp == self.psk and len(self.psk):
+                    self.psk_tmp = ""
+                else:
+                    self.psk_tmp += chr(event.key)
+                self._psk_label.set_text(self.psk_tmp)
+            elif self._option == 2:
+                self.server_tmp += chr(event.key)
+                self._server_label.set_text(self.server_tmp)
+            event.status = True
+
+    def _select_default_option(self):
+        draw_image(res.WIFI_DEFAULT_IMG, 9, 83)
+        self._ssid_label.set_text_color(0x000000, 0xFEFEFE)
+        self._psk_label.set_text_color(0x000000, 0xFEFEFE)
+        self._server_label.set_text_color(0x000000, 0xFEFEFE)
+        self._ssid_label.set_text(self.ssid_tmp)
+        if len(self.psk_tmp) == 0:
+            self._psk_label.set_text("")
+        else:
+            self._psk_label.set_text("*" * 20)
+        self._server_label.set_text(self.server_tmp)
+
+    def _select_ssid_option(self):
+        draw_image(res.WIFI_SSID_IMG, 9, 83)
+        self._ssid_label.set_text_color(0x000000, 0xDCDDDD)
+        self._psk_label.set_text_color(0x000000, 0xFEFEFE)
+        self._server_label.set_text_color(0x000000, 0xFEFEFE)
+        self._ssid_label.set_text(self.ssid_tmp)
+        if len(self.psk_tmp) == 0:
+            self._psk_label.set_text("")
+        else:
+            self._psk_label.set_text("*" * 20)
+        self._server_label.set_text(self.server_tmp)
+
+    def _select_psk_option(self):
+        draw_image(res.WIFI_PSK_IMG, 9, 83)
+        self._ssid_label.set_text_color(0x000000, 0xFEFEFE)
+        self._psk_label.set_text_color(0x000000, 0xDCDDDD)
+        self._server_label.set_text_color(0x000000, 0xFEFEFE)
+        self._ssid_label.set_text(self.ssid_tmp)
+        if len(self.psk_tmp) == 0:
+            self._psk_label.set_text("")
+        else:
+            self._psk_label.set_text("*" * 20)
+        self._server_label.set_text(self.server_tmp)
+
+    def _select_server_option(self):
+        draw_image(res.WIFI_SERVER_IMG, 9, 83)
+        self._ssid_label.set_text_color(0x000000, 0xFEFEFE)
+        self._psk_label.set_text_color(0x000000, 0xFEFEFE)
+        self._server_label.set_text_color(0x000000, 0xDCDDDD)
+        self._ssid_label.set_text(self.ssid_tmp)
+        if len(self.psk_tmp) == 0:
+            self._psk_label.set_text("")
+        else:
+            self._psk_label.set_text("*" * 20)
+        self._server_label.set_text(self.server_tmp)
+
+    def _handle_option_button(self, fw):
+        self._option, view_fn = next(self._option_views)
+        view_fn()
+
+    def _handle_confirm_button(self, fw):
+        self._select_default_option()
+        self.set_data()
+
+    def get_data(self):
+        self.nvs = esp32.NVS("uiflow")
+        self.ssid = self.nvs.get_str("ssid0")
+        self.psk = self.nvs.get_str("pswd0")
+        self.server = self.nvs.get_str("server")
+        self.ssid_tmp = self.ssid
+        self.psk_tmp = self.psk
+        self.server_tmp = self.server
+
+    def set_data(self):
+        is_save = False
+        if self.ssid != self.ssid_tmp:
+            self.ssid = self.ssid_tmp
+            self.nvs.set_str("ssid0", self.ssid)
+            print("set new ssid: ", self.ssid)
+            is_save = True
+        if self.psk != self.psk_tmp:
+            self.psk = self.psk_tmp
+            self.nvs.set_str("pswd0", self.psk)
+            print("set new psk: ", self.psk)
+            is_save = True
+        if self.server != self.server_tmp:
+            self.server = self.server_tmp
+            self.nvs.set_str("server", self.server)
+            print("set new server: ", self.server)
+            is_save = True
+
+        if is_save is True:
+            self.nvs.commit()
+            self._wifi.network.disconnect()
+            self._wifi.network.active(False)
+            self._wifi.network.active(True)
+            self._wifi.connect_network(self.ssid, self.psk)
+
+
+_boot_options = {
+    1: res.BOOT_YES_IMG,
+    2: res.BOOT_NO_IMG,
+}
+
+
+class BootScreenSetting(app_base.AppBase):
+    def __init__(self, icos: dict, data=None) -> None:
+        super().__init__()
+
+    def on_install(self):
+        self.on_launch()
+        self.on_view()
+        self.on_hide()
+
+    def on_launch(self):
+        self._boot_option = self._get_boot_option()
+        self._boot_option = 1 if self._boot_option == 1 else 2
+        self._options = app_base.generator(_boot_options)
+        while True:
+            t = next(self._options)
+            if t == self._boot_option:
+                break
+
+    def on_view(self):
+        self._draw_row()
+        self._setup_buttons()
+
+    def _draw_row(self):
+        draw_image(res.BOOT_IMG, 0, 49)
+        draw_image(_boot_options.get(self._boot_option), 120, 49)
+
+    def _setup_buttons(self):
+        if hasattr(self, "_boot_label_btn"):
+            return
+
+        self._boot_label_btn = widgets.Button(None)
+        self._boot_label_btn.set_pos(0, sy(49))
+        self._boot_label_btn.set_size(sx(120), sy(50))
+        self._boot_label_btn.add_event(self._handle_boot_option)
+
+        self._boot_option_btn = widgets.Button(None)
+        self._boot_option_btn.set_pos(sx(120), sy(49))
+        self._boot_option_btn.set_size(sx(120), sy(50))
+        self._boot_option_btn.add_event(self._handle_boot_option)
+
+    def on_ready(self):
+        pass
+
+    def on_hide(self):
+        pass
+
+    def on_exit(self):
+        del (self._boot_label_btn, self._boot_option_btn)
+
+    async def _click_event_handler(self, x, y, fw):
+        self._boot_label_btn.handle(x, y)
+        self._boot_option_btn.handle(x, y)
+
+    @staticmethod
+    def _get_boot_option():
+        nvs = esp32.NVS("uiflow")
+        return nvs.get_u8("boot_option")
+
+    @staticmethod
+    def _set_boot_option(boot_option):
+        nvs = esp32.NVS("uiflow")
+        nvs.set_u8("boot_option", boot_option)
+        nvs.commit()
+
+    def _handle_boot_option(self, fw):
+        self._boot_option = next(self._options)
+        self._set_boot_option(self._boot_option)
+        draw_image(_boot_options.get(self._boot_option), 120, 49)
+
+
+_comlink_options = {
+    False: res.COMX_DISABLE_IMG,
+    True: res.COMX_ENABLE_IMG,
+}
+
+
+class ComLinkSetting(app_base.AppBase):
+    def __init__(self, icos: dict) -> None:
+        super().__init__()
+
+    def on_install(self):
+        self.on_launch()
+        self.on_view()
+        self.on_hide()
+
+    def on_launch(self):
+        self._option = False
+        self._options = app_base.generator(_comlink_options)
+        while True:
+            t = next(self._options)
+            if t == self._option:
+                break
+
+    def on_view(self):
+        self._draw_row()
+        self._setup_buttons()
+
+    def _draw_row(self):
+        draw_image(res.COMX_IMG, 0, 155)
+        draw_image(_comlink_options.get(self._option), 120, 155)
+
+    def _setup_buttons(self):
+        if hasattr(self, "_label_btn"):
+            return
+
+        self._label_btn = widgets.Button(None)
+        self._label_btn.set_pos(0, sy(155))
+        self._label_btn.set_size(sx(120), sy(53))
+        self._label_btn.add_event(self._handle_option)
+
+        self._option_btn = widgets.Button(None)
+        self._option_btn.set_pos(sx(120), sy(155))
+        self._option_btn.set_size(sx(120), sy(53))
+        self._option_btn.add_event(self._handle_option)
+
+    def on_ready(self):
+        pass
+
+    def on_hide(self):
+        pass
+
+    def on_exit(self):
+        del (self._label_btn, self._option_btn)
+
+    async def _click_event_handler(self, x, y, fw):
+        self._label_btn.handle(x, y)
+        self._option_btn.handle(x, y)
+
+    async def _btnb_event_handler(self, fw):
+        pass
+
+    def _handle_option(self, fw):
+        self._option = next(self._options)
+        draw_image(_comlink_options.get(self._option), 120, 155)
+
+
+_brightness_options = {
+    64: res.SCREEN25_IMG,
+    128: res.SCREEN50_IMG,
+    192: res.SCREEN75_IMG,
+    255: res.SCREEN100_IMG,
+}
+
+
+class BrightnessSetting(app_base.AppBase):
+    def __init__(self, icos: dict) -> None:
+        super().__init__()
+
+    def on_install(self):
+        self.on_launch()
+        self.on_view()
+        self.on_hide()
+
+    def on_launch(self):
+        self._brightness = M5.Lcd.getBrightness()
+        self._brightness = self.approximate(self._brightness)
+        self._options = app_base.generator(_brightness_options)
+        while True:
+            t = next(self._options)
+            if t == self._brightness:
+                break
+
+    def on_view(self):
+        self._draw_row()
+        self._setup_buttons()
+
+    def _draw_row(self):
+        draw_image(res.SCREEN_IMG, 0, 101)
+        draw_image(_brightness_options.get(self._brightness), 120, 101)
+
+    def _setup_buttons(self):
+        if hasattr(self, "_brightness_label_btn"):
+            return
+
+        self._brightness_label_btn = widgets.Button(None)
+        self._brightness_label_btn.set_pos(0, sy(101))
+        self._brightness_label_btn.set_size(sx(120), sy(52))
+        self._brightness_label_btn.add_event(self._handle_brightness)
+
+        self._brightness_option_btn = widgets.Button(None)
+        self._brightness_option_btn.set_pos(sx(120), sy(101))
+        self._brightness_option_btn.set_size(sx(120), sy(52))
+        self._brightness_option_btn.add_event(self._handle_brightness)
+
+    def on_ready(self):
+        pass
+
+    def on_hide(self):
+        pass
+
+    def on_exit(self):
+        del (self._brightness_label_btn, self._brightness_option_btn)
+
+    async def _click_event_handler(self, x, y, fw):
+        self._brightness_label_btn.handle(x, y)
+        self._brightness_option_btn.handle(x, y)
+
+    def _handle_brightness(self, fw):
+        self._brightness = next(self._options)
+        M5.Lcd.setBrightness(self._brightness)
+        draw_image(_brightness_options.get(self._brightness), 120, 101)
+
+    @staticmethod
+    def approximate(number):
+        tolerance = 32
+        for v in (64, 128, 192, 255):
+            if number < 64:
+                return 64
+            if abs(number - v) < tolerance:
+                return v
+
+
+class SettingsApp(app_base.AppBase):
+    def __init__(self, icos: dict, data=None) -> None:
+        self._wlan = data
+        self._menus = (
+            BootScreenSetting(None),
+            BrightnessSetting(None),
+            ComLinkSetting(None),
+        )
+        self._menu_selector = app_base.AppSelector(self._menus)
+        super().__init__()
+
+    def on_install(self):
+        pass
+
+    def on_launch(self):
+        pass
+
+    def on_view(self):
+        draw_page_bg(res.SETTING_COMMON_IMG)
+
+    def _redraw_rows(self):
+        for menu in self._menus:
+            menu._draw_row()
+
+    def on_ready(self):
+        self._status_bar = status_bar.StatusBarApp(None, self._wlan, time_y=sy(32) + 3)
+        self._status_bar.start()
+
+    def on_hide(self):
+        self._status_bar.stop()
+
+    async def _click_event_handler(self, x, y, fw):
+        for menu in self._menus:
+            if hasattr(menu, "_click_event_handler"):
+                await menu._click_event_handler(x, y, fw)
+
+    def start(self):
+        super().start()
+        for menu in self._menus:
+            menu.install()
+        self._redraw_rows()
+
+    def stop(self):
+        for menu in self._menus:
+            menu.stop()
+        super().stop()

@@ -24,4 +24,10 @@ menu "Audio Board Configuration"
         help
             Enable this option to support m5stack sticks3.
 
+    config STOPWATCH
+        bool "select M5STACK StopWatch"
+        default n
+        help
+            Enable this option to support m5stack StopWatch.
+
 endmenu

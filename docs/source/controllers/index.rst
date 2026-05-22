@@ -18,5 +18,6 @@ Controllers
     dualkey.rst
     nesso-n1.rst
     unit_c6l.rst
-    sticks3.rst
     stackchan.rst
+    sticks3.rst
+    stopwatch.rst

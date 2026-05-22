@@ -16,6 +16,8 @@
 #include "../M5STACK_Atom_EchoS3R/audioconfigboard.h"
 #elif CONFIG_STICKS3
 #include "../M5STACK_StickS3/audioconfigboard.h"
+#elif CONFIG_STOPWATCH
+#include "../M5STACK_StopWatch/audioconfigboard.h"
 #endif
 
 

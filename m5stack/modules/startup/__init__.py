@@ -404,6 +404,11 @@ def startup(boot_opt, timeout: int = 60) -> None:
 
             sticks3 = StickS3_Startup()
             sticks3.startup(ssid, pswd, timeout=timeout)
+        elif board_id == M5.BOARD.M5StopWatch:
+            from .stopwatch import StopWatch_Startup
+
+            stopwatch = StopWatch_Startup()
+            stopwatch.startup(ssid, pswd, timeout=timeout)
         elif board_id == M5.BOARD.M5Unit_PoEP4:
             from .unit_poep4 import Unit_PoEP4_Startup
 
