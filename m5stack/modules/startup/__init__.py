@@ -241,9 +241,9 @@ def startup(boot_opt, timeout: int = 60) -> None:
             core2 = Core2_Startup()
             core2.startup(ssid, pswd, timeout=timeout)
         elif board_id == M5.BOARD.M5StickCPlus2:
-            from .stickcplus import StickCPlus_Startup
+            from .stickcplus2 import StickCPlus2_Startup
 
-            stickcplus = StickCPlus_Startup()
+            stickcplus = StickCPlus2_Startup()
             stickcplus.startup(ssid, pswd, timeout=timeout)
         elif board_id == M5.BOARD.M5StickCPlus:
             from .stickcplus import StickCPlus_Startup
