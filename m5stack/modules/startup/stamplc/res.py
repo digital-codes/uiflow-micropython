@@ -11,8 +11,9 @@ _attrs = {
     "RUN_ALWAYS_SELECT_IMG": "/system/stamplc/apprun/run_always_select.jpeg",
     "RUN_ALWAYS_UNSELECT_IMG": "/system/stamplc/apprun/run_always_unselect.jpeg",
     # develop
-    "DEVELOP_PRIVATE_IMG": "/system/stamplc/develop/private.jpeg",
-    "DEVELOP_PUBLIC_IMG": "/system/stamplc/develop/public.jpeg",
+    "DEVELOP_BG_IMG": "/system/stamplc/develop/bg.jpg",
+    "DEVELOP_OFFLINE_IMG": "/system/stamplc/develop/offline.jpg",
+    "DEVELOP_ONLINE_IMG": "/system/stamplc/develop/online.jpg",
     "AVATAR_IMG": "/system/common/img/avatar.jpg",
     # ezdata
     # launcher
