@@ -6,7 +6,7 @@ package(
     "startup",
     (
         "__init__.py",
-        "stamps3.py",
+        "headless.py",
     ),
     base_path="..",
     opt=3,

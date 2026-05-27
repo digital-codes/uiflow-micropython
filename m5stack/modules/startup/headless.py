@@ -2,17 +2,52 @@
 #
 # SPDX-License-Identifier: MIT
 
-from startup.headless import Headless_Startup
-import network
-import time
+# StampS3 startup script
 import M5
+import time
+import network
+import machine
+import binascii
 import M5Things
 from startup import Startup
+from hardware import RGB
 
 
-class Capsule_Startup(Headless_Startup):
+class NullRGB:
+    def fill_color(self, color: int) -> None:
+        pass
+
+    def set_brightness(self, brightness: int) -> None:
+        pass
+
+
+# Headless startup menu
+class Headless_Startup:
+    COLOR_RED = 0xFF0000  # WiFi not connected
+    COLOR_BLUE = 0x0000FF  # WiFi connected, server not connected
+    COLOR_GREEN = 0x00FF00  # WiFi connected, server connected
+
     def __init__(self) -> None:
-        super().__init__()
+        has_rgb = M5.getBoard() not in [M5.BOARD.M5AtomS3R_CAM, M5.BOARD.M5AtomEchoS3R]
+        self.rgb = RGB() if has_rgb else NullRGB()
+        self.rgb.fill_color(self.COLOR_BLUE)
+        self.rgb.set_brightness(50)
+
+    def show_hits(self, hits: str) -> None:
+        pass
+
+    def show_msg(self, msg: str) -> None:
+        pass
+
+    def show_ssid(self, ssid: str) -> None:
+        pass
+
+    def show_mac(self) -> None:
+        mac = binascii.hexlify(machine.unique_id()).decode("utf-8").upper()
+        print("Mac: " + mac[0:6] + "_" + mac[6:])
+
+    def show_error(self, ssid: str, error: str) -> None:
+        print("SSID: " + ssid + "\r\nNotice: " + error)
 
     def startup(
         self,
@@ -27,7 +62,7 @@ class Capsule_Startup(Headless_Startup):
         timeout: int = 60,
     ) -> None:
         self.show_mac()
-        M5.Speaker.setVolumePercentage(1.0)
+        self.rgb.set_brightness(100)
 
         self._net_if = Startup(network_type=net_mode)  # type: ignore
         if self._net_if.connect_network(
@@ -47,9 +82,6 @@ class Capsule_Startup(Headless_Startup):
                 if status is network.STAT_GOT_IP:
                     access_code = M5Things.accesscode()
                     if access_code != "":
-                        M5.Speaker.tone(4500, 50)
-                        time.sleep(0.1)
-                        M5.Speaker.tone(4500, 50)
                         print(" ")
                         print("Local IP: " + self._net_if.local_ip())
                         print("=======================")
@@ -66,8 +98,8 @@ class Capsule_Startup(Headless_Startup):
                 time.sleep(1)
 
             if not success:
-                M5.Speaker.tone(5000, 50)
                 print(" ")
+                self.rgb.fill_color(self.COLOR_RED)
                 self.show_error(ssid, "TIMEOUT")
                 print(
                     f"[NET]: {self._net_if.wifi_status_str(status)} | "
@@ -76,4 +108,3 @@ class Capsule_Startup(Headless_Startup):
         else:
             self.rgb.fill_color(self.COLOR_RED)
             self.show_error("Not Found", "Please use M5Burner setup :)")
-            print("Connecting to " + ssid + " ", end="")
