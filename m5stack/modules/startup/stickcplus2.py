@@ -548,9 +548,9 @@ class SetupApp(AppBase):
                     if M5Things.status() < 2:
                         pass
                     if M5Things.status() == 2:
-                        if M5Things.paircode() != "":
+                        if M5Things.accesscode() != "":
                             self._state = self._STATE_SERVER_OK
-                            self._pair_code = M5Things.paircode()
+                            self._pair_code = M5Things.accesscode()
                             self._nick_name = M5Things.nick_name()
                             self._bg_img.set_src(SETUP_SERVER_OK_IMG)
 
@@ -621,7 +621,7 @@ class SetupApp(AppBase):
                     self._nick_name = t
                     self._nick_name_label.set_text(t)
 
-                t = M5Things.paircode()
+                t = M5Things.accesscode()
                 if t != self._pair_code:
                     self._pair_code = t
                     self._pair_code_label.set_text(t)
@@ -744,7 +744,7 @@ class CloudApp(AppBase):
                     self._nick_name = t
                     self._nick_name_label.set_text(t)
 
-                t = M5Things.paircode()
+                t = M5Things.accesscode()
                 if t != self._pair_code:
                     self._pair_code = t
                     self._pair_code_label.set_text(t)
