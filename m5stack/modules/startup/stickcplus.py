@@ -199,7 +199,7 @@ class CloudApp(AppBase):
     def _get_pair_code(self):
         if _HAS_SERVER and self._cloud_status == 4:
             try:
-                return M5Things.paircode() or ""
+                return M5Things.accesscode() or ""
             except Exception:
                 pass
         return ""
