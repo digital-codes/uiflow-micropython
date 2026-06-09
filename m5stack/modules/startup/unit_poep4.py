@@ -37,7 +37,7 @@ class Unit_PoEP4_Startup:
 
     def show_mac(self) -> None:
         mac = binascii.hexlify(machine.unique_id()).decode("utf-8").upper()
-        print("Mac: " + mac[0:6] + "_" + mac[6:])
+        print("MAC: " + mac[0:6] + "_" + mac[6:])
 
     def startup(
         self,
@@ -82,7 +82,7 @@ class Unit_PoEP4_Startup:
                     if pair_code != "":
                         print("Local IP: " + self._net_if.local_ip())
                         print("=======================")
-                        print("Nick Name: " + M5Things.nick_name())
+                        print("Nickname: " + M5Things.nick_name())
                         print("Access Code: " + pair_code)
                         print("=======================")
                         self._unit_poep4_rgb_show("green")

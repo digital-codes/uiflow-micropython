@@ -53,7 +53,7 @@ class Capsule_Startup(Headless_Startup):
                         print(" ")
                         print("Local IP: " + self._net_if.local_ip())
                         print("=======================")
-                        print("Nick Name: " + M5Things.nick_name())
+                        print("Nickname: " + M5Things.nick_name())
                         print("Access Code: " + access_code)
                         print("=======================")
                         self.rgb.fill_color(self.COLOR_GREEN)

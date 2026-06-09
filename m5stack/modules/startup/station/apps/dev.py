@@ -9,6 +9,7 @@ import M5
 import machine
 import asyncio
 import binascii
+from startup import print_access_info
 
 try:
     import M5Things
@@ -76,6 +77,7 @@ class DevApp(app_base.AppBase):
         self._set_value(self._mac_value, self._state.get("mac", "-"))
         self._set_value(self._code_value, self._state.get("pair_code", ""), fallback="")
         self._set_value(self._nick_value, self._state.get("nick_name", ""), fallback="")
+        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
 
     def on_ready(self):
         super().on_ready()
@@ -91,10 +93,12 @@ class DevApp(app_base.AppBase):
             if new_state["pair_code"] != self._state.get("pair_code"):
                 self._state["pair_code"] = new_state["pair_code"]
                 self._set_value(self._code_value, new_state["pair_code"], fallback="")
+                print_access_info(self._state.get("nick_name", ""), new_state["pair_code"])
 
             if new_state["nick_name"] != self._state.get("nick_name"):
                 self._state["nick_name"] = new_state["nick_name"]
                 self._set_value(self._nick_value, new_state["nick_name"], fallback="")
+                print_access_info(new_state["nick_name"], self._state.get("pair_code", ""))
 
             await asyncio.sleep_ms(1500)
 

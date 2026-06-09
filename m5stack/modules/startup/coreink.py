@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 # CoreInk startup script
-from startup import Startup
+from startup import Startup, print_access_info
 import M5
 import network
 import widgets
@@ -164,11 +164,13 @@ class FlowApp(AppBase):
         self._cloud_status = self._get_cloud_status()
         self._access_code = self._get_access_code()
         self._nick_name = self._get_nick_name()
+        print_access_info(self._nick_name, self._access_code)
 
     def _update_data(self):
         self._cloud_status = self._get_cloud_status()
         self._access_code = self._get_access_code()
         self._nick_name = self._get_nick_name()
+        print_access_info(self._nick_name, self._access_code)
 
     def _load_view(self):
         self._bg_img.set_src(FLOW_BG_IMG)
@@ -319,6 +321,7 @@ class FlowApp(AppBase):
                 self._cloud_status = cloud_status
                 self._access_code = access_code
                 self._nick_name = nick_name
+                print_access_info(self._nick_name, self._access_code)
                 self._load_view()
             await asyncio.sleep_ms(1000)
 

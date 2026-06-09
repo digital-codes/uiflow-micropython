@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-from . import Startup
+from . import Startup, print_access_info
 import M5
 import network
 import widgets
@@ -740,6 +740,7 @@ class SetupApp(AppBase):
                             self._state = self._STATE_SERVER_OK
                             self._pair_code = M5Things.accesscode()
                             self._nick_name = M5Things.nick_name()
+                            print_access_info(self._nick_name, self._pair_code)
                             self._bg_img.set_src(SETUP_SERVER_OK_IMG)
 
                             self._net_status_img = widgets.Image(use_sprite=False)
@@ -813,6 +814,8 @@ class SetupApp(AppBase):
                 if t != self._pair_code:
                     self._pair_code = t
                     self._pair_code_label.set_text(t)
+
+                print_access_info(self._nick_name, self._pair_code)
 
             await asyncio.sleep_ms(100)
 
@@ -913,6 +916,7 @@ class CloudApp(AppBase):
         self._server_status_img.set_src(SERVER_OK_IMG if self._get_cloud_status() else NG_IMG)
         self._pair_code_label.set_text(self._pair_code)
         self._nick_name_label.set_text(self._nick_name)
+        print_access_info(self._nick_name, self._pair_code)
 
     async def on_run(self):
         while True:
@@ -936,6 +940,8 @@ class CloudApp(AppBase):
                 if t != self._pair_code:
                     self._pair_code = t
                     self._pair_code_label.set_text(t)
+
+                print_access_info(self._nick_name, self._pair_code)
 
             await asyncio.sleep_ms(1000)
 

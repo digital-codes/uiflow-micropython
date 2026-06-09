@@ -6,6 +6,7 @@ from .app import AppBase
 from ..hal import *
 import lvgl as lv
 import asyncio
+from startup import print_access_info
 
 
 _M5THINGS = None
@@ -77,7 +78,9 @@ class AppDevelop(AppBase):
         self._images.append(self._develop_bg_img)
 
         self._mac_value = self._create_row("Device MAC:", _LEFT_X, _ROW_MAC_Y)
-        self._code_value = self._create_row("Access Code:", _LEFT_X, _ROW_CODE_Y)
+        self._code_value = self._create_row(
+            "Access Code:", _LEFT_X, _ROW_CODE_Y, lv.font_montserrat_48
+        )
         self._nick_value = self._create_row("Nickname:", _LEFT_X, _ROW_NICK_Y)
         self._wifi_value = self._create_row("Wi-Fi SSID:", _RIGHT_X, _ROW_WIFI_Y)
         self._ip_value = self._create_row("IP Address:", _RIGHT_X, _ROW_IP_Y)
@@ -90,6 +93,7 @@ class AppDevelop(AppBase):
         self._set_value(self._wifi_value, self._state.get("wifi_ssid", ""), fallback="")
         self._set_value(self._ip_value, self._state.get("ip_address", ""), fallback="")
         self._set_value(self._fw_value, self._state.get("firmware", ""), fallback="")
+        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
 
     def _update_view(self, refresh_details=False):
         new_state = self._collect_state(refresh_details)
@@ -103,6 +107,7 @@ class AppDevelop(AppBase):
         self._update_label("wifi_ssid", self._wifi_value, new_state, fallback="")
         self._update_label("ip_address", self._ip_value, new_state, fallback="")
         self._update_label("firmware", self._fw_value, new_state, fallback="")
+        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
 
     def _update_label(self, key, label, new_state, fallback="-"):
         if new_state[key] != self._state.get(key):
@@ -123,9 +128,9 @@ class AppDevelop(AppBase):
         panel.set_style_bg_color(lv.color_hex(_DEFAULT_PANEL_BG_COLOR), lv.PART.MAIN)
         panel.add_flag(lv.obj.FLAG.SCROLLABLE)
 
-    def _create_row(self, caption, x, y):
+    def _create_row(self, caption, x, y, value_font=lv.font_montserrat_36):
         self._create_caption(caption, x, y)
-        return self._create_value_label(x, y + _LABEL_GAP, _VALUE_W)
+        return self._create_value_label(x, y + _LABEL_GAP, _VALUE_W, value_font)
 
     def _create_caption(self, text, x, y):
         label = self._create_text_label(x, y, _VALUE_W, 32)
@@ -134,9 +139,9 @@ class AppDevelop(AppBase):
         label.set_style_text_color(lv.color_hex(_LABEL_COLOR), lv.PART.MAIN)
         return label
 
-    def _create_value_label(self, x, y, width):
+    def _create_value_label(self, x, y, width, font):
         label = self._create_text_label(x, y, width, _VALUE_H)
-        label.set_style_text_font(lv.font_montserrat_36, lv.PART.MAIN)
+        label.set_style_text_font(font, lv.PART.MAIN)
         label.set_style_text_color(lv.color_hex(_VALUE_COLOR), lv.PART.MAIN)
         return label
 

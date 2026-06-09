@@ -8,6 +8,7 @@ import network
 import machine
 import binascii
 import asyncio
+import esp32
 from . import Startup
 
 try:
@@ -117,7 +118,7 @@ def _draw_textbox(x, y, w, h, r, text, invert=False, is_title=False):
             text = text[:3] + ".." + text[-3:]
     text_w = _measure_text(text)
     cursor_x = x + (w - text_w) // 2
-    cursor_y = y + (6 if is_title else 4)
+    cursor_y = y + (h - 7) // 2
     if invert:
         M5.Lcd.fillRoundRect(x, y, w, h, r, M5.Lcd.COLOR.WHITE)
         fg_color = M5.Lcd.COLOR.BLACK
@@ -142,18 +143,84 @@ def label2_set_text(text, invert=False):
     _draw_textbox(3, 32, 58, 15, 4, text, invert, is_title=False)
 
 
+def _short_row_text(text):
+    text = "" if text is None else str(text)
+    if len(text) > 10:
+        text = text[:4] + ".." + text[-4:]
+    return text
+
+
+def _draw_plain_row(text, y, h):
+    text = _short_row_text(text)
+    text_w = _measure_text(text)
+    x = (64 - text_w) // 2
+    text_y = y + (h - 7) // 2
+    _draw_bitmap_text(text, x, text_y, M5.Lcd.COLOR.WHITE, M5.Lcd.COLOR.BLACK)
+
+
+def _draw_inverted_header(rows):
+    box_x = 8
+    box_y = -1
+    box_w = 48
+    box_h = 28
+    radius = 8
+    M5.Lcd.fillRect(box_x, box_y, box_w, box_h - radius, M5.Lcd.COLOR.WHITE)
+    M5.Lcd.fillRoundRect(
+        box_x, box_y + box_h - radius * 2, box_w, radius * 2, radius, M5.Lcd.COLOR.WHITE
+    )
+    for index, row in enumerate(rows[:2]):
+        text = _short_row_text(row)
+        text_w = _measure_text(text)
+        x = box_x + (box_w - text_w) // 2
+        text_y = box_y + 3 + index * 14
+        _draw_bitmap_text(text, x, text_y, M5.Lcd.COLOR.BLACK, M5.Lcd.COLOR.WHITE)
+
+
+def _draw_split_rows(rows, inverted_header=False):
+    M5.Lcd.fillRect(0, 0, 64, 48, M5.Lcd.COLOR.BLACK)
+    count = len(rows)
+    if count <= 0:
+        return
+    if inverted_header and count >= 2:
+        _draw_inverted_header(rows)
+        rest = rows[2:]
+        rest_count = len(rest)
+        if rest_count <= 0:
+            return
+        rest_y = 30
+        row_h = (48 - rest_y) // rest_count
+        for index, row in enumerate(rest):
+            y = rest_y + index * row_h
+            h = 48 - y if index == rest_count - 1 else row_h
+            _draw_plain_row(row, y, h)
+        return
+    row_h = 48 // count
+    for index, row in enumerate(rows):
+        y = index * row_h
+        h = 48 - y if index == count - 1 else row_h
+        _draw_plain_row(row, y, h)
+
+
 class InfoPages:
+    PAGE_ACCESS = 0
+    PAGE_NICKNAME = 1
+    PAGE_WIFI = 2
+    PAGE_MAC = 3
+    PAGE_COUNT = 4
+
     def __init__(self, wifi, ssid) -> None:
         self._wifi = wifi
-        self._ssid = ssid
-        self._page = 0
-        self._last_state = None
-        self._last_pair_code = None
-        self._last_nick_name = None
+        self._ssid = ssid or ""
+        self._page = self.PAGE_HOME
+        self._last_payload = None
         self._last_refresh_ms = 0
 
+    def draw_start_page(self):
+        self._page = self.PAGE_ACCESS
+        self._draw_current_page(force=True)
+
     async def start(self):
-        self._draw_current_page()
+        self._draw_current_page(force=True)
         while True:
             M5.update()
             if M5.BtnA.wasClicked():
@@ -161,70 +228,55 @@ class InfoPages:
                     M5.Speaker.tone(666, 100)
                 except Exception:
                     pass
-                self._page = (self._page + 1) % 3
-                self._draw_current_page()
+                self._page = (self._page + 1) % self.PAGE_COUNT
+                self._draw_current_page(force=True)
             else:
                 self._refresh_current_page()
             await asyncio.sleep_ms(100)
-
-    def _draw_current_page(self):
-        if self._page == 0:
-            self._draw_wifi_page()
-        elif self._page == 1:
-            self._draw_access_code_page()
-        else:
-            self._draw_nickname_page()
 
     def _refresh_current_page(self):
         now = time.ticks_ms()
         if time.ticks_diff(now, self._last_refresh_ms) < 1500:
             return
         self._last_refresh_ms = now
-        if self._page == 0:
-            state = self._wifi.connect_status()
-            if state != self._last_state:
-                self._draw_wifi_page()
-        elif self._page == 1:
-            pair_code = self._get_pair_code() or "None"
-            if pair_code != self._last_pair_code:
-                self._draw_access_code_page()
-        else:
-            nick_name = self._get_nick_name() or "None"
-            if nick_name != self._last_nick_name:
-                self._draw_nickname_page()
+        self._draw_current_page(force=False)
 
-    def _draw_wifi_page(self):
-        self._last_state = self._wifi.connect_status()
-        M5.Lcd.fillRect(0, 0, 64, 48, M5.Lcd.COLOR.BLACK)
-        title_set_text("WiFi", False)
-        label1_set_text(str(self._ssid) if self._ssid else "None", False)
-        label2_set_text(self._get_wifi_status_text(), False)
+    def _draw_current_page(self, force=False):
+        payload = self._get_page_payload()
+        if not force and payload == self._last_payload:
+            return
+        self._last_payload = payload
+        _draw_split_rows(payload, True)
 
-    def _draw_access_code_page(self):
-        self._last_pair_code = self._get_pair_code() or "None"
-        M5.Lcd.fillRect(0, 0, 64, 48, M5.Lcd.COLOR.BLACK)
-        title_set_text("Access", False)
-        label1_set_text("Code", False)
-        label2_set_text(self._last_pair_code, False)
-
-    def _draw_nickname_page(self):
-        self._last_nick_name = self._get_nick_name() or "None"
-        M5.Lcd.fillRect(0, 0, 64, 48, M5.Lcd.COLOR.BLACK)
-        title_set_text("Nickname", False)
-        label1_set_text(self._last_nick_name, False)
-        label2_set_text("", False)
+    def _get_page_payload(self):
+        if self._page == self.PAGE_ACCESS:
+            return ("Access", "code", self._get_access_code() or "None")
+        if self._page == self.PAGE_NICKNAME:
+            return ("Nick", "name", self._get_nick_name() or "None")
+        if self._page == self.PAGE_WIFI:
+            return ("Wi-Fi", self._get_wifi_status_text(), self._ssid or "None")
+        return self._get_mac_rows()
 
     def _get_wifi_status_text(self):
-        return {
-            network.STAT_GOT_IP: "ONLINE",
-            network.STAT_CONNECTING: "CONNECT",
-            network.STAT_NO_AP_FOUND: "NO AP",
-            network.STAT_WRONG_PASSWORD: "WRONG",
-            network.STAT_HANDSHAKE_TIMEOUT: "TIMEOUT",
-        }.get(self._wifi.connect_status(), "OFFLINE")
+        if self._wifi.connect_status() == network.STAT_GOT_IP:
+            return "OK"
+        return "FAIL"
 
     @staticmethod
-    def _get_pair_code():
+    def _get_version():
+        try:
+            return str(esp32.firmware_info()[3]).lstrip("v")
+        except Exception:
+            return "-.-.-"
+
+    @staticmethod
+    def _get_mac_rows():
+        text = binascii.hexlify(machine.unique_id()).decode("utf-8").upper()
+        mac = ":".join(text[i : i + 2] for i in range(0, len(text), 2))
+        return ("MAC", "Address", mac[:8], mac[9:])
+
+    @staticmethod
+    def _get_access_code():
         if _HAS_SERVER is True:
             try:
                 if M5Things.status() == 2:
@@ -285,22 +337,10 @@ class UnitC6L_Startup(Startup):
         M5.Speaker.begin()
         M5.Speaker.setVolumePercentage(1)
         # 显示启动画面
-        M5.Lcd.fillRect(0, 0, 64, 48, M5.Lcd.COLOR.BLACK)
-        M5.Lcd.fillRect(0, 0, 64, 15, M5.Lcd.COLOR.WHITE)
-        _draw_bitmap_text(
-            "UiFlow2",
-            (64 - _measure_text("UiFlow2")) // 2,
-            7,
-            M5.Lcd.COLOR.BLACK,
-            M5.Lcd.COLOR.WHITE,
-        )
-        _draw_bitmap_text(
-            "Unit C6L",
-            (64 - _measure_text("Unit C6L")) // 2,
-            29,
-            M5.Lcd.COLOR.WHITE,
-            M5.Lcd.COLOR.BLACK,
-        )
+        _draw_split_rows(("UiFlow2", InfoPages._get_version()))
+        time.sleep_ms(1500)
+        pages = InfoPages(self, ssid)
+        pages.draw_start_page()
         M5.Speaker.tone(888, 200)
         self.show_mac()
         # 连接网络
@@ -344,12 +384,11 @@ class UnitC6L_Startup(Startup):
                 print("Local IP: " + super().local_ip())
         else:
             self.show_error("Not Found", "Use Burner setup")
-        self._start_menu_system(ssid)
+        self._start_menu_system(pages)
 
-    def _start_menu_system(self, ssid):
+    def _start_menu_system(self, pages):
         """Start the simple info page switcher."""
         try:
-            pages = InfoPages(self, ssid)
             asyncio.run(pages.start())
         except KeyboardInterrupt:
             pass

@@ -7,6 +7,7 @@ import M5
 import widgets
 import asyncio
 import binascii
+from startup import print_access_info
 import machine
 
 
@@ -120,12 +121,14 @@ class DevApp(app_base.AppBase):
             if t != self._access_code_text or refresh:
                 self._access_code_text = t
                 self._access_code_label.set_text(self._access_code_text)
+                print_access_info(self._nick_name_text, self._access_code_text)
                 refresh = True
 
             t = self._get_nick_name()
             if t != self._nick_name_text or refresh:
                 self._nick_name_text = t
                 self._nick_name_label.set_text(self._nick_name_text)
+                print_access_info(self._nick_name_text, self._access_code_text)
                 refresh = True
 
             # if refresh:

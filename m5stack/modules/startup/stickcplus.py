@@ -2,13 +2,14 @@
 #
 # SPDX-License-Identifier: MIT
 
-from . import Startup
+from . import Startup, print_access_info
 import M5
 import network
 import widgets
 import sys
 import gc
 import asyncio
+import esp32
 
 try:
     import M5Things
@@ -17,43 +18,29 @@ try:
 except ImportError:
     _HAS_SERVER = False
 
-DEBUG = True
+DEBUG = False
 
-if M5.getBoard() == M5.BOARD.M5StickCPlus:
-    BK_IMG = "/flash/res/stickcplus/bk.jpg"
-    CLOUD1_IMG = "/flash/res/stickcplus/cloud1.jpg"
-    CLOUD2_IMG = "/flash/res/stickcplus/cloud2.jpg"
-    CLOUD3_IMG = "/flash/res/stickcplus/cloud3.jpg"
-    CLOUD4_IMG = "/flash/res/stickcplus/cloud4.jpg"
-    CLOUD5_IMG = "/flash/res/stickcplus/cloud5.jpg"
-    CLOUD6_IMG = "/flash/res/stickcplus/cloud6.jpg"
-    CLOUD7_IMG = "/flash/res/stickcplus/cloud7.jpg"
-    CLOUD8_IMG = "/flash/res/stickcplus/cloud8.jpg"
-    CLOUD9_IMG = "/flash/res/stickcplus/cloud9.jpg"
-    CLOUD10_IMG = "/flash/res/stickcplus/cloud10.jpg"
-    MODE1_IMG = "/flash/res/stickcplus/mode1.jpg"
-    MODE2_IMG = "/flash/res/stickcplus/mode2.jpg"
-    USB_IMG = "/flash/res/stickcplus/usb.jpg"
-elif M5.getBoard() == M5.BOARD.M5StickCPlus2:
-    BK_IMG = "/system/stickcplus2/bk.png"
-    CLOUD1_IMG = "/system/stickcplus2/cloud1.png"
-    CLOUD2_IMG = "/system/stickcplus2/cloud2.png"
-    CLOUD3_IMG = "/system/stickcplus2/cloud3.png"
-    CLOUD4_IMG = "/system/stickcplus2/cloud4.png"
-    CLOUD5_IMG = "/system/stickcplus2/cloud5.png"
-    CLOUD6_IMG = "/system/stickcplus2/cloud6.png"
-    CLOUD7_IMG = "/system/stickcplus2/cloud7.png"
-    CLOUD8_IMG = "/system/stickcplus2/cloud8.png"
-    CLOUD9_IMG = "/system/stickcplus2/cloud9.png"
-    CLOUD10_IMG = "/system/stickcplus2/cloud10.png"
-    MODE1_IMG = "/system/stickcplus2/mode1.png"
-    MODE2_IMG = "/system/stickcplus2/mode2.png"
-    USB_IMG = "/system/stickcplus2/usb.png"
+CHARGE_ICON = "/flash/res/stickcplus/CHG.jpg"
+NO_CHARGE_ICON = "/flash/res/stickcplus/noCHG.jpg"
+CLOUD_ICON = "/flash/res/stickcplus/1a.jpg"
+USB_ICON = "/flash/res/stickcplus/1b.jpg"
+USB_IMG = "/flash/res/stickcplus/usb.jpg"
+CLOUD_IMG = "/flash/res/stickcplus/a11.jpg"
+NG_IMG = "/flash/res/stickcplus/ng.jpg"
+WIFI_OK_IMG = "/flash/res/stickcplus/wifi_ok.jpg"
+SERVER_OK_IMG = "/flash/res/stickcplus/server_ok.jpg"
+STATE_WIFI_NO_SET_IMG = "/flash/res/stickcplus/wifiNeverSet.jpg"
+STATE_WIFI_NG_IMG = "/flash/res/stickcplus/wifiNG.jpg"
+STATE_WIFI_OK_IMG = "/flash/res/stickcplus/wifiOKServerNG.jpg"
+STATE_SERVER_OK_IMG = "/flash/res/stickcplus/wifiOKServerOK.jpg"
 
 
 class AppBase:
     def __init__(self) -> None:
         self._task = None
+
+    def on_install(self):
+        pass
 
     def on_launch(self):
         pass
@@ -68,11 +55,59 @@ class AppBase:
         while True:
             await asyncio.sleep_ms(500)
 
-    async def on_hide(self):
+    def on_hide(self):
         self._task.cancel()
 
     def on_exit(self):
         pass
+
+    def on_uninstall(self):
+        pass
+
+    def install(self):
+        self.on_install()
+
+    def start(self):
+        self.on_launch()
+        self.on_view()
+        self.on_ready()
+
+    def pause(self):
+        self.on_hide()
+
+    def resume(self):
+        self.on_ready()
+
+    def stop(self):
+        self.on_hide()
+        self.on_exit()
+
+    def uninstall(self):
+        self.on_uninstall()
+
+
+class AppSelector:
+    def __init__(self, apps: list) -> None:
+        self._apps = apps
+        self._id = 0
+
+    def prev(self):
+        self._id = (self._id - 1) % len(self._apps)
+        return self._apps[self._id]
+
+    def next(self):
+        self._id = (self._id + 1) % len(self._apps)
+        return self._apps[self._id]
+
+    def current(self):
+        return self._apps[self._id]
+
+    def select(self, app):
+        self._id = self._apps.index(app)
+
+    def index(self, id):
+        self._id = id % len(self._apps)
+        return self._apps[self._id]
 
 
 class UsbApp(AppBase):
@@ -109,297 +144,137 @@ class UsbApp(AppBase):
     def on_exit(self):
         del self._bg_img, self._battery_label
 
-    async def _keycode_enter_event_handler(self, fw):
-        # print("_keycode_enter_event_handler")
-        pass
+    async def _keycode_enter_event_handler(self, fw: "Framework") -> None:
+        DEBUG and print("_keycode_enter_event_handler")
+        self.stop()
+        fw._app_selector.select(fw._launcher)
+        fw._launcher.start()
 
-    async def _keycode_back_event_handler(self, fw):
-        # print("_keycode_back_event_handler")
-        pass
+    async def _keycode_back_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_back_event_handler")
+        self.stop()
+        fw._app_selector.select(fw._launcher)
+        fw._launcher.start()
 
-    async def _keycode_dpad_down_event_handler(self, fw):
-        # print("_keycode_dpad_down_event_handler")
-        pass
-
-
-_cloud_icos_0 = {
-    0: CLOUD1_IMG,
-    1: CLOUD2_IMG,
-    2: CLOUD3_IMG,
-    3: CLOUD4_IMG,
-    4: CLOUD5_IMG,
-}
-
-_cloud_icos_1 = {
-    0: CLOUD6_IMG,
-    1: CLOUD7_IMG,
-    2: CLOUD8_IMG,
-    3: CLOUD10_IMG,
-    4: CLOUD9_IMG,
-}
-
-_txt_bg_colors = {
-    0: 0xCCCCCC,
-    1: 0x33CC99,
-    2: 0xFF6666,
-    3: 0x00CCFF,
-    4: 0x00CCFF,
-}
+    async def _keycode_dpad_down_event_handler(self, fw: "Framework") -> None:
+        DEBUG and print("_keycode_dpad_down_event_handler")
 
 
 class CloudApp(AppBase):
     def __init__(self, data) -> None:
         self._wifi = data[0]
         self._ssid = str(data[1]) if len(data[1]) else str(None)
+        self._user_id = None
         self._server = None
-        self._cloud_status = 0
+        self._wifi_status = False
+        self._cloud_status = False
         self._nick_name = ""
         self._pair_code = ""
 
-    def _get_server(self):
-        import esp32
+    def _get_wifi_status(self) -> bool:
+        return self._wifi.connect_status() == network.STAT_GOT_IP
 
-        nvs = esp32.NVS("uiflow")
-        try:
-            return nvs.get_str("server")
-        finally:
-            pass
-
-    def _set_server(self, server):
-        import esp32
-
-        nvs = esp32.NVS("uiflow")
-        try:
-            nvs.set_str("server", server)
-            nvs.commit()
-        finally:
-            pass
-
-    def _get_cloud_status(self):
-        _cloud_status = {
-            network.STAT_IDLE: 0,
-            network.STAT_CONNECTING: 0,
-            network.STAT_GOT_IP: 1,
-            network.STAT_NO_AP_FOUND: 2,
-            network.STAT_WRONG_PASSWORD: 2,
-            network.STAT_BEACON_TIMEOUT: 2,
-            network.STAT_ASSOC_FAIL: 2,
-            network.STAT_HANDSHAKE_TIMEOUT: 2,
-        }[self._wifi.connect_status()]
-
-        if _cloud_status != 1 or _HAS_SERVER is not True:
-            return _cloud_status
-
-        if M5Things.status() == 2:
-            _cloud_status = 4
+    def _get_cloud_status(self) -> bool:
+        if self._get_wifi_status() and _HAS_SERVER:
+            return M5Things.status() == 2
         else:
-            _cloud_status = 3
-        return _cloud_status
-
-    def _get_pair_code(self):
-        if _HAS_SERVER and self._cloud_status == 4:
-            try:
-                return M5Things.accesscode() or ""
-            except Exception:
-                pass
-        return ""
-
-    def _get_nick_name(self):
-        if _HAS_SERVER and self._cloud_status == 4:
-            try:
-                return M5Things.nick_name() or ""
-            except Exception:
-                pass
-        return ""
-
-    def _update_pair_data(self):
-        self._pair_code = self._get_pair_code()
-        self._nick_name = self._get_nick_name()
-
-    def _load_data(self):
-        self._server = self._get_server()
-        self._icos = {
-            "uiflow2.m5stack.com": _cloud_icos_0,
-            "sg.m5stack.com": _cloud_icos_1,
-        }[self._server]
-        self._cloud_status = self._get_cloud_status()
-        self._update_pair_data()
-
-    def _update_data(self):
-        self._icos = {
-            "uiflow2.m5stack.com": _cloud_icos_0,
-            "sg.m5stack.com": _cloud_icos_1,
-        }[self._server]
-        self._cloud_status = self._get_cloud_status()
-        self._update_pair_data()
-
-    def _load_view(self):
-        # bg img
-        self._bg_img.set_src(self._icos.get(self._cloud_status))
-
-        # ssid
-        self._ssid_label.set_text_color(0x000000, _txt_bg_colors.get(self._cloud_status))
-        self._ssid_label.set_text(self._ssid)
-
-        # access code
-        self._pair_code_label.set_text(self._pair_code)
-        self._nick_name_label.set_text(self._nick_name)
-
-        # rssi
-        if self._cloud_status in (3, 4):
-            self._rssi_label.set_text_color(0x000000, _txt_bg_colors.get(self._cloud_status))
-            self._rssi_label.set_text(str(self._wifi.get_rssi()))
-
-        # battery
-        self._battery_label.set_text(str(M5.Power.getBatteryLevel()))
+            return False
 
     def on_launch(self):
-        self._server = self._get_server()
-        self._icos = {
-            "uiflow2.m5stack.com": _cloud_icos_0,
-            "sg.m5stack.com": _cloud_icos_1,
-        }[self._server]
-        self._cloud_status = self._get_cloud_status()
-        self._update_pair_data()
-
-    def on_view(self):
-        self._battery_label = widgets.Label(
-            str(None),
-            135 - 14,
-            6,
-            w=135,
-            h=20,
-            font_align=widgets.Label.RIGHT_ALIGNED,
-            fg_color=0x000000,
-            bg_color=0xFFFFFF,
-            font=M5.Lcd.FONTS.Montserrat14,
-        )
-
-        self._ssid_label = widgets.Label(
-            str(None),
-            int(135 / 2),
-            55,
-            w=135,
-            h=20,
-            font_align=widgets.Label.CENTER_ALIGNED,
-            fg_color=0x000000,
-            bg_color=0xCCCCCC,
-            font=M5.Lcd.FONTS.Montserrat18,
-        )
-        self._ssid_label.set_long_mode(widgets.Label.LONG_DOT)
-
-        self._rssi_label = widgets.Label(
-            str(None),
-            65,
-            82,
-            w=135,
-            h=20,
-            font_align=widgets.Label.LEFT_ALIGNED,
-            fg_color=0x000000,
-            bg_color=0xCCCCCC,
-            font=M5.Lcd.FONTS.Montserrat14,
-        )
-        self._ssid_label.set_long_mode(widgets.Label.LONG_DOT)
-
-        self._nick_caption_label = widgets.Label(
-            "Nickname:",
-            int(135 / 2),
-            126,
-            w=135,
-            h=17,
-            font_align=widgets.Label.CENTER_ALIGNED,
-            fg_color=0xFFFFFF,
-            bg_color=0x000000,
-            font=M5.Lcd.FONTS.Montserrat14,
-        )
-
-        self._nick_name_label = widgets.Label(
-            "",
-            int(135 / 2),
-            143,
-            w=135,
-            h=22,
-            font_align=widgets.Label.CENTER_ALIGNED,
-            fg_color=0xFFFFFF,
-            bg_color=0x000000,
-            font=M5.Lcd.FONTS.Montserrat18,
-        )
-        self._nick_name_label.set_long_mode(widgets.Label.LONG_DOT)
-
-        self._pair_caption_label = widgets.Label(
-            "Access Code:",
-            int(135 / 2),
-            166,
-            w=135,
-            h=17,
-            font_align=widgets.Label.CENTER_ALIGNED,
-            fg_color=0xFFFFFF,
-            bg_color=0x000000,
-            font=M5.Lcd.FONTS.Montserrat14,
-        )
-
-        self._pair_code_label = widgets.Label(
-            "",
-            int(135 / 2),
-            183,
-            w=135,
-            h=29,
-            font_align=widgets.Label.CENTER_ALIGNED,
-            fg_color=0xFFFFFF,
-            bg_color=0x000000,
-            font=M5.Lcd.FONTS.Montserrat24,
-        )
-
         self._bg_img = widgets.Image(use_sprite=False)
         self._bg_img.set_x(0)
         self._bg_img.set_y(0)
         self._bg_img.set_size(135, 240)
+        self._bg_img.set_src(CLOUD_IMG)
 
-        self._load_view()
+        self._net_status_img = widgets.Image(use_sprite=False)
+        self._net_status_img.set_x(98)
+        self._net_status_img.set_y(27)
+        self._net_status_img.set_size(34, 24)
+        self._net_status_img.set_src(NG_IMG)
+
+        self._server_status_img = widgets.Image(use_sprite=False)
+        self._server_status_img.set_x(98)
+        self._server_status_img.set_y(55)
+        self._server_status_img.set_size(34, 24)
+        self._server_status_img.set_src(NG_IMG)
+
+        self._pair_code_label = widgets.Label(
+            self._pair_code,
+            67,
+            151,
+            w=103,
+            h=29,
+            font_align=widgets.Label.CENTER_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0xCBDFE0,
+            font=M5.Lcd.FONTS.Montserrat24,
+        )
+
+        self._nick_name_label = widgets.Label(
+            self._nick_name,
+            67,
+            101,
+            w=129,
+            h=29,
+            font_align=widgets.Label.CENTER_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0xCBDFE0,
+            font=M5.Lcd.FONTS.Montserrat24,
+        )
+        self._nick_name_label.set_long_mode(self._nick_name_label.LONG_DOT)
+
+    def on_view(self):
+        self._net_status_img.set_src(WIFI_OK_IMG if self._get_wifi_status() else NG_IMG)
+        self._server_status_img.set_src(SERVER_OK_IMG if self._get_cloud_status() else NG_IMG)
+        self._pair_code_label.set_text(self._pair_code)
+        self._nick_name_label.set_text(self._nick_name)
+        print_access_info(self._nick_name, self._pair_code)
 
     async def on_run(self):
         while True:
+            t = self._get_wifi_status()
+            if t is not self._wifi_status:
+                self._wifi_status = t
+                self._net_status_img.set_src(WIFI_OK_IMG if t else NG_IMG)
+
             t = self._get_cloud_status()
             if t is not self._cloud_status:
                 self._cloud_status = t
-                self._update_data()
-                self._load_view()
-            else:
-                nick_name = self._get_nick_name()
-                if nick_name != self._nick_name:
-                    self._nick_name = nick_name
-                    self._nick_name_label.set_text(nick_name)
+                self._server_status_img.set_src(SERVER_OK_IMG if t else NG_IMG)
 
-                pair_code = self._get_pair_code()
-                if pair_code != self._pair_code:
-                    self._pair_code = pair_code
-                    self._pair_code_label.set_text(pair_code)
+            if _HAS_SERVER:
+                t = M5Things.nick_name()
+                if t != self._nick_name:
+                    self._nick_name = t
+                    self._nick_name_label.set_text(t)
+
+                t = M5Things.accesscode()
+                if t != self._pair_code:
+                    self._pair_code = t
+                    self._pair_code_label.set_text(t)
+
+                print_access_info(self._nick_name, self._pair_code)
 
             await asyncio.sleep_ms(1000)
 
     def on_exit(self):
-        del self._battery_label, self._ssid_label, self._rssi_label
-        del self._nick_caption_label, self._nick_name_label
-        del self._pair_caption_label, self._pair_code_label
-        del self._bg_img
+        del self._bg_img, self._net_status_img, self._server_status_img
 
-    async def _keycode_enter_event_handler(self, fw):
-        # print("_keycode_enter_event_handler")
-        pass
+    async def _keycode_enter_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_enter_event_handler")
+        self.stop()
+        fw._app_selector.select(fw._launcher)
+        fw._launcher.start()
 
-    async def _keycode_back_event_handler(self, fw):
-        # print("_keycode_back_event_handler")
-        pass
+    async def _keycode_back_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_back_event_handler")
+        self.stop()
+        fw._app_selector.select(fw._launcher)
+        fw._launcher.start()
 
-    async def _keycode_dpad_down_event_handler(self, fw):
-        # print("_keycode_dpad_down_event_handler")
-        if self._server == "uiflow2.m5stack.com":
-            self._server = "sg.m5stack.com"
-        else:
-            self._server = "uiflow2.m5stack.com"
-        # self._set_server(self._server)
-        self._update_data()
-        self._load_view()
+    async def _keycode_dpad_down_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_dpad_down_event_handler")
 
 
 def _charge_ico(icos):
@@ -415,157 +290,158 @@ def _charge_ico(icos):
         yield from icos
 
 
-class MenuApp(AppBase):
+class LauncherApp(AppBase):
     def __init__(self, data=None) -> None:
         self._cloud_app = data
-        self._menus = (
-            (self._cloud_app, MODE1_IMG),
-            (UsbApp(), MODE2_IMG),
+        self._icons = (
+            CLOUD_ICON,
+            USB_ICON,
         )
 
     def on_launch(self):
-        self._icos = _charge_ico(self._menus)
-        self._app, self._img_src = next(self._icos)
-
-    def on_view(self):
-        self._status_img = widgets.Image(use_sprite=False)
-        self._status_img.set_x(0)
-        self._status_img.set_y(0)
-        self._status_img.set_size(135, 240)
-        self._status_img.set_src(self._img_src)
-
-        self._tips_label = widgets.Label(
-            "",
-            67,
-            108 - 22 - 5 - 22 - 5 - 22 - 5,
-            w=135,
-            h=20,
-            font_align=widgets.Label.CENTER_ALIGNED,
-            fg_color=0x00CCFF,
-            bg_color=0x000000,
-            font=M5.Lcd.FONTS.Montserrat18,
-        )
-
-        self._battery_label = widgets.Label(
-            str(None),
-            135 - 14,
-            6,
-            w=135,
-            h=20,
-            font_align=widgets.Label.RIGHT_ALIGNED,
-            fg_color=0x000000,
-            bg_color=0xFFFFFF,
-            font=M5.Lcd.FONTS.Montserrat14,
-        )
-        self._battery_label.set_text(str(M5.Power.getBatteryLevel()))
-
-    async def on_run(self):
-        while True:
-            # battery
-            self._battery_label.set_text(str(M5.Power.getBatteryLevel()))
-            await asyncio.sleep_ms(1000)
-
-    async def _keycode_enter_event_handler(self, fw):
-        # print("_keycode_enter_event_handler")
-        if self._app:
-            await fw.unload(self)
-            await fw.load(self._app)
-
-    async def _keycode_back_event_handler(self, fw):
-        # print("_keycode_back_event_handler")
-        pass
-
-    async def _keycode_dpad_down_event_handler(self, fw):
-        # print("_keycode_dpad_down_event_handler")
-        self._app, src = next(self._icos)
-        self._status_img.set_src(src)
-        self._battery_label.set_text(str(M5.Power.getBatteryLevel()))
-
-
-class LauncherApp(AppBase):
-    def __init__(self, data=None) -> None:
-        self._cloud_app, self._menu_app = data
+        self._icon_selector = _charge_ico(self._icons)
+        self._img_src = next(self._icon_selector)
+        self._id = 0
 
     def on_view(self):
         self._bg_img = widgets.Image(use_sprite=False)
-        self._bg_img.set_pos(0, 0)
+        self._bg_img.set_x(0)
+        self._bg_img.set_y(0)
         self._bg_img.set_size(135, 240)
-        self._bg_img.set_src(BK_IMG)
+        self._bg_img.set_src(self._img_src)
+
+        self._chg_img = widgets.Image(use_sprite=False)
+        self._chg_img.set_x(59)
+        self._chg_img.set_y(3)
+        self._chg_img.set_size(16, 22)
+        if M5.Power.isCharging():
+            self._chg_img.set_src(CHARGE_ICON)
+        else:
+            self._chg_img.set_src(NO_CHARGE_ICON)
+
+        self._battery_label = widgets.Label(
+            str(None),
+            132,
+            5,
+            w=47,
+            h=21,
+            font_align=widgets.Label.RIGHT_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0xCCCCCC,
+            font=M5.Lcd.FONTS.Montserrat18,
+        )
+
+        self._version_label = widgets.Label(
+            str(esp32.firmware_info()[3]),
+            67,
+            152,
+            w=135,
+            h=22,
+            font_align=widgets.Label.CENTER_ALIGNED,
+            fg_color=0x000000,
+            bg_color=0x67C94D,
+            font=M5.Lcd.FONTS.Montserrat18,
+        )
+        self._version_label.set_text(esp32.firmware_info()[3])
+
+    async def on_run(self):
+        last_battery = -1
+        last_charging = False
+        while True:
+            # charging status
+            if last_charging != M5.Power.isCharging():
+                last_charging = M5.Power.isCharging()
+                self._chg_img.set_src(CHARGE_ICON if last_charging else NO_CHARGE_ICON)
+
+            # battery level
+            if last_battery != M5.Power.getBatteryLevel():
+                last_battery = M5.Power.getBatteryLevel()
+                self._battery_label.set_text(str(last_battery) + "%")
+
+            await asyncio.sleep_ms(200)
 
     def on_exit(self):
-        del self._bg_img
+        del self._bg_img, self._icon_selector
 
-    async def _keycode_enter_event_handler(self, fw):
-        # print("_keycode_enter_event_handler")
-        await fw.unload(self)
-        await fw.load(self._cloud_app)
+    async def _keycode_enter_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_enter_event_handler")
+        self.stop()
+        app = fw._app_selector.index(self._id + 1)
+        app.start()
 
-    async def _keycode_back_event_handler(self, fw):
-        # print("_keycode_back_event_handler")
+    async def _keycode_back_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_back_event_handler")
         pass
 
-    async def _keycode_dpad_down_event_handler(self, fw):
-        # print("_keycode_dpad_down_event_handler")
-        await fw.unload(self)
-        await fw.load(self._menu_app)
+    async def _keycode_dpad_down_event_handler(self, fw: "Framework"):
+        DEBUG and print("_keycode_dpad_down_event_handler")
+        self._id = self._id + 1 if self._id + 1 < len(self._icons) else 0
+        self._img_src = next(self._icon_selector)
+        self._bg_img.set_src(self._img_src)
+        self._chg_img.set_src(CHARGE_ICON if M5.Power.isCharging() else NO_CHARGE_ICON)
+        self._battery_label.set_text(str(M5.Power.getBatteryLevel()) + "%")
+        self._version_label.set_text(esp32.firmware_info()[3])
 
 
 class Framework:
     def __init__(self) -> None:
         self._apps = []
+        self._app_selector = AppSelector(self._apps)
         self._launcher = None
 
     def install_launcher(self, launcher: AppBase):
         self._launcher = launcher
 
     def install(self, app: AppBase):
+        app.install()
         self._apps.append(app)
+
+    def start(self):
+        # asyncio.create_task(self.gc_task())
+        asyncio.run(self.run())
 
     async def unload(self, app: AppBase):
         # app = self._apps.pop()
-        await app.on_hide()
+        app.stop()
 
     async def load(self, app: AppBase):
-        self._apps.append(app)
-        app.on_launch()
-        app.on_view()
-        app.on_ready()
+        app.start()
 
     async def reload(self, app: AppBase):
-        await app.on_hide()
-        app.on_ready()
+        app.stop()
+        app.start()
 
     async def run(self):
-        asyncio.create_task(self.load(self._launcher))
+        if self._launcher:
+            self._app_selector.select(self._launcher)
+            self._launcher.start()
+
         # asyncio.create_task(self.gc_task())
         while True:
             M5.update()
             if M5.BtnA.wasClicked():
                 M5.Speaker.tone(4000, 50)
-                app = self._apps[-1]
-                asyncio.create_task(app._keycode_enter_event_handler(self))
-            if M5.BtnB.wasClicked():
-                M5.Speaker.tone(6000, 50)
-                app = self._apps[-1]
-                asyncio.create_task(app._keycode_dpad_down_event_handler(self))
+                app = self._app_selector.current()
+                if hasattr(app, "_keycode_enter_event_handler"):
+                    await app._keycode_enter_event_handler(self)
             if M5.BtnPWR.wasClicked():
                 M5.Speaker.tone(3500, 50)
-                if self._apps and len(self._apps) > 1:
-                    app = self._apps.pop()
+                app = self._app_selector.current()
+                if hasattr(app, "_keycode_back_event_handler"):
                     await app._keycode_back_event_handler(self)
-                    await app.on_hide()
-                    app.on_exit()
-                    app = self._apps[-1]
-                    app.on_launch()
-                    app.on_view()
-                    app.on_ready()
+            if M5.BtnB.wasClicked():
+                M5.Speaker.tone(6000, 50)
+                app = self._app_selector.current()
+                if hasattr(app, "_keycode_dpad_down_event_handler"):
+                    await app._keycode_dpad_down_event_handler(self)
+
             await asyncio.sleep_ms(100)
 
     async def gc_task(self):
         while True:
             gc.collect()
-            print("heap RAM free:", gc.mem_free())
-            print("heap RAM alloc:", gc.mem_alloc())
+            DEBUG and print("heap RAM free:", gc.mem_free())
+            DEBUG and print("heap RAM alloc:", gc.mem_alloc())
             await asyncio.sleep_ms(5000)
 
 
@@ -587,25 +463,19 @@ class StickCPlus_Startup:
         self._wifi.connect_network(
             ssid, pswd, protocol=protocol, ip=ip, netmask=netmask, gateway=gateway, dns=dns
         )
-        M5.Speaker.setVolume(255)
+        M5.Power.setExtOutput(False)
+        M5.Speaker.setVolume(100)
         M5.Speaker.tone(4000, 50)
 
-        bg_img = widgets.Image(use_sprite=False)
-        bg_img.set_pos(0, 0)
-        bg_img.set_size(135, 240)
-        bg_img.set_src(BK_IMG)
-        M5.Lcd.setBrightness(0)
-        import time
-
-        for i in range(0, 128, 20):
-            M5.Lcd.setBrightness(i)
-            time.sleep_ms(80)
-        DEBUG and print("Run startup menu")
+        DEBUG and print("Run StickC Plus startup menu")
 
         cloud_app = CloudApp((self._wifi, ssid))
-        menu_app = MenuApp(data=cloud_app)
-        launcher = LauncherApp(data=(cloud_app, menu_app))
+        usb_app = UsbApp()
+        launcher = LauncherApp(data=cloud_app)
 
         fw = Framework()
         fw.install_launcher(launcher)
-        asyncio.run(fw.run())
+        fw.install(launcher)
+        fw.install(cloud_app)
+        fw.install(usb_app)
+        fw.start()

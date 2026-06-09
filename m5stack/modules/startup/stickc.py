@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-from . import Startup
+from . import Startup, print_access_info
 import M5
 import network
 import widgets
@@ -125,6 +125,7 @@ class DevApp(AppBase):
         self._cloud_status = self._is_online()
         self._nick_name_text = self._get_nick_name()
         self._access_code_text = self._get_access_code()
+        print_access_info(self._nick_name_text, self._access_code_text)
 
     def on_view(self):
         M5.Lcd.fillRect(0, 12, 80, 148, self._BLACK)
@@ -234,6 +235,7 @@ class DevApp(AppBase):
                 self._cloud_status = cloud_status
                 self._nick_name_text = nick_name
                 self._access_code_text = access_code
+                print_access_info(self._nick_name_text, self._access_code_text)
                 self._load_view()
             await asyncio.sleep_ms(1500)
 
@@ -288,10 +290,7 @@ class DevApp(AppBase):
         if _HAS_SERVER is True:
             try:
                 if M5Things.status() == 2:
-                    for name in ("accesscode", "paircode"):
-                        code = getattr(M5Things, name)()
-                        if code:
-                            return code
+                    return M5Things.accesscode() or ""
             except Exception:
                 pass
         return ""

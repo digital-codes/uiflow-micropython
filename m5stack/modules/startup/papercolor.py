@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 # PaperColor startup script
-from startup import Startup
+from startup import Startup, print_access_info
 from M5 import Widgets
 import M5
 import time
@@ -168,8 +168,9 @@ class PaperColorCloudApp(AppBase):
             self._logged_ip = state["ip_addr"]
 
         if state["pair_code"] and state["pair_code"] != self._logged_pair_code:
-            print(f"Access code: {state['pair_code']}")
             self._logged_pair_code = state["pair_code"]
+
+        print_access_info(state.get("nick_name", ""), state.get("pair_code", ""))
 
     def _log_wait_stage(self, state) -> None:
         if not state["wifi_ok"]:

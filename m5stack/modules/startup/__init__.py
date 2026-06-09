@@ -116,6 +116,23 @@ class Startup:
         return _M5THINGS_STATUS_MAP.get(status, f"UNKNOWN({status})")
 
 
+_last_access_info = (None, None)
+
+
+def print_access_info(nick_name, access_code):
+    global _last_access_info
+    nick_name = "" if nick_name is None else str(nick_name)
+    access_code = "" if access_code is None else str(access_code)
+    if nick_name == "" and access_code == "":
+        return
+    info = (nick_name, access_code)
+    if info == _last_access_info:
+        return
+    _last_access_info = info
+    print("Nickname: " + nick_name)
+    print("Access Code: " + access_code)
+
+
 def _is_psram():
     sum = 0
     infos = esp32.idf_heap_info(esp32.HEAP_DATA)

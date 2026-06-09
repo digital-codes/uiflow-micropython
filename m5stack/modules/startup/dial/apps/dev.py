@@ -12,6 +12,7 @@ import machine
 import network
 from .. import res
 from . import status_bar
+from startup import print_access_info
 
 try:
     import M5Things
@@ -97,14 +98,14 @@ class DevApp(app_base.AppBase):
             font_align=widgets.Label.CENTER_ALIGNED,
             fg_color=_VALUE_COLOR,
             bg_color=_PANEL_BG,
-            font=_VALUE_FONT,
+            font=_LABEL_FONT,
         )
         self._mac_value_label.set_long_mode(widgets.Label.LONG_DOT)
 
         self._nick_title_label = widgets.Label(
             "Nickname:",
             120,
-            141,
+            182,
             w=210,
             h=18,
             font_align=widgets.Label.CENTER_ALIGNED,
@@ -116,20 +117,20 @@ class DevApp(app_base.AppBase):
         self._nick_value_label = widgets.Label(
             "",
             120,
-            158,
+            199,
             w=190,
             h=20,
             font_align=widgets.Label.CENTER_ALIGNED,
             fg_color=_VALUE_COLOR,
             bg_color=_PANEL_BG,
-            font=_VALUE_FONT,
+            font=_LABEL_FONT,
         )
         self._nick_value_label.set_long_mode(widgets.Label.LONG_DOT)
 
         self._access_label = widgets.Label(
             "Access code:",
             120,
-            182,
+            141,
             w=210,
             h=18,
             font_align=widgets.Label.CENTER_ALIGNED,
@@ -141,7 +142,7 @@ class DevApp(app_base.AppBase):
         self._code_value_label = widgets.Label(
             "",
             120,
-            199,
+            158,
             w=190,
             h=22,
             font_align=widgets.Label.CENTER_ALIGNED,
@@ -202,14 +203,15 @@ class DevApp(app_base.AppBase):
         self._set_value(self._server_label, self._state.get("server", ""), fallback="")
         self._mac_title_label.set_text("Device MAC:")
         self._set_value(self._mac_value_label, self._state.get("mac", ""), fallback="")
-        self._nick_title_label.set_text("Nickname:")
-        self._set_value(self._nick_value_label, self._state.get("nick_name", ""), fallback="")
         self._access_label.set_text("Access code:")
         self._set_value(
             self._code_value_label,
             self._state.get("pair_code", ""),
             fallback="",
         )
+        self._nick_title_label.set_text("Nickname:")
+        self._set_value(self._nick_value_label, self._state.get("nick_name", ""), fallback="")
+        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
 
     def _refresh_status_bar(self):
         if not hasattr(self, "_status_bar"):
