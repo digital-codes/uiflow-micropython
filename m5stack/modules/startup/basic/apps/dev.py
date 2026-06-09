@@ -88,9 +88,9 @@ class DevApp(app_base.AppBase):
         self._nick_label, self._nick_value = self._create_row("Nickname:", 110)
 
         self._set_value(self._mac_value, self._state.get("mac", "-"))
-        self._set_value(self._code_value, self._state.get("pair_code", ""), fallback="")
+        self._set_value(self._code_value, self._state.get("access_code", ""), fallback="")
         self._set_value(self._nick_value, self._state.get("nick_name", ""), fallback="")
-        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
+        print_access_info(self._state.get("nick_name", ""), self._state.get("access_code", ""))
 
         self._bar_img = widgets.Image(use_sprite=False)
         self._bar_img.set_pos(0, self._origin_y + 164)
@@ -130,15 +130,15 @@ class DevApp(app_base.AppBase):
         while True:
             new_state = self._collect_state()
 
-            if new_state["pair_code"] != self._state.get("pair_code"):
-                self._state["pair_code"] = new_state["pair_code"]
-                self._set_value(self._code_value, new_state["pair_code"], fallback="")
-                print_access_info(self._state.get("nick_name", ""), new_state["pair_code"])
+            if new_state["access_code"] != self._state.get("access_code"):
+                self._state["access_code"] = new_state["access_code"]
+                self._set_value(self._code_value, new_state["access_code"], fallback="")
+                print_access_info(self._state.get("nick_name", ""), new_state["access_code"])
 
             if new_state["nick_name"] != self._state.get("nick_name"):
                 self._state["nick_name"] = new_state["nick_name"]
                 self._set_value(self._nick_value, new_state["nick_name"], fallback="")
-                print_access_info(new_state["nick_name"], self._state.get("pair_code", ""))
+                print_access_info(new_state["nick_name"], self._state.get("access_code", ""))
 
             t = self._get_bar_src()
             if t != self._status_bar_src:
@@ -250,7 +250,7 @@ class DevApp(app_base.AppBase):
         return binascii.hexlify(machine.unique_id()).decode("utf-8").upper()
 
     @staticmethod
-    def _get_pair_code():
+    def _get_access_code():
         if _HAS_SERVER is True:
             try:
                 if M5Things.status() == 2:
@@ -272,7 +272,7 @@ class DevApp(app_base.AppBase):
     def _collect_state(self):
         return {
             "mac": self._get_mac(),
-            "pair_code": self._get_pair_code(),
+            "access_code": self._get_access_code(),
             "nick_name": self._get_nick_name(),
         }
 

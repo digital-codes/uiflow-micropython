@@ -738,9 +738,9 @@ class SetupApp(AppBase):
                     if M5Things.status() == 2:
                         if M5Things.accesscode() != "":
                             self._state = self._STATE_SERVER_OK
-                            self._pair_code = M5Things.accesscode()
+                            self._access_code = M5Things.accesscode()
                             self._nick_name = M5Things.nick_name()
-                            print_access_info(self._nick_name, self._pair_code)
+                            print_access_info(self._nick_name, self._access_code)
                             self._bg_img.set_src(SETUP_SERVER_OK_IMG)
 
                             self._net_status_img = widgets.Image(use_sprite=False)
@@ -757,8 +757,8 @@ class SetupApp(AppBase):
                             self._server_status_img.set_src(SERVER_OK_IMG)
                             self._server_status = True
 
-                            self._pair_code_label = widgets.Label(
-                                self._pair_code,
+                            self._access_code_label = widgets.Label(
+                                self._access_code,
                                 67,
                                 153,
                                 w=103,
@@ -780,7 +780,7 @@ class SetupApp(AppBase):
                                 font=M5.Lcd.FONTS.Montserrat24,
                             )
                             self._nick_name_label.set_long_mode(self._nick_name_label.LONG_DOT)
-                            self._pair_code_label.set_text(self._pair_code)
+                            self._access_code_label.set_text(self._access_code)
                     elif M5Things.status() > 2:
                         self._state = self._STATE_SERVER_NG
                         self._bg_img.set_src(SETUP_SERVER_NG_IMG)
@@ -811,11 +811,11 @@ class SetupApp(AppBase):
                     self._nick_name_label.set_text(t)
 
                 t = M5Things.accesscode()
-                if t != self._pair_code:
-                    self._pair_code = t
-                    self._pair_code_label.set_text(t)
+                if t != self._access_code:
+                    self._access_code = t
+                    self._access_code_label.set_text(t)
 
-                print_access_info(self._nick_name, self._pair_code)
+                print_access_info(self._nick_name, self._access_code)
 
             await asyncio.sleep_ms(100)
 
@@ -856,7 +856,7 @@ class CloudApp(AppBase):
         self._wifi_status = False
         self._cloud_status = False
         self._nick_name = ""
-        self._pair_code = ""
+        self._access_code = ""
 
     def _get_wifi_status(self) -> bool:
         return self._wifi.connect_status() == network.STAT_GOT_IP
@@ -886,8 +886,8 @@ class CloudApp(AppBase):
         self._server_status_img.set_size(34, 24)
         self._server_status_img.set_src(NG_IMG)
 
-        self._pair_code_label = widgets.Label(
-            self._pair_code,
+        self._access_code_label = widgets.Label(
+            self._access_code,
             67,
             153,
             w=103,
@@ -914,9 +914,9 @@ class CloudApp(AppBase):
     def on_view(self):
         self._net_status_img.set_src(WIFI_OK_IMG if self._get_wifi_status() else NG_IMG)
         self._server_status_img.set_src(SERVER_OK_IMG if self._get_cloud_status() else NG_IMG)
-        self._pair_code_label.set_text(self._pair_code)
+        self._access_code_label.set_text(self._access_code)
         self._nick_name_label.set_text(self._nick_name)
-        print_access_info(self._nick_name, self._pair_code)
+        print_access_info(self._nick_name, self._access_code)
 
     async def on_run(self):
         while True:
@@ -937,11 +937,11 @@ class CloudApp(AppBase):
                     self._nick_name_label.set_text(t)
 
                 t = M5Things.accesscode()
-                if t != self._pair_code:
-                    self._pair_code = t
-                    self._pair_code_label.set_text(t)
+                if t != self._access_code:
+                    self._access_code = t
+                    self._access_code_label.set_text(t)
 
-                print_access_info(self._nick_name, self._pair_code)
+                print_access_info(self._nick_name, self._access_code)
 
             await asyncio.sleep_ms(1000)
 

@@ -88,12 +88,12 @@ class AppDevelop(AppBase):
 
         self._set_status(self._state.get("is_cloud_connected", False))
         self._set_value(self._mac_value, self._state.get("mac", "-"))
-        self._set_value(self._code_value, self._state.get("pair_code", ""), fallback="")
+        self._set_value(self._code_value, self._state.get("access_code", ""), fallback="")
         self._set_value(self._nick_value, self._state.get("nick_name", ""), fallback="")
         self._set_value(self._wifi_value, self._state.get("wifi_ssid", ""), fallback="")
         self._set_value(self._ip_value, self._state.get("ip_address", ""), fallback="")
         self._set_value(self._fw_value, self._state.get("firmware", ""), fallback="")
-        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
+        print_access_info(self._state.get("nick_name", ""), self._state.get("access_code", ""))
 
     def _update_view(self, refresh_details=False):
         new_state = self._collect_state(refresh_details)
@@ -102,12 +102,12 @@ class AppDevelop(AppBase):
             self._state["is_cloud_connected"] = new_state["is_cloud_connected"]
             self._set_status(new_state["is_cloud_connected"])
 
-        self._update_label("pair_code", self._code_value, new_state, fallback="")
+        self._update_label("access_code", self._code_value, new_state, fallback="")
         self._update_label("nick_name", self._nick_value, new_state, fallback="")
         self._update_label("wifi_ssid", self._wifi_value, new_state, fallback="")
         self._update_label("ip_address", self._ip_value, new_state, fallback="")
         self._update_label("firmware", self._fw_value, new_state, fallback="")
-        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
+        print_access_info(self._state.get("nick_name", ""), self._state.get("access_code", ""))
 
     def _update_label(self, key, label, new_state, fallback="-"):
         if new_state[key] != self._state.get(key):
@@ -184,7 +184,7 @@ class AppDevelop(AppBase):
         return _M5THINGS
 
     @staticmethod
-    def _get_pair_code(m5things, is_cloud_connected):
+    def _get_access_code(m5things, is_cloud_connected):
         if m5things and is_cloud_connected:
             try:
                 return m5things.accesscode() or ""
@@ -239,7 +239,7 @@ class AppDevelop(AppBase):
         return {
             "mac": self._get_mac(),
             "is_cloud_connected": False,
-            "pair_code": "",
+            "access_code": "",
             "nick_name": "",
             "wifi_ssid": "",
             "ip_address": "",
@@ -254,7 +254,7 @@ class AppDevelop(AppBase):
         state = {
             "mac": self._state.get("mac", ""),
             "is_cloud_connected": is_cloud_connected,
-            "pair_code": self._state.get("pair_code", ""),
+            "access_code": self._state.get("access_code", ""),
             "nick_name": self._state.get("nick_name", ""),
             "wifi_ssid": self._state.get("wifi_ssid", ""),
             "ip_address": self._state.get("ip_address", ""),
@@ -262,12 +262,12 @@ class AppDevelop(AppBase):
         }
 
         if not is_cloud_connected:
-            state["pair_code"] = ""
+            state["access_code"] = ""
             state["nick_name"] = ""
 
         if refresh_details:
             m5things = self._get_m5things() if is_cloud_connected else None
-            state["pair_code"] = self._get_pair_code(m5things, is_cloud_connected)
+            state["access_code"] = self._get_access_code(m5things, is_cloud_connected)
             state["nick_name"] = self._get_nick_name(m5things, is_cloud_connected)
             state["wifi_ssid"] = self._get_wifi_ssid()
             state["ip_address"] = self._get_ip_address()

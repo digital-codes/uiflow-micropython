@@ -169,7 +169,7 @@ class DevApp(app_base.AppBase):
                 self._draw_page_bg(self._bg_src)
                 refresh = True
 
-            for key in ("server", "mac", "nick_name", "pair_code"):
+            for key in ("server", "mac", "nick_name", "access_code"):
                 if new_state[key] != self._state.get(key):
                     self._state[key] = new_state[key]
                     refresh = True
@@ -206,12 +206,12 @@ class DevApp(app_base.AppBase):
         self._access_label.set_text("Access code:")
         self._set_value(
             self._code_value_label,
-            self._state.get("pair_code", ""),
+            self._state.get("access_code", ""),
             fallback="",
         )
         self._nick_title_label.set_text("Nickname:")
         self._set_value(self._nick_value_label, self._state.get("nick_name", ""), fallback="")
-        print_access_info(self._state.get("nick_name", ""), self._state.get("pair_code", ""))
+        print_access_info(self._state.get("nick_name", ""), self._state.get("access_code", ""))
 
     def _refresh_status_bar(self):
         if not hasattr(self, "_status_bar"):
@@ -266,7 +266,7 @@ class DevApp(app_base.AppBase):
             "server": self._get_server(),
             "mac": self._get_mac(),
             "nick_name": self._get_nick_name(),
-            "pair_code": self._get_access_code(),
+            "access_code": self._get_access_code(),
         }
 
     def _is_wifi_connected(self):
