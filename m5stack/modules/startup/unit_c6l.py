@@ -211,7 +211,7 @@ class InfoPages:
     def __init__(self, wifi, ssid) -> None:
         self._wifi = wifi
         self._ssid = ssid or ""
-        self._page = self.PAGE_HOME
+        self._page = self.PAGE_ACCESS
         self._last_payload = None
         self._last_refresh_ms = 0
 
