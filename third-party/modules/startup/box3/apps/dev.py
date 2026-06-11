@@ -47,7 +47,8 @@ class DevApp(AppBase):
 
     def on_launch(self):
         self._mac_text = self._get_mac()
-        self._account_text = self._get_account()
+        self._access_code_text = self._get_access_code()
+        self._nick_name_text = self._get_nick_name()
         self._bg_src = self._get_bg_src()
         self._avatar_src = self._get_avatar()
 
@@ -63,32 +64,43 @@ class DevApp(AppBase):
         self._bg_img.set_src(self._bg_src)
 
         self._mac_label = Label(
-            "aabbcc112233",
+            "",
             4 + 6,
-            4 + 57,
-            w=177,
+            4 + 48,
+            w=188,
             fg_color=0x000000,
             bg_color=0xEEEEEF,
             font="/system/common/font/Montserrat-Medium-18.vlw",
             parent=self._lcd,
         )
-        self._mac_label.set_text(self._mac_text)
+        self._mac_label.set_text("MAC: " + self._mac_text)
 
-        self._account_label = Label(
-            "XXABC",
+        self._access_code_label = Label(
+            "",
             4 + 6,
-            4 + 57 + 40,
-            w=110,
-            h=60,
+            4 + 83,
+            w=188,
             fg_color=0x000000,
             bg_color=0xEEEEEF,
             font="/system/common/font/Montserrat-Medium-18.vlw",
             parent=self._lcd,
         )
-        self._account_label.set_text(self._account_text)
+        self._access_code_label.set_text("Access Code: " + self._access_code_text)
+
+        self._nick_name_label = Label(
+            "",
+            4 + 6,
+            4 + 118,
+            w=188,
+            fg_color=0x000000,
+            bg_color=0xEEEEEF,
+            font="/system/common/font/Montserrat-Medium-18.vlw",
+            parent=self._lcd,
+        )
+        self._nick_name_label.set_text("Nickname: " + self._nick_name_text)
 
         self._avatar_img = Image(use_sprite=False, parent=self._lcd)
-        self._avatar_img.set_pos(130, 100)
+        self._avatar_img.set_pos(252, 98)
         self._avatar_img.set_size(56, 56)
         self._avatar_img.set_scale(0.28, 0.28)
         self._avatar_img.set_src(self._avatar_src)
@@ -104,15 +116,18 @@ class DevApp(AppBase):
                 self._bg_img.set_src(self._bg_src)
                 refresh = True
 
-            refresh and self._mac_label.set_text(self._mac_text)
+            refresh and self._mac_label.set_text("MAC: " + self._mac_text)
 
-            t = self._get_account()
-            if t != self._account_text or refresh:
-                print(refresh)
-                print(self._account_text)
-                print(t)
-                self._account_text = t
-                self._account_label.set_text(self._account_text)
+            t = self._get_access_code()
+            if t != self._access_code_text or refresh:
+                self._access_code_text = t
+                self._access_code_label.set_text("Access Code: " + self._access_code_text)
+                self._lcd.push(self._origin_x, self._origin_y)
+
+            t = self._get_nick_name()
+            if t != self._nick_name_text or refresh:
+                self._nick_name_text = t
+                self._nick_name_label.set_text("Nickname: " + self._nick_name_text)
                 self._lcd.push(self._origin_x, self._origin_y)
 
             t = self._get_avatar()
@@ -139,7 +154,13 @@ class DevApp(AppBase):
 
     def on_exit(self):
         M5.Lcd.drawImage("/system/box3/Selection/develop_unselected.png", 5 + 62, 20 + 4)
-        del self._bg_img, self._mac_label, self._account_label, self._avatar_img
+        del (
+            self._bg_img,
+            self._mac_label,
+            self._access_code_label,
+            self._nick_name_label,
+            self._avatar_img,
+        )
 
     async def _click_event_handler(self, x, y, fw):
         pass
@@ -175,13 +196,21 @@ class DevApp(AppBase):
 
     @staticmethod
     def _get_mac():
-        return binascii.hexlify(machine.unique_id()).upper()
+        return binascii.hexlify(machine.unique_id()).decode("utf-8").upper()
 
     @staticmethod
-    def _get_account():
+    def _get_access_code():
         if _HAS_SERVER is True and M5Things.status() == 2:
-            infos = M5Things.info()
-            return "None" if len(infos[1]) == 0 else infos[1]
+            code = M5Things.accesscode()
+            return "None" if len(code) == 0 else code
+        else:
+            return "None"
+
+    @staticmethod
+    def _get_nick_name():
+        if _HAS_SERVER is True and M5Things.status() == 2:
+            nick_name = M5Things.nick_name()
+            return "None" if len(nick_name) == 0 else nick_name
         else:
             return "None"
 
