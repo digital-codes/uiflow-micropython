@@ -187,7 +187,7 @@ define pack_fw
 		$(BOARD_TYPE) \
 		$(LVGL_FLAG) \
 		$(BUILD)/uiflow-$(GIT_VERSION).bin \
-		$(BUILD)/uiflow-Sx-$(GIT_VERSION).uf2
+		$(BUILD)/sx-uiflow-$(GIT_VERSION).uf2
 endef
 
 export ADF_PATH=$(abspath ../esp-adf)
