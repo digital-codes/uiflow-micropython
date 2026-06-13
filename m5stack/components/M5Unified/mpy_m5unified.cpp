@@ -18,6 +18,8 @@
 #include <esp_log.h>
 #include <sdkconfig.h>
 #include <M5Unified.hpp>
+#include <LGFX_Fonts.hpp>
+#include "mpy_lgfx_lvgl_font.hpp"
 #include <M5AtomDisplay.h>
 #include <M5ModuleDisplay.h>
 #if CONFIG_IDF_TARGET_ESP32
@@ -596,13 +598,7 @@ mp_obj_t m5_begin(size_t n_args, const mp_obj_t *args) {
     // default display
     m5_display.gfx = (void *)(&(M5.Display));
     // set default font to Montserrat 12, keep same style with UIFlow website UI design.
-    #if MICROPY_PY_LVGL
-    extern const lv_font_t lv_font_montserrat_12;
-    static const lgfx::LVGLfont lv_font_montserrat_12_obj(&lv_font_montserrat_12);
-    M5.Display.setFont(&lv_font_montserrat_12_obj);
-    #else
-    M5.Display.setFont(&m5gfx::fonts::lv_font_montserrat_12);
-    #endif
+    M5.Display.setFont(&m5gfx::fonts::lvFontMontserrat12);
 
     // get local time and sync to RTC IC
     rtc_sync(nullptr);
