@@ -310,6 +310,7 @@ submodules:
 	rm -rf ./components/esp-code-scanner && git submodule update --init ./components/esp-code-scanner
 	rm -rf ./components/esp_zigbee_host && git submodule update --init ./components/esp_zigbee_host
 	rm -rf ./components/M5Unified/M5GFX && git submodule update --init ./components/M5Unified/M5GFX
+	rm -rf ./components/M5Unified/LGFX_Fonts && git submodule update --init ./components/M5Unified/LGFX_Fonts
 	rm -rf ./components/M5Unified/M5Unified && git submodule update --init ./components/M5Unified/M5Unified
 	#git submodule update --init --recursive ./components/lv_bindings
 	rm -rf ./cmodules/lv_binding_micropython && git submodule update --init --recursive ./cmodules/lv_binding_micropython
