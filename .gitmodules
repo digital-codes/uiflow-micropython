@@ -33,4 +33,4 @@
 	url = https://github.com/lvgl/lv_binding_micropython.git
 [submodule "m5stack/components/M5Unified/LGFX_Fonts"]
 	path = m5stack/components/M5Unified/LGFX_Fonts
-	url = git@github.com:tobozo/LGFX_Fonts.git
+	url = https://github.com/tobozo/LGFX_Fonts.git
