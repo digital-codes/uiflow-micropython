@@ -1351,6 +1351,19 @@ mp_obj_t gfx_delete(mp_obj_t self) {
 #include "mpy_gfx_stream.c"
 
 // --------------------------- builtin fonts ----------------------------
+#if BOARD_ID == 25
+const font_obj_t gfx_font_0_obj = {{ &mp_type_object }, &m5gfx::fonts::Font0 };
+const font_obj_t gfx_font_DejaVu9_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu9  };
+const font_obj_t gfx_font_DejaVu12_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu12 };
+const font_obj_t gfx_font_DejaVu18_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu18 };
+const font_obj_t gfx_font_DejaVu24_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu24 };
+const font_obj_t gfx_font_DejaVu40_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu40 };
+const font_obj_t gfx_font_DejaVu56_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu56 };
+const font_obj_t gfx_font_DejaVu72_obj = {{ &mp_type_object }, &m5gfx::fonts::DejaVu72 };
+const font_obj_t gfx_font_efontCN_24_obj = {{ &mp_type_object }, &m5gfx::fonts::efontCN_24 };
+const font_obj_t gfx_font_efontJA_24_obj = {{ &mp_type_object }, &m5gfx::fonts::efontJA_24 };
+const font_obj_t gfx_font_efontKR_24_obj = {{ &mp_type_object }, &m5gfx::fonts::efontKR_24 };
+#else
 #ifndef TINY_FONT
 // FONT_MONTSERRAT_12
 const font_obj_t gfx_font_montserrat_12_obj = {{ &mp_type_object }, &m5gfx::fonts::lvFontMontserrat12 };
@@ -1455,4 +1468,5 @@ extern const lv_font_t Montserrat_1BPP_48;
 const M5LvglFont lv_font_montserrat_48_obj(&Montserrat_1BPP_48);
 const font_obj_t gfx_font_montserrat_48_obj = {{ &mp_type_object }, &lv_font_montserrat_48_obj };
 #endif // TINY_FONT
+#endif // BOARD_ID == 25
 }

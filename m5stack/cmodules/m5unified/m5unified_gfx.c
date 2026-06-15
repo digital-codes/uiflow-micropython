@@ -97,68 +97,68 @@ MAKE_METHOD_0(gfx, lvgl_benchmark);
 #endif
 
 #define TABLE_PARTS_GFX_BASE \
-    MAKE_TABLE(gfx, height), \
-    MAKE_TABLE(gfx, width), \
-    MAKE_TABLE(gfx, getRotation), \
-    MAKE_TABLE(gfx, getColorDepth), \
-    MAKE_TABLE(gfx, getEpdMode), \
-    MAKE_TABLE(gfx, powerSaveOn), \
-    MAKE_TABLE(gfx, powerSaveOff), \
-    MAKE_TABLE(gfx, getCursor), \
-    MAKE_TABLE(gfx, setRotation), \
-    MAKE_TABLE(gfx, setColorDepth), \
-    MAKE_TABLE(gfx, setEpdMode), \
-    MAKE_TABLE(gfx, isEPD), \
-    MAKE_TABLE(gfx, setFont), \
-    MAKE_TABLE(gfx, loadFont), \
-    MAKE_TABLE(gfx, unloadFont), \
-    MAKE_TABLE(gfx, setTextColor), \
-    MAKE_TABLE(gfx, setTextScroll), \
-    MAKE_TABLE(gfx, setTextSize), \
-    MAKE_TABLE(gfx, textWidth), \
-    MAKE_TABLE(gfx, fontHeight), \
-    MAKE_TABLE(gfx, setCursor), \
-    MAKE_TABLE(gfx, getBrightness), \
-    MAKE_TABLE(gfx, setBrightness), \
-    MAKE_TABLE(gfx, clear), \
-    MAKE_TABLE(gfx, fillScreen), \
-    MAKE_TABLE(gfx, drawPixel), \
-    MAKE_TABLE(gfx, drawCircle), \
-    MAKE_TABLE(gfx, fillCircle), \
-    MAKE_TABLE(gfx, drawEllipse), \
-    MAKE_TABLE(gfx, fillEllipse), \
-    MAKE_TABLE(gfx, drawLine), \
-    MAKE_TABLE(gfx, drawRect), \
-    MAKE_TABLE(gfx, fillRect), \
-    MAKE_TABLE(gfx, drawRoundRect), \
-    MAKE_TABLE(gfx, fillRoundRect), \
-    MAKE_TABLE(gfx, drawTriangle), \
-    MAKE_TABLE(gfx, fillTriangle), \
-    MAKE_TABLE(gfx, drawArc), \
-    MAKE_TABLE(gfx, fillArc), \
-    MAKE_TABLE(gfx, drawEllipseArc), \
-    MAKE_TABLE(gfx, fillEllipseArc), \
-    MAKE_TABLE(gfx, drawQR), \
-    MAKE_TABLE(gfx, drawJpg), \
-    MAKE_TABLE(gfx, drawPng), \
-    MAKE_TABLE(gfx, drawBmp), \
-    MAKE_TABLE(gfx, drawImage), \
-    MAKE_TABLE(gfx, drawRawBuf), \
-    MAKE_TABLE(gfx, show), \
-    MAKE_TABLE(gfx, drawString), \
-    MAKE_TABLE(gfx, drawCenterString), \
-    MAKE_TABLE(gfx, drawRightString), \
-    MAKE_TABLE(gfx, print), \
-    MAKE_TABLE(gfx, printf), \
-    MAKE_TABLE(gfx, newCanvas), \
-    MAKE_TABLE(gfx, writeCommand), \
-    MAKE_TABLE(gfx, writeCommand16), \
-    MAKE_TABLE(gfx, writeData), \
-    MAKE_TABLE(gfx, writeData16), \
-    MAKE_TABLE(gfx, writeData32), \
-    MAKE_TABLE(gfx, readData), \
-    MAKE_TABLE(gfx, readData16), \
-    MAKE_TABLE(gfx, readData32)
+        MAKE_TABLE(gfx, height), \
+        MAKE_TABLE(gfx, width), \
+        MAKE_TABLE(gfx, getRotation), \
+        MAKE_TABLE(gfx, getColorDepth), \
+        MAKE_TABLE(gfx, getEpdMode), \
+        MAKE_TABLE(gfx, powerSaveOn), \
+        MAKE_TABLE(gfx, powerSaveOff), \
+        MAKE_TABLE(gfx, getCursor), \
+        MAKE_TABLE(gfx, setRotation), \
+        MAKE_TABLE(gfx, setColorDepth), \
+        MAKE_TABLE(gfx, setEpdMode), \
+        MAKE_TABLE(gfx, isEPD), \
+        MAKE_TABLE(gfx, setFont), \
+        MAKE_TABLE(gfx, loadFont), \
+        MAKE_TABLE(gfx, unloadFont), \
+        MAKE_TABLE(gfx, setTextColor), \
+        MAKE_TABLE(gfx, setTextScroll), \
+        MAKE_TABLE(gfx, setTextSize), \
+        MAKE_TABLE(gfx, textWidth), \
+        MAKE_TABLE(gfx, fontHeight), \
+        MAKE_TABLE(gfx, setCursor), \
+        MAKE_TABLE(gfx, getBrightness), \
+        MAKE_TABLE(gfx, setBrightness), \
+        MAKE_TABLE(gfx, clear), \
+        MAKE_TABLE(gfx, fillScreen), \
+        MAKE_TABLE(gfx, drawPixel), \
+        MAKE_TABLE(gfx, drawCircle), \
+        MAKE_TABLE(gfx, fillCircle), \
+        MAKE_TABLE(gfx, drawEllipse), \
+        MAKE_TABLE(gfx, fillEllipse), \
+        MAKE_TABLE(gfx, drawLine), \
+        MAKE_TABLE(gfx, drawRect), \
+        MAKE_TABLE(gfx, fillRect), \
+        MAKE_TABLE(gfx, drawRoundRect), \
+        MAKE_TABLE(gfx, fillRoundRect), \
+        MAKE_TABLE(gfx, drawTriangle), \
+        MAKE_TABLE(gfx, fillTriangle), \
+        MAKE_TABLE(gfx, drawArc), \
+        MAKE_TABLE(gfx, fillArc), \
+        MAKE_TABLE(gfx, drawEllipseArc), \
+        MAKE_TABLE(gfx, fillEllipseArc), \
+        MAKE_TABLE(gfx, drawQR), \
+        MAKE_TABLE(gfx, drawJpg), \
+        MAKE_TABLE(gfx, drawPng), \
+        MAKE_TABLE(gfx, drawBmp), \
+        MAKE_TABLE(gfx, drawImage), \
+        MAKE_TABLE(gfx, drawRawBuf), \
+        MAKE_TABLE(gfx, show), \
+        MAKE_TABLE(gfx, drawString), \
+        MAKE_TABLE(gfx, drawCenterString), \
+        MAKE_TABLE(gfx, drawRightString), \
+        MAKE_TABLE(gfx, print), \
+        MAKE_TABLE(gfx, printf), \
+        MAKE_TABLE(gfx, newCanvas), \
+        MAKE_TABLE(gfx, writeCommand), \
+        MAKE_TABLE(gfx, writeCommand16), \
+        MAKE_TABLE(gfx, writeData), \
+        MAKE_TABLE(gfx, writeData16), \
+        MAKE_TABLE(gfx, writeData32), \
+        MAKE_TABLE(gfx, readData), \
+        MAKE_TABLE(gfx, readData16), \
+        MAKE_TABLE(gfx, readData32)
 
 // -------- GFX device wrapper
 MAKE_METHOD_0(gfx, startWrite);
@@ -166,6 +166,34 @@ MAKE_METHOD_0(gfx, endWrite);
 
 static const mp_rom_map_elem_t fonts_member_table[] = {
     /* *FORMAT-OFF* */
+#if BOARD_ID == 25
+    { MP_ROM_QSTR(MP_QSTR_ASCII7),    MP_ROM_PTR(&gfx_font_0_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu9),   MP_ROM_PTR(&gfx_font_DejaVu9_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu12),  MP_ROM_PTR(&gfx_font_DejaVu12_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu18),  MP_ROM_PTR(&gfx_font_DejaVu18_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu24),  MP_ROM_PTR(&gfx_font_DejaVu24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu40),  MP_ROM_PTR(&gfx_font_DejaVu40_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu56),  MP_ROM_PTR(&gfx_font_DejaVu56_obj) },
+    { MP_ROM_QSTR(MP_QSTR_DejaVu72),  MP_ROM_PTR(&gfx_font_DejaVu72_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat12), MP_ROM_PTR(&gfx_font_DejaVu9_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat14), MP_ROM_PTR(&gfx_font_DejaVu12_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat16), MP_ROM_PTR(&gfx_font_DejaVu18_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat18), MP_ROM_PTR(&gfx_font_DejaVu18_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat20), MP_ROM_PTR(&gfx_font_DejaVu18_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat22), MP_ROM_PTR(&gfx_font_DejaVu24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat24), MP_ROM_PTR(&gfx_font_DejaVu24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat30), MP_ROM_PTR(&gfx_font_DejaVu24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat36), MP_ROM_PTR(&gfx_font_DejaVu40_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat40), MP_ROM_PTR(&gfx_font_DejaVu40_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat44), MP_ROM_PTR(&gfx_font_DejaVu56_obj) },
+    { MP_ROM_QSTR(MP_QSTR_Montserrat48), MP_ROM_PTR(&gfx_font_DejaVu72_obj) },
+    { MP_ROM_QSTR(MP_QSTR_EFontCN24), MP_ROM_PTR(&gfx_font_efontCN_24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_EFontJA24), MP_ROM_PTR(&gfx_font_efontJA_24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_EFontKR24), MP_ROM_PTR(&gfx_font_efontKR_24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_AlibabaPuHuiTiCN24), MP_ROM_PTR(&gfx_font_efontCN_24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_AlibabaSansJA24),    MP_ROM_PTR(&gfx_font_efontJA_24_obj) },
+    { MP_ROM_QSTR(MP_QSTR_AlibabaSansKR24),    MP_ROM_PTR(&gfx_font_efontKR_24_obj) },
+#else
 #if FONT_MONTSERRAT_12
     { MP_ROM_QSTR(MP_QSTR_Montserrat12), MP_ROM_PTR(&gfx_font_montserrat_12_obj) },
     { MP_ROM_QSTR(MP_QSTR_ASCII7),       MP_ROM_PTR(&gfx_font_montserrat_12_obj) },
@@ -221,6 +249,7 @@ static const mp_rom_map_elem_t fonts_member_table[] = {
 #if FONT_ALIBABASANS_KR24
     { MP_ROM_QSTR(MP_QSTR_AlibabaSansKR24),    MP_ROM_PTR(&gfx_font_AlibabaSans_KR24_obj)    },
     { MP_ROM_QSTR(MP_QSTR_EFontKR24),           MP_ROM_PTR(&gfx_font_AlibabaSans_KR24_obj)    },
+#endif
 #endif
     /* *FORMAT-ON* */
 };
