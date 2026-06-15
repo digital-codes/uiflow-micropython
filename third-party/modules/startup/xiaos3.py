@@ -40,15 +40,20 @@ class XIAOS3_Startup(Startup):
 
     def show_mac(self) -> None:
         mac = binascii.hexlify(machine.unique_id()).decode("utf-8").upper()
-        print("Mac: " + mac[0:6] + "_" + mac[6:])
+        print("MAC: " + mac[0:6] + "_" + mac[6:])
 
     def show_access_code(self) -> bool:
-        if _HAS_SERVER is True and M5Things.status() == 2:
-            access_code = M5Things.accesscode()
-            if len(access_code) > 0:
-                print("Nickname: " + M5Things.nick_name())
-                print("Access Code: " + access_code)
-                return True
+        if _HAS_SERVER is True:
+            try:
+                access_code = M5Things.accesscode()
+                if len(access_code) > 0:
+                    print("=======================")
+                    print("Nickname: " + M5Things.nick_name())
+                    print("Access Code: " + access_code)
+                    print("=======================")
+                    return True
+            except Exception:
+                pass
         return False
 
     def show_error(self, ssid: str, error: str) -> None:

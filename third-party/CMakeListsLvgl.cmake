@@ -90,6 +90,19 @@ set(MICROPY_SOURCE_PORT
     ${PROJECT_DIR}/../micropython/ports/esp32/machine_sdcard.c
 )
 
+if(BOARD_TYPE STREQUAL "box3" OR BOARD_TYPE STREQUAL "xiao-s3")
+    # Use M5Stack network hooks and VFS stream helpers for third-party boards that expose access code.
+    list(REMOVE_ITEM MICROPY_SOURCE_PORT
+        ${PROJECT_DIR}/../micropython/ports/esp32/network_lan.c
+        ${PROJECT_DIR}/../micropython/ports/esp32/network_wlan.c
+    )
+    list(APPEND MICROPY_SOURCE_PORT
+        ${PROJECT_DIR}/../m5stack/network_lan.c
+        ${PROJECT_DIR}/../m5stack/network_wlan.c
+        ${PROJECT_DIR}/../m5stack/_vfs_stream.c
+    )
+endif()
+
 if (BOARD_TYPE STREQUAL "cores3" OR BOARD_TYPE STREQUAL "core2")
     LIST(APPEND MICROPY_SOURCE_PORT ${PROJECT_DIR}/machine_hw_spi.c)
 else()
