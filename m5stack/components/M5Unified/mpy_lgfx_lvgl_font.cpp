@@ -258,8 +258,6 @@ static uint8_t get_lvgl_glyph_bpp(lv_font_glyph_format_t format) {
         case LV_FONT_GLYPH_FORMAT_A2:
         case LV_FONT_GLYPH_FORMAT_A2_ALIGNED:
             return 2;
-        case LV_FONT_GLYPH_FORMAT_A3:
-            return 3;
         case LV_FONT_GLYPH_FORMAT_A4:
         case LV_FONT_GLYPH_FORMAT_A4_ALIGNED:
             return 4;
