@@ -4,12 +4,6 @@
 
 _attrs = {
     "LOGO_IMG": "/system/cardputer/boot/boot_logo_1.jpeg",
-    # apprun
-    "RUN_INFO_IMG": "/system/cardputer/apprun/run_info.jpeg",
-    "RUN_ONCE_SELECT_IMG": "/system/cardputer/apprun/run_once_select.jpeg",
-    "RUN_ONCE_UNSELECT_IMG": "/system/cardputer/apprun/run_once_unselect.jpeg",
-    "RUN_ALWAYS_SELECT_IMG": "/system/cardputer/apprun/run_always_select.jpeg",
-    "RUN_ALWAYS_UNSELECT_IMG": "/system/cardputer/apprun/run_always_unselect.jpeg",
     # develop
     "DEVELOP_BG_IMG": "/system/cardputer/develop/bg.jpg",
     "DEVELOP_OFFLINE_IMG": "/system/cardputer/develop/offline.jpg",
@@ -17,9 +11,7 @@ _attrs = {
     "AVATAR_IMG": "/system/common/img/avatar.jpg",
     # ezdata
     # launcher
-    "APPLIST_ICO": "/system/cardputer/applist.jpeg",
     "DEVELOP_ICO": "/system/cardputer/develop.jpeg",
-    "APPRUN_ICO": "/system/cardputer/apprun.jpeg",
     "EZDATA_ICO": "/system/cardputer/ezdata.jpeg",
     "SETTING_ICO": "/system/cardputer/setting.jpeg",
     "RIGHT_ICO": "/system/cardputer/right.jpeg",
