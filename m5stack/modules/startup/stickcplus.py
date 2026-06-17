@@ -202,7 +202,7 @@ class CloudApp(AppBase):
         self._access_code_label = widgets.Label(
             self._access_code,
             67,
-            151,
+            99,
             w=103,
             h=29,
             font_align=widgets.Label.CENTER_ALIGNED,
@@ -214,7 +214,7 @@ class CloudApp(AppBase):
         self._nick_name_label = widgets.Label(
             self._nick_name,
             67,
-            101,
+            149,
             w=129,
             h=29,
             font_align=widgets.Label.CENTER_ALIGNED,

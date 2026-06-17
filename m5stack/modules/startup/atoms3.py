@@ -27,6 +27,8 @@ class AtomS3_Startup(Startup):
     _TITLE_WIFI = 0x336699
     _TITLE_SERVER = 0x006633
     _TITLE_TEXT = 0xFFFFFF
+    _SCREEN_W = 128
+    _ROW_LABEL_H = 16
     _PAGE_DEVELOP = 0
     _PAGE_WIFI = 1
 
@@ -205,7 +207,7 @@ class AtomS3_Startup(Startup):
         self._render_title()
         self._render_status()
         if self._page == self._PAGE_DEVELOP:
-            self._draw_row("Access code:", self._access_code, 39, 14)
+            self._draw_row("Access Code:", self._access_code, 39, 14)
             self._draw_row("Nickname:", self._nick_name, 77, 13)
         else:
             self._draw_row("IP Address:", self._ip, 39, 15)
@@ -226,6 +228,7 @@ class AtomS3_Startup(Startup):
         M5.Lcd.drawString(text, x, text_y)
 
     def _draw_row(self, label: str, value: str, y: int, max_len: int) -> None:
+        M5.Lcd.fillRect(0, y + 1, self._SCREEN_W, self._ROW_LABEL_H, self._ROW_LABEL_BG)
         self._set_text_color(self._TEXT, self._ROW_LABEL_BG)
         M5.Lcd.setFont(M5.Lcd.FONTS.Montserrat12)
         M5.Lcd.drawString(label, 3, y + 1)
