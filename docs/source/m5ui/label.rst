@@ -8,6 +8,16 @@ M5Label
 
 M5Label is a widget that can be used to create labels in the user interface. It can display text and can be styled with different fonts, colors, and sizes.
 
+.. important::
+
+    **Available Fonts**: The firmware only includes these Montserrat fonts:
+    
+    - ``lv.font_montserrat_14`` (default)
+    - ``lv.font_montserrat_16``
+    - ``lv.font_montserrat_24``
+    
+    Other sizes (18, 20, 22, 28, etc.) are **not compiled** and will cause ``AttributeError``.
+
 
 UiFlow2 Example
 ---------------
@@ -52,6 +62,13 @@ Example output:
 
 M5Label
 ^^^^^^^^
+
+.. note::
+
+    Unlike ``M5Button`` and ``M5Chart``, the ``M5Label`` constructor does
+    **not** accept ``w`` or ``h`` parameters. Label size is determined
+    automatically by its text content. To explicitly set a label's width,
+    call ``label.set_width(150)`` after creation.
 
 .. autoclass:: m5ui.label.M5Label
     :members:

@@ -8,6 +8,10 @@ M5Button
 
 M5Button is a widget that can be used to create buttons in the user interface. It can be used to trigger actions when clicked.
 
+.. important::
+
+    **Available Fonts**: Only ``lv.font_montserrat_14``, ``lv.font_montserrat_16``, and ``lv.font_montserrat_24`` are available. Other sizes will cause ``AttributeError``.
+
 UiFlow2 Example
 ---------------
 

@@ -9,6 +9,10 @@ M5Dropdown is a widget that can be used to create dropdown menus in the user
 interface. It allows users to select one option from a list of available options
 with a compact dropdown interface.
 
+.. important::
+
+    **Available Fonts**: Only ``lv.font_montserrat_14``, ``lv.font_montserrat_16``, and ``lv.font_montserrat_24`` are available.
+
 UiFlow2 Example
 ---------------
 

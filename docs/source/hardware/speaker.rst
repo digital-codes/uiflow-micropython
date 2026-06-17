@@ -98,6 +98,12 @@ class Speaker
 
     All calls to methods of Speaker objects should be placed after ``M5.begin()`` |M5.begin.png|, and ``M5.update()`` |M5.update.png| should be called in the main loop.
 
+.. note::
+
+    Speaker is registered in the ``M5`` module, **not** in the ``hardware``
+    module. Use ``from M5 import *`` to make ``Speaker`` available. Do not
+    write ``from hardware import Speaker``.
+
 .. _hardware.Speaker.Methods:
 
 Methods
