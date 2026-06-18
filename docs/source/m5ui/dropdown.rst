@@ -11,7 +11,7 @@ with a compact dropdown interface.
 
 .. important::
 
-    **Available Fonts**: Only ``lv.font_montserrat_14``, ``lv.font_montserrat_16``, and ``lv.font_montserrat_24`` are available.
+    **Available Fonts**: For ``m5ui`` widgets, use LVGL fonts such as ``lv.font_montserrat_12``, ``14``, ``16``, ``18``, ``24``, ``40``, ``44``, and ``48``. Some builds, such as Tab5, also include ``20``, ``22``, ``30``, and ``36``. The Alibaba CJK fonts are ``M5.Lcd.FONTS`` fonts for ``M5.Lcd`` / ``M5.Widgets`` drawing.
 
 UiFlow2 Example
 ---------------

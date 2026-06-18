@@ -10,13 +10,13 @@ M5Label is a widget that can be used to create labels in the user interface. It 
 
 .. important::
 
-    **Available Fonts**: The firmware only includes these Montserrat fonts:
-    
-    - ``lv.font_montserrat_14`` (default)
-    - ``lv.font_montserrat_16``
-    - ``lv.font_montserrat_24``
-    
-    Other sizes (18, 20, 22, 28, etc.) are **not compiled** and will cause ``AttributeError``.
+    **Available Fonts**: For ``m5ui`` widgets, use LVGL fonts such as
+    ``lv.font_montserrat_12``, ``14``, ``16``, ``18``, ``24``, ``40``, ``44``,
+    and ``48``. Some builds, such as Tab5, also include ``20``, ``22``, ``30``,
+    and ``36``. Check with ``hasattr(lv, "font_montserrat_20")`` before using
+    an optional size in cross-board examples. The Alibaba CJK fonts are
+    ``M5.Lcd.FONTS`` fonts for ``M5.Lcd`` / ``M5.Widgets`` drawing, not
+    ``lv.font_montserrat_*`` objects.
 
 
 UiFlow2 Example

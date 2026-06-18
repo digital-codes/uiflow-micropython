@@ -54,25 +54,51 @@ Common Mistakes to Avoid
 Available Fonts
 ^^^^^^^^^^^^^^^
 
-The firmware includes only the following Montserrat fonts to save Flash space:
+Font availability depends on the board firmware build and the UI API you use.
 
-- ``lv.font_montserrat_14`` - Default font (small text)
-- ``lv.font_montserrat_16`` - Medium font
-- ``lv.font_montserrat_24`` - Large font
+**LVGL / m5ui widget fonts**
+
+For ``m5ui`` widgets, use LVGL font objects such as ``lv.font_montserrat_*``.
+Most M5Stack firmware builds include these Montserrat fonts:
+
+- ``lv.font_montserrat_12`` - Extra small text
+- ``lv.font_montserrat_14`` - Default font
+- ``lv.font_montserrat_16`` - Medium text
+- ``lv.font_montserrat_18`` - Medium-large text
+- ``lv.font_montserrat_24`` - Large text
+- ``lv.font_montserrat_40`` - Extra-large text
+- ``lv.font_montserrat_44`` - Extra-large text
+- ``lv.font_montserrat_48`` - Extra-large text
+
+Some builds, such as Tab5, also include ``lv.font_montserrat_20``,
+``lv.font_montserrat_22``, ``lv.font_montserrat_30``, and
+``lv.font_montserrat_36``.
+
+**M5.Lcd / Widgets CJK fonts**
+
+For drawing text with ``M5.Lcd`` or widgets based on ``M5.Widgets``, use
+``M5.Lcd.FONTS``. Most firmware builds also include these 24 px CJK fonts:
+
+- ``M5.Lcd.FONTS.AlibabaPuHuiTiCN24`` - Simplified Chinese
+- ``M5.Lcd.FONTS.AlibabaSansJA24`` - Japanese
+- ``M5.Lcd.FONTS.AlibabaSansKR24`` - Korean
+
+The older ``EFontCN24``, ``EFontJA24``, and ``EFontKR24`` names are deprecated
+aliases; prefer the ``Alibaba*`` names above. These CJK fonts may be disabled on
+small-flash or resource-constrained firmware builds.
 
 .. important::
 
-    Other font sizes (e.g., ``font_montserrat_18``, ``font_montserrat_20``,
-    ``font_montserrat_22``, ``font_montserrat_28``) are **not compiled** into
-    the firmware. Using them will cause ``AttributeError``.
-
-    **Always use one of the three available sizes above.**
+    Do not assume every font is available on every device. If your code may run
+    on multiple boards, use common fonts or check availability before using an
+    optional size/font, for example ``hasattr(lv, "font_montserrat_20")`` for
+    LVGL fonts.
 
 **Font Selection Guide**:
 
-- Small text (labels, descriptions) → ``lv.font_montserrat_14``
-- Medium text (buttons, titles) → ``lv.font_montserrat_16``
-- Large text (headings, emphasis) → ``lv.font_montserrat_24``
+- ``m5ui`` labels/buttons/dropdowns -> ``lv.font_montserrat_*``
+- ``M5.Lcd.drawString()`` / ``M5.Widgets`` English text -> ``M5.Lcd.FONTS.Montserrat*``
+- ``M5.Lcd.drawString()`` / ``M5.Widgets`` Chinese/Japanese/Korean text -> ``M5.Lcd.FONTS.Alibaba*24``
 
 **Example**:
 
@@ -84,12 +110,11 @@ The firmware includes only the following Montserrat fonts to save Flash space:
     m5ui.init()
     page0 = m5ui.M5Page(bg_c=0xFFFFFF)
 
-    # ✅ CORRECT - Use available fonts
     title = m5ui.M5Label("Title", x=10, y=10, font=lv.font_montserrat_24, parent=page0)
     label = m5ui.M5Label("Text", x=10, y=50, font=lv.font_montserrat_14, parent=page0)
 
-    # ❌ WRONG - These fonts don't exist
-    # bad_label = m5ui.M5Label("Error", font=lv.font_montserrat_28, parent=page0)  # AttributeError!
+    optional_font = lv.font_montserrat_20 if hasattr(lv, "font_montserrat_20") else lv.font_montserrat_18
+    value = m5ui.M5Label("123", x=10, y=80, font=optional_font, parent=page0)
 
 
 Functions
