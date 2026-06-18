@@ -36,8 +36,8 @@ UIFLOW2 Example:
 
     Initialize the ODriveModule.
 
-    :param int id: 
-    :param  port: 
+    :param int id:
+    :param  port:
 
     UIFLOW2:
 
@@ -72,9 +72,9 @@ UIFLOW2 Example:
 
 <!-- .. method:: ODriveModule.set_gain(pos_gain, vel_gain, vel_integrator_gain) -->
 
-    :param  pos_gain: 
-    :param  vel_gain: 
-    :param  vel_integrator_gain: 
+    :param  pos_gain:
+    :param  vel_gain:
+    :param  vel_integrator_gain:
 
     UIFLOW2:
 
@@ -282,5 +282,3 @@ UIFLOW2 Example:
 <!-- .. data:: ODriveModule.CONTROL_MODE_POSITION_CONTROL -->
 
     Control modes
-
-    

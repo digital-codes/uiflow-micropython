@@ -227,4 +227,3 @@ MicroPython Code Block:
     .. code-block:: python
 
         flag = chain_tof_0.get_measure_complete_flag()
-

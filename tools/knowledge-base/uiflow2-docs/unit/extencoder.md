@@ -178,5 +178,3 @@ UIFLOW2 Example:
     Sets the I2C address of the ExtEncoderUnit object.
 
     UIFLOW2:
-
-        

@@ -201,4 +201,3 @@ UIFLOW2 Example:
 <!-- .. data:: HeartHat.MODE_SPO2_HR -->
 
     Detect heart rate and SpO2.
-

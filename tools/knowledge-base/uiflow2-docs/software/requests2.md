@@ -172,4 +172,3 @@ UIFLOW2 Example:
     Return the content of the response, in dict.
 
     UIFLOW2:
-

@@ -219,7 +219,7 @@ UIFLOW2 Slave Example:
 
 <!-- .. method:: DMX512.stop_receive() -> None -->
     :no-index:
-    
+
     Stops the non-blocking data reception task.
 
     UIFLOW2:

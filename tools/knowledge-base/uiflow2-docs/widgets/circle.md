@@ -114,5 +114,3 @@ UIFLOW2 Example:
         - ``visible`` is the visibility of the displayed circle.
 
     UIFLOW2:
-
-        

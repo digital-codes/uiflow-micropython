@@ -36,7 +36,7 @@ UiFlow2 Code Block:
 Example output:
 
     None
-   
+
 ## MicroPython Example:
 
 #### Heart Rate Monitoring Display

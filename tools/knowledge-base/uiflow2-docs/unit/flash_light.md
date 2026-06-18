@@ -104,5 +104,3 @@ UIFLOW2 Example:
     :param turn_off: Turn off the light after flash.
 
     UIFLOW2:
-
-        

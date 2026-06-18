@@ -95,5 +95,3 @@ UIFLOW2 Example:
         - ``visible`` is the visibility of the displayed image.
 
     UIFLOW2:
-
-        

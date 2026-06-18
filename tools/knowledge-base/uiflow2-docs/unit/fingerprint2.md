@@ -16,7 +16,7 @@ Support the following products:
 
 Open the |m5cores3_fp2_basic_example.m5f2| project in UiFlow2.
 
-This example demonstrates how to use a fingerprint recognition module to perform 
+This example demonstrates how to use a fingerprint recognition module to perform
 the complete process of fingerprint enrollment, identification, and deletion.
 
 UiFlow2 Code Block:
@@ -29,7 +29,7 @@ Example output:
 
 Open the |m5cores3_fp2_template_upload_download_example.m5f2| project in UiFlow2.
 
-This example demonstrates how to use a fingerprint recognition module to perform the complete process of fingerprint enrollment, identification, deletion, 
+This example demonstrates how to use a fingerprint recognition module to perform the complete process of fingerprint enrollment, identification, deletion,
 and template upload/download.(The upload and download functions enable cross-device fingerprint recognition — a fingerprint enrolled on one module can be verified on another.
 The fingerprint template transfer method can be customized according to user requirements, such as via serial communication, network, or cloud synchronization.)
 
@@ -50,12 +50,12 @@ UiFlow2 Code Block:
 Example output:
 
     None
- 
+
 ## MicroPython Example
 
 #### Enroll and recognize
 
-This example demonstrates how to use a fingerprint recognition module to perform 
+This example demonstrates how to use a fingerprint recognition module to perform
 the complete process of fingerprint enrollment, identification, and deletion.
 
 MicroPython Code Block:
@@ -484,7 +484,7 @@ Example output:
 
 #### Upload and download template
 
-This example demonstrates how to use a fingerprint recognition module to perform the complete process of fingerprint enrollment, identification, deletion, 
+This example demonstrates how to use a fingerprint recognition module to perform the complete process of fingerprint enrollment, identification, deletion,
 and template upload/download.(The upload and download functions enable cross-device fingerprint recognition — a fingerprint enrolled on one module can be verified on another.
 The fingerprint template transfer method can be customized according to user requirements, such as via serial communication, network, or cloud synchronization.)
 

@@ -104,5 +104,3 @@ Micropython Example::
     Get the state of the power of the servo.
 
     UIFLOW2:
-
-        

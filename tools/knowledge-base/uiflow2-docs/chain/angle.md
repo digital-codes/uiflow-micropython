@@ -14,7 +14,7 @@ Support the following products:
 
 Open the |m5core_chain_angle_basic_example.m5f2| project in UiFlow2.
 
-This example demonstrates how to read angle values from the Chain Angle sensor and control RGB brightness based on the angle value. 
+This example demonstrates how to read angle values from the Chain Angle sensor and control RGB brightness based on the angle value.
 The example reads 8-bit ADC values (0-255) and maps them to brightness values (0-100) for visual feedback.
 
 UiFlow2 Code Block:
@@ -27,7 +27,7 @@ Example output:
 
 #### Angle reading with RGB brightness control
 
-This example demonstrates how to read angle values from the Chain Angle sensor and control RGB brightness based on the angle value. 
+This example demonstrates how to read angle values from the Chain Angle sensor and control RGB brightness based on the angle value.
 The example reads 8-bit ADC values (0-255) and maps them to brightness values (0-100) for visual feedback.
 
 MicroPython Code Block:

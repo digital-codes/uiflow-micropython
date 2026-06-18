@@ -527,7 +527,7 @@ MicroPython Code Block:
         UiFlow2 Code Block:
 
         MicroPython Code Block:
-    
+
 <!-- .. code-block:: python -->
 
                 dropdown_0.set_text("Select an option")

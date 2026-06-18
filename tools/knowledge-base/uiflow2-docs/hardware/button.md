@@ -9,7 +9,7 @@ the detailed Button support for the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |                 | BtnA | BtnB | BtnC | BtnPWR | BtnEXT |
 

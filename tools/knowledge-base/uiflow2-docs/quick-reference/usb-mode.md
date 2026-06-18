@@ -36,4 +36,3 @@ Image resources need to be saved under the ``res/img`` directory.
 ## Use Images from the Device
 
 Use the  block to set the filename of the image to be displayed, and show the image on the screen.
-

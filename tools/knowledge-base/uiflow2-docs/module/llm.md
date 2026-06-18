@@ -280,5 +280,3 @@ UIFLOW2 Example:
     :param on_llm_data_input: Callback function to handle LLM data input.
 
     UIFLOW2:
-
-        

@@ -14,22 +14,22 @@ def generate_tree(directory, prefix="", is_last=True, stats=None):
             'file_types': defaultdict(int),
             'total_size': 0
         }
-    
+
     lines = []
     path = Path(directory)
-    
+
     if not path.exists():
         return ["目录不存在"], stats
-    
+
     # 获取所有项目并排序（目录在前，文件在后）
     try:
         items = sorted(path.iterdir(), key=lambda x: (not x.is_dir(), x.name.lower()))
     except PermissionError:
         return [f"{prefix}[权限拒绝]"], stats
-    
+
     for index, item in enumerate(items):
         is_last_item = index == len(items) - 1
-        
+
         # 构建树形符号
         if is_last:
             current_prefix = prefix + "└── "
@@ -37,7 +37,7 @@ def generate_tree(directory, prefix="", is_last=True, stats=None):
         else:
             current_prefix = prefix + "├── "
             next_prefix = prefix + "│   "
-        
+
         if item.is_dir():
             stats['total_dirs'] += 1
             lines.append(f"{current_prefix}{item.name}/")
@@ -55,9 +55,9 @@ def generate_tree(directory, prefix="", is_last=True, stats=None):
                 stats['total_size'] += file_size
             except:
                 pass
-            
+
             lines.append(f"{current_prefix}{item.name}")
-    
+
     return lines, stats
 
 def format_size(size_bytes):
@@ -71,7 +71,7 @@ def format_size(size_bytes):
 def main():
     print(f"Scanning directory: {TARGET_DIR}")
     print("生成文件树中...")
-    
+
     # 生成树形结构
     stats = {
         'total_files': 0,
@@ -79,11 +79,11 @@ def main():
         'file_types': defaultdict(int),
         'total_size': 0
     }
-    
+
     tree_lines = [f"{TARGET_DIR.name}/"]
     sub_lines, stats = generate_tree(TARGET_DIR, "", True, stats)
     tree_lines.extend(sub_lines)
-    
+
     # 生成统计信息
     stats_lines = [
         "\n" + "="*60,
@@ -95,18 +95,18 @@ def main():
         "\n文件类型分布:",
         "-"*60
     ]
-    
+
     # 按文件数量排序文件类型
     sorted_types = sorted(stats['file_types'].items(), key=lambda x: x[1], reverse=True)
     for ext, count in sorted_types:
         percentage = (count / stats['total_files'] * 100) if stats['total_files'] > 0 else 0
         stats_lines.append(f"  {ext:20s}: {count:5d} 个 ({percentage:5.2f}%)")
-    
+
     # 写入文件
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write('\n'.join(tree_lines))
         f.write('\n'.join(stats_lines))
-    
+
     print(f"\n文件树已保存到: {OUTPUT_FILE}")
     print("\n" + "="*60)
     print("统计信息")
@@ -119,7 +119,7 @@ def main():
     for ext, count in sorted_types[:10]:
         percentage = (count / stats['total_files'] * 100) if stats['total_files'] > 0 else 0
         print(f"  {ext:20s}: {count:5d} 个 ({percentage:5.2f}%)")
-    
+
     if len(sorted_types) > 10:
         print(f"  ... 还有 {len(sorted_types) - 10} 种文件类型")
 

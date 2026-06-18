@@ -604,7 +604,7 @@ Example output:
 
 #### Audio Recording and Playback
 
-This example demonstrates audio recording and playback functionality. Press button A to start recording for 5 seconds. 
+This example demonstrates audio recording and playback functionality. Press button A to start recording for 5 seconds.
 After recording completes, the audio will automatically play back. The example displays the recording status and countdown timer.
 
 MicroPython Code Block:

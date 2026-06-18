@@ -237,5 +237,3 @@ Example output:
     :return: The temperature buffer.
 
     UiFlow2:
-
-        

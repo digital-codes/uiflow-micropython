@@ -2,7 +2,7 @@
 ###### Paper
 
 <!-- .. include:: ../refs/controllers.paper.ref -->
-###### 
+######
 
 ###### UI
 

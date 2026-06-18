@@ -128,4 +128,3 @@ UIFLOW2 Example:
 <!-- .. data:: LoraModule.BANDWIDTHS -->
 
     Valid bandwidth
-

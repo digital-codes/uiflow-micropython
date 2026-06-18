@@ -97,8 +97,8 @@ Create a WLAN network interface object. Supported interfaces are
         - ``STAT_GOT_IP(1010)`` -- connection successful.
 
     When called with one argument *param* should be a string naming the status
-    parameter to retrieve.  
-    
+    parameter to retrieve.
+
     Supported parameters in WiFI STA mode are: ``rssi`` will returns a signal strength indicator value.
 
     UIFLOW2:
@@ -193,5 +193,3 @@ Create a WLAN network interface object. Supported interfaces are
 
         - 0 -- visible
         - 1 -- hidden
-
-        

@@ -9,7 +9,7 @@ The following are the host's support for PWRCAN:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | Status         |
 

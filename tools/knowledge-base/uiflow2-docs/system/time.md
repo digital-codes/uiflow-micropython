@@ -241,11 +241,11 @@ UIFLOW2 Example:
 
 <!-- .. function:: ticks_diff(ticks1, ticks2) -->
 
-    Measure ticks difference between values returned from `ticks_ms()`, 
-    `ticks_us()`, or `ticks_cpu()` functions, as a signed value which may wrap 
+    Measure ticks difference between values returned from `ticks_ms()`,
+    `ticks_us()`, or `ticks_cpu()` functions, as a signed value which may wrap
     around.
 
-    The argument order is the same as for subtraction operator, 
+    The argument order is the same as for subtraction operator,
     ``ticks_diff(ticks1, ticks2)`` has the same meaning as ``ticks1 - ticks2``.
     However, values returned by `ticks_ms()`, etc. functions may wrap around,
     so directly using subtraction on them will produce incorrect result.
@@ -256,29 +256,29 @@ UIFLOW2 Example:
     [*-TICKS_PERIOD/2* .. *TICKS_PERIOD/2-1*] (that's a typical range definition
     for two's-complement signed binary integers). If the result is negative,
     it means that *ticks1* occurred earlier in time than *ticks2*. Otherwise,
-    it means that *ticks1* occurred after *ticks2*. This holds **only** if 
-    *ticks1* and *ticks2* are apart from each other for no more than 
-    *TICKS_PERIOD/2-1* ticks. If that does not hold, incorrect result will be 
+    it means that *ticks1* occurred after *ticks2*. This holds **only** if
+    *ticks1* and *ticks2* are apart from each other for no more than
+    *TICKS_PERIOD/2-1* ticks. If that does not hold, incorrect result will be
     returned. Specifically, if two tick values are apart for *TICKS_PERIOD/2-1*
-    ticks, that value will be returned by the function. However, 
+    ticks, that value will be returned by the function. However,
     if *TICKS_PERIOD/2* of real-time ticks has passed between them, the function
     will return *-TICKS_PERIOD/2* instead, i.e. result value will wrap around
     to the negative range of possible values.
 
-    Informal rationale of the constraints above: Suppose you are locked in a 
-    room with no means to monitor passing of time except a standard 12-notch 
+    Informal rationale of the constraints above: Suppose you are locked in a
+    room with no means to monitor passing of time except a standard 12-notch
     clock. Then if you look at dial-plate now, and don't look again for another
-    13 hours (e.g., if you fall for a long sleep), then once you finally look 
-    again, it may seem to you that only 1 hour has passed. To avoid this 
-    mistake, just look at the clock regularly. Your application should do the 
+    13 hours (e.g., if you fall for a long sleep), then once you finally look
+    again, it may seem to you that only 1 hour has passed. To avoid this
+    mistake, just look at the clock regularly. Your application should do the
     same. "Too long sleep" metaphor also maps directly to application behaviour:
-    don't let your application run any single task for too long. Run tasks in 
+    don't let your application run any single task for too long. Run tasks in
     steps, and do time-keeping inbetween.
 
-    `ticks_diff()` is designed to accommodate various usage patterns, among 
+    `ticks_diff()` is designed to accommodate various usage patterns, among
     them:
 
-    - Polling with timeout. In this case, the order of events is known, and you 
+    - Polling with timeout. In this case, the order of events is known, and you
       will deal only with positive results of `ticks_diff()`::
 
         # Wait for GPIO pin to be asserted, but at most 500us
@@ -314,11 +314,11 @@ UIFLOW2 Example:
 
     Returns the number of seconds, as an integer, since the Epoch, assuming that
     underlying RTC is set and maintained as described above. If an RTC is not
-    set, this function returns number of seconds since a port-specific reference 
-    point in time (for embedded boards without a battery-backed RTC, usually 
-    since power up or reset). If you want to develop portable MicroPython 
-    application, you should not rely on this function to provide higher than 
-    second precision.  If you need higher precision, absolute timestamps, 
+    set, this function returns number of seconds since a port-specific reference
+    point in time (for embedded boards without a battery-backed RTC, usually
+    since power up or reset). If you want to develop portable MicroPython
+    application, you should not rely on this function to provide higher than
+    second precision.  If you need higher precision, absolute timestamps,
     use `time_ns()`.  If relative times are acceptable then use the `ticks_ms()`
     and `ticks_us()` functions.  If you need calendar time, `gmtime()` or
     `localtime()` without an argument is a better choice.
@@ -331,10 +331,10 @@ UIFLOW2 Example:
         usually having microsecond precision. With MicroPython, only Unix port
         uses the same Epoch, and if floating-point precision allows,
         returns sub-second precision. Embedded hardware usually doesn't have
-        floating-point precision to represent both long time ranges and 
-        subsecond precision, so they use integer value with second precision. 
-        Some embedded hardware also lacks battery-powered RTC, so returns number 
-        of seconds since last power-up or from other relative, hardware-specific 
+        floating-point precision to represent both long time ranges and
+        subsecond precision, so they use integer value with second precision.
+        Some embedded hardware also lacks battery-powered RTC, so returns number
+        of seconds since last power-up or from other relative, hardware-specific
         point(e.g. reset).
 
     UIFLOW2:

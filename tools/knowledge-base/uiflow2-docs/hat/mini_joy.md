@@ -226,5 +226,3 @@ UIFLOW2 Example:
     :param address: 0x01 ~ 0x7F
 
     UIFLOW2:
-
-        

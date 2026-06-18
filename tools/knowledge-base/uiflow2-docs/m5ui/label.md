@@ -10,11 +10,11 @@ M5Label is a widget that can be used to create labels in the user interface. It 
 <!-- .. important:: -->
 
     **Available Fonts**: The firmware only includes these Montserrat fonts:
-    
+
     - ``lv.font_montserrat_14`` (default)
     - ``lv.font_montserrat_16``
     - ``lv.font_montserrat_24``
-    
+
     Other sizes (18, 20, 22, 28, etc.) are **not compiled** and will cause ``AttributeError``.
 
 ## UiFlow2 Example

@@ -195,4 +195,3 @@ UIFLOW2 Example:
     :param  addr: The new I2C address value.
 
     UIFLOW2:
-

@@ -685,5 +685,3 @@ UIFLOW2 Example:
 <!-- .. data:: TimerPWRUnit._CHARGING -->
 
     index.
-
-    

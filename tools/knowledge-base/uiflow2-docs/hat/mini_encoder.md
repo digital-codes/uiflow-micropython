@@ -219,5 +219,3 @@ UIFLOW2 Example:
     Set the I2C address of the device.
 
     UIFLOW2:
-
-        

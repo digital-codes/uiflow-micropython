@@ -16,7 +16,7 @@ Support the following products:
 
 Open the |cores3_dc_motor_module_speed_control.m5f2| project in UiFlow2.
 
-This example demonstrates the use of the DCMotor Module to control the speed of a DC motor and display the motor's encoder value in real-time. 
+This example demonstrates the use of the DCMotor Module to control the speed of a DC motor and display the motor's encoder value in real-time.
 The program automatically adjusts the motor speed, gradually increasing or decreasing the speed until it reaches the maximum or minimum value, then reverses the direction.
 
 UiFlow2 Code Block:
@@ -24,12 +24,12 @@ UiFlow2 Code Block:
 Example output:
 
     None
-   
+
 ## MicroPython Example
 
 #### Speed Control
 
-This example demonstrates the use of the DCMotor Module to control the speed of a DC motor and display the motor's encoder value in real-time. 
+This example demonstrates the use of the DCMotor Module to control the speed of a DC motor and display the motor's encoder value in real-time.
 The program automatically adjusts the motor speed, gradually increasing or decreasing the speed until it reaches the maximum or minimum value, then reverses the direction.
 
 MicroPython Code Block:

@@ -100,5 +100,3 @@ UIFLOW2 Example:
     This method allows setting the maximum (0-3300) and minimum (0-3300) values for calibrating the EARTH sensor.
 
     UIFLOW2:
-
-        

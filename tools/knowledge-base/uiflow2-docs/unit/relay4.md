@@ -149,5 +149,3 @@ UIFLOW2 Example:
     :param int state: The state of the relay.
 
     UIFLOW2:
-
-        

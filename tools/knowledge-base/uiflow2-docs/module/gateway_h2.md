@@ -27,7 +27,7 @@ UiFlow2 Code Block:
 Example output:
 
     None
- 
+
 ## MicroPython Example
 
 #### Switch Control
@@ -190,7 +190,7 @@ Example output:
 
 <!-- .. method:: create_switch_endpoint() -->
 
-        Create Switch Endpoint. 
+        Create Switch Endpoint.
 
         :returns SwitchEndpoint: zigbee switch endpoint object.
         :return type: SwitchEndpoint
@@ -216,7 +216,7 @@ Example output:
         Turn on the light.
 
         :param addr: The device address (optional).
-        
+
         - If called as ``on()``, turn on all devices.
         - If called as ``on(addr)``, turn on special address devices.
 
@@ -261,6 +261,6 @@ Example output:
         MicroPython Code Block:
 
 <!-- .. code-block:: python -->
-                
+
                 h2_switch_endpoint.toggle(addr)
                 h2_switch_endpoint.toggle()

@@ -15,7 +15,7 @@ Below is the detailed support for Atomic Echo Pyramid Base on the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | Atomic Echo Pyramid Base  |
 

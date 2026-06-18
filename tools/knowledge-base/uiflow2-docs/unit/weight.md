@@ -122,4 +122,3 @@ UIFLOW2 Example:
     :param int chan: The channel to set (1, 2, or 3).
 
     UIFLOW2:
-

@@ -116,7 +116,7 @@ UIFLOW2 Example:
 ```
 ```
         Set the mapping parameters of the X-axis.
-        
+
         ADC Raw     0                                                    65536
                     |------------------------------------------------------|
         Mapped    -4096                   0           0                   4096
@@ -135,7 +135,7 @@ UIFLOW2 Example:
 ```
 ```
         Set the mapping parameters of the Y-axis.
-        
+
         ADC Raw     0                                                    65536
                     |------------------------------------------------------|
         Mapped    -4096                   0           0                   4096
@@ -220,4 +220,3 @@ UIFLOW2 Example:
     :return (int): Returns the Y-axis position.
 
     UIFLOW2:
-

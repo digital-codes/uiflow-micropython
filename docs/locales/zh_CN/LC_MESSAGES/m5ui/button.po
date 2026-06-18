@@ -594,4 +594,3 @@ msgstr ""
 #~ "``hasattr()`` before using them in "
 #~ "cross-board examples."
 #~ msgstr ""
-

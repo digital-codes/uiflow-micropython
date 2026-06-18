@@ -215,5 +215,3 @@ UIFLOW2 Example:
     :return: True or False
 
     UIFLOW2:
-
-        

@@ -104,5 +104,3 @@ UIFLOW2 Example:
     This method allows to read the atmospheric pressure collected by ENV and returns a floating point value. The hat of measurement is Pa.
 
     UIFLOW2:
-
-        

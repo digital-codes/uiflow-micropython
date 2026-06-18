@@ -24,7 +24,7 @@ Below is the detailed support for Speaker on the host:
 
 <!-- .. table:: -->
     :widths: auto
-###### 
+######
 
 ###### |Controller       | Atomic Echo Base  |
 

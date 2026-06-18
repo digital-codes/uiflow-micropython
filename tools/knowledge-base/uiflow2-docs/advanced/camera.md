@@ -119,4 +119,3 @@ if __name__ == "__main__":
     Returns if vertical flip mode is enabled.
 
     UiFlow2
-

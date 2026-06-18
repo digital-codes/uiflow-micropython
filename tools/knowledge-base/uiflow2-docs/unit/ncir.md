@@ -86,5 +86,3 @@ UIFLOW2 Example:
    Get the temperature of the measured object.
 
     UIFLOW2:
-
-        

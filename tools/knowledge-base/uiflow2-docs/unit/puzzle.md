@@ -261,4 +261,3 @@ UIFLOW2 Example:
     :param list color_list: A list of colors to apply to the screen.
 
     UIFLOW2:
-

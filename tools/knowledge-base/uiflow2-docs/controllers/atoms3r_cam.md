@@ -158,4 +158,3 @@ Replace `<device-ip>` with the actual IP address printed in the console.
 <!-- .. figure:: ./../../_static/controllers/atoms3r_cam/browser.png -->
    :width: 800
    :align: center
-

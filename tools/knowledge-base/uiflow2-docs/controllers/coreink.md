@@ -2,7 +2,7 @@
 ###### CoreInk
 
 <!-- .. include:: ../refs/controllers.coreink.ref -->
-###### 
+######
 
 ###### UI
 

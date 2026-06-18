@@ -45,14 +45,14 @@ UIFLOW2 Example:
     Create a IMUProUnit object
 
     :param i2c: the I2C object.
-    
+
     UIFLOW2:
 
 ## Methods
 
 <!-- .. method:: IMUProUnit.get_accelerometer() -->
 
-    Get the tuple of x, y, and z values of the accelerometer and acceleration vector in gravity units (9.81m/s^2). 
+    Get the tuple of x, y, and z values of the accelerometer and acceleration vector in gravity units (9.81m/s^2).
 
     - Return: ``tuple``:  (float, float, float)
 
@@ -62,7 +62,7 @@ UIFLOW2 Example:
 
     Get the tuple of x, y, and z values of the gyroscope and gyroscope vector in rad/sec.
 
-    - Return: ``tuple``:  (float, float, float)   
+    - Return: ``tuple``:  (float, float, float)
 
     UIFLOW2:
 
@@ -70,7 +70,7 @@ UIFLOW2 Example:
 
     Get the tuple of x, y, and z values of the magnetometer and magnetometer vector in uT.
 
-    - Return: ``tuple``:  (float, float, float)   
+    - Return: ``tuple``:  (float, float, float)
 
     UIFLOW2:
 
@@ -78,13 +78,13 @@ UIFLOW2 Example:
 
     Get the compass heading value is in range of 0º ~ 360º.
 
-    - Return: ``float``:  0 ~ 360  
+    - Return: ``float``:  0 ~ 360
 
     UIFLOW2:
 
 <!-- .. method:: IMUProUnit.get_attitude() -->
 
-    Get the attitude angles as yaw, pitch, and roll in degrees. 
+    Get the attitude angles as yaw, pitch, and roll in degrees.
 
     - Return: ``tuple``:  (float, float, float)
 
@@ -92,7 +92,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: IMUProUnit.get_temperature() -->
 
-    Get the temperature value in degrees celsius from the BMP280 sensor. 
+    Get the temperature value in degrees celsius from the BMP280 sensor.
 
     - Return: ``float``:  -40 ~ +85 °C
 
@@ -100,7 +100,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: IMUProUnit.get_pressure() -->
 
-    Get the pressure value in pascals from the BMP280 sensor. 
+    Get the pressure value in pascals from the BMP280 sensor.
 
     - Return: ``float``:  300 ~ 1100 hPa
 
@@ -108,7 +108,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: IMUProUnit.set_accel_gyro_odr(accel_odr, gyro_odr) -->
 
-    Set the accelerometer and gyroscope output data rate(ODR): 0.78 Hz … 1.6 kHz (accelerometer) and 25 Hz … 6.4 kHz (gyroscope). 
+    Set the accelerometer and gyroscope output data rate(ODR): 0.78 Hz … 1.6 kHz (accelerometer) and 25 Hz … 6.4 kHz (gyroscope).
 
     :param accel_odr: range of 0.78 Hz … 1.6 kHz.
     :type unit: float
@@ -128,7 +128,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: IMUProUnit.set_accel_range(accel_scale) -->
 
-    Set the accelerometer scale range. 
+    Set the accelerometer scale range.
 
     :param accel_scale: scale range of ±2g, ±4g, ±8g and ±16g.
     :type unit: int
@@ -137,9 +137,9 @@ UIFLOW2 Example:
 
 <!-- .. method:: IMUProUnit.set_gyro_range(gyro_scale) -->
 
-    Set the gyroscope scale range. 
+    Set the gyroscope scale range.
 
-    :param gyro_scale: scale range of ±125 dps, ±250 dps, ±500 dps, ±1000 dps, and ±2000 dps. 
+    :param gyro_scale: scale range of ±125 dps, ±250 dps, ±500 dps, ±1000 dps, and ±2000 dps.
     :type unit: int
 
     UIFLOW2:
@@ -147,13 +147,12 @@ UIFLOW2 Example:
 <!-- .. method:: IMUProUnit.set_gyro_offsets(x, y, z) -->
 
     Set the manual gyro calibrations offsets value
-    
+
     :param x: 0.0
     :type unit: float
     :param y: 0.0
     :type unit: float
     :param z: 0.0
     :type unit: float
-    
-    UIFLOW2:
 
+    UIFLOW2:

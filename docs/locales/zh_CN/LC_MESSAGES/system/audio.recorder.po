@@ -266,4 +266,3 @@ msgstr ""
 #: ../../en/refs/system.audio.recorder.ref:12 a05b58d1effd4504954ff9fb41dd7551
 msgid "config.png"
 msgstr ""
-

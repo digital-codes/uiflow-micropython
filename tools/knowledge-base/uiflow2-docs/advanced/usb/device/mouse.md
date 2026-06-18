@@ -242,5 +242,3 @@ if __name__ == "__main__":
     - ``w`` range: -127 to 127, values less than 0 scroll up, and values greater than 0 scroll down.
 
     UIFlow2.0
-
-        

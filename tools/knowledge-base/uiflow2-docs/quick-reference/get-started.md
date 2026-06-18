@@ -2,7 +2,7 @@
 ###### Get Started
 
 <!-- .. include:: ../refs/qr.get-started.ref -->
-###### 
+######
 
 ###### Preparation
 
@@ -51,7 +51,7 @@ M5Burner_MacOS   |M5Burner-v3-beta-mac-x64|_
 ---------------- -----------------------------
 M5Burner_Linux   |M5Burner-v3-beta-linux-x64|_
 ================ =============================
-###### 
+######
 
 ###### Installation UIFLOW2
 
@@ -69,11 +69,10 @@ corresponding host product documentation.
 Before burning, M5Burner will bind your host and M5Stack account.
 After binding, you can use your host in UIFlow2.
 
-###### 
+######
 
 ###### Start using UIFLOW2
 
 # Login UIFlow2
 
 Log in to https://uiflow2.m5stack.com/
-

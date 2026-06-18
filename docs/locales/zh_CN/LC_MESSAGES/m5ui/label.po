@@ -510,4 +510,3 @@ msgstr ""
 #~ "\"font_montserrat_20\")`` before using an "
 #~ "optional size in cross-board examples."
 #~ msgstr ""
-

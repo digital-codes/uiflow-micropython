@@ -179,5 +179,3 @@ UIFLOW2 Example:
     Save the current DAC value to EEPROM.
 
     UIFLOW2:
-
-        

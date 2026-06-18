@@ -258,4 +258,3 @@ UIFLOW2 Example:
     Calculate the CRC-8 checksum for a given buffer.
 
     :param bytearray buffer: The buffer of bytes to calculate the CRC for.
-

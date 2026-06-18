@@ -350,7 +350,7 @@ Example output:
         Set the font for the display.
 
         :param font: support built-in font and font file(e.g., .bin(lvgl binary font format) or .vlw(Processing font format)). The following built-in fonts are available:
-###### 
+######
 
 ###### | Font Name                           | Status          | Alternatives                        | Unsupported Devices                                          |
 

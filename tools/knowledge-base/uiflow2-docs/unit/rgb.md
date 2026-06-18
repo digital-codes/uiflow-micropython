@@ -59,5 +59,3 @@ UIFLOW2 Example:
     This method is used to set the specified RGB lamp bead color. The input value is the lamp bead index and 3-byte RGB888.
 
     UIFLOW2:
-
-        

@@ -214,5 +214,3 @@ UIFLOW2 Example:
     Fill the screen with a color.
 
     UIFLOW2:
-
-        

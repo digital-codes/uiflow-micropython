@@ -1683,4 +1683,3 @@ msgstr ""
 
 #~ msgid "font type. Available options:"
 #~ msgstr "字体类型，可选："
-

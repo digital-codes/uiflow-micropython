@@ -458,7 +458,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     Sets the device address.
 
     :param str address: The device address to set, provided as a string.
-    
+
     :returns: The application session key as a string.
 
 <!-- .. method:: LoRaWAN_X.get_apps_key() -->
@@ -546,7 +546,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     :param int timeout: The timeout duration in milliseconds for the command, default is 8000ms.
 
     :returns: The join mode as an integer (0 for ABP, 1 for OTAA).
-    
+
     UIFLOW2:
 
 <!-- .. method:: LoRaWAN_X.join_network(timeout) -->
@@ -556,7 +556,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     :param int timeout: The timeout duration in milliseconds for the join command, default is 8000ms.
 
     :returns: True if the command is successfully set, else False.
-    
+
     UIFLOW2:
 
 <!-- .. method:: LoRaWAN_X.get_join_mode() -->
@@ -572,7 +572,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     :param int mode: The join mode to set, 0 for ABP or 1 for OTAA.
 
     :returns: The received data as a string.
-    
+
     UIFLOW2:
 
 <!-- .. method:: LoRaWAN_X.get_join_state() -->
@@ -580,7 +580,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     Checks whether the module has successfully joined the network. 1 indicates joined, 0 indicates not joined.
 
     :returns: True if the data was sent successfully, otherwise False.
-    
+
     UIFLOW2:
 
 <!-- .. method:: LoRaWAN_X.get_last_receive() -->
@@ -588,7 +588,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     Retrieves the data from the last received message.
 
     :returns: True if the data was sent successfully, otherwise False.
-    
+
     UIFLOW2:
 
 <!-- .. method:: LoRaWAN_X.send_data(port, data, timeout) -->
@@ -598,9 +598,9 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
     :param int port: The port number to send data through.
     :param bytes data: The data to send, provided as bytes.
     :param int timeout: The timeout duration in milliseconds for the send command, default is 600ms.
-    
+
     :returns: True if the command is successfully set, else False.
-    
+
     UIFLOW2:
 
 <!-- .. method:: LoRaWAN_X.send_long_data(port, ack, data, timeout) -->
@@ -1082,7 +1082,7 @@ UIFLOW2 LoRaWAN-CN470 P2P Mode RX Example:
 
 <!-- .. method:: LoRaWAN_X.set_p2p_bandwidth(bandwidth) -->
 
-    :param int bandwidth: 
+    :param int bandwidth:
 
     :returns: The result of the AT command execution.
 

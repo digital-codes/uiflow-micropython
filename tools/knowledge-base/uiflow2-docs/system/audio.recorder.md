@@ -107,5 +107,3 @@ The recorder can record audio from the microphone and encode the audio into wav 
     :param bool stereo: Whether the audio data is stereo.
 
     UIFLOW2:
-
-        

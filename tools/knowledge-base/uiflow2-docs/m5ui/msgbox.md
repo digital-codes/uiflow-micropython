@@ -241,7 +241,7 @@ MicroPython Code Block:
         UiFlow2 Code Block:
 
         MicroPython Code Block:
-    
+
 <!-- .. code-block:: python -->
 
                 button_0.set_text("Select an option")
@@ -332,7 +332,7 @@ MicroPython Code Block:
 <!-- .. code-block:: python -->
 
                 msgbox_0.set_flag(lv.obj.FLAG.HIDDEN, True)
-    
+
 <!-- .. py:method:: set_pos(x, y) -->
 
         Set the position of the msgbox.
@@ -457,7 +457,7 @@ MicroPython Code Block:
                 button_0.set_style_radius(10, lv.PART.MAIN | lv.STATE.DEFAULT)
 
 <!-- .. py:method:: set_shadow(color, opa, align, offset_x, offset_y) -->
-        
+
         Set a shadow for the label.
 
         :param int color: The color of the shadow in hexadecimal format or an integer.

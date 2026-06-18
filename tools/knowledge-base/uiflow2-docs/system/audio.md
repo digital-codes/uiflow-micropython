@@ -15,7 +15,7 @@ Below is the detailed audio support for the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |                 | AW88298 | ES7210 | ES8311 | I2S Philips | I2S PDM |
 

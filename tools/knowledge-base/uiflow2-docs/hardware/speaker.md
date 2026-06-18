@@ -5,13 +5,13 @@
 <!-- .. include:: ../refs/system.ref -->
 <!-- .. include:: ../refs/hardware.speaker.ref -->
 
-The Speaker is used to control the built-in speaker inside the host device. 
+The Speaker is used to control the built-in speaker inside the host device.
 Below is the detailed support for Speaker on the host:
 
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | NS4168  | AW88298 | Buzzer  |
 
@@ -336,5 +336,3 @@ UIFLOW2 Example:
         - ``stop_current_sound`` controls whether to wait for the previous audio playback to finish. If True, start the new output without waiting for the current output to finish.
 
     UIFLOW2:
-
-        

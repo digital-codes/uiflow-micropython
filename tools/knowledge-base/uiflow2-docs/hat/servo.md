@@ -61,5 +61,3 @@ UIFLOW2 Example:
     Deinitialize the Servo.
 
     UIFLOW2:
-
-        

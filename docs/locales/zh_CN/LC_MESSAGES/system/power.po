@@ -566,4 +566,3 @@ msgstr "所有端口。"
 
 #~ msgid "setVibration.svg"
 #~ msgstr ""
-

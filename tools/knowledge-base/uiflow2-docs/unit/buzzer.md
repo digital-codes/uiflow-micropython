@@ -107,5 +107,3 @@ UIFLOW2 Example:
     Deinitialize the buzzer.
 
     UIFLOW2:
-
-        

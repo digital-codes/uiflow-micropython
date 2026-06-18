@@ -87,7 +87,7 @@ Support the following products:
     UIFLOW2:
 
 <!-- .. method:: EXTIOUnit.pin(id, mode, value) -> Pin -->
-    
+
     Provide a MicroPython-style interface for handling GPIO pins.
 
     :param int id: The GPIO pin number to configure and control.
@@ -125,7 +125,7 @@ Support the following products:
 
     Get or set the digital value of the pin.
 
-    If no arguments are passed, the method returns the current value of the pin.  
+    If no arguments are passed, the method returns the current value of the pin.
     If one argument is passed, it sets the pin to the specified value.
 
     :param args: Optional argument to set the pin value.

@@ -146,4 +146,3 @@ UIFLOW2 Example:
     :param int pin_num: The number of the pin (1 to 3).
 
     UIFLOW2:
-

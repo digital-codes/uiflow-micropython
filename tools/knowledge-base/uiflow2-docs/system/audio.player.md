@@ -96,5 +96,3 @@ Audio player now can support mp3,amr and wav, if more types are needed, please a
     :return: The volume of the player.
 
     UIFLOW2:
-
-        

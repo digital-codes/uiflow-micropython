@@ -141,5 +141,3 @@ UIFLOW2 Example:
     :return: The firmware version.
 
     UIFLOW2:
-
-        

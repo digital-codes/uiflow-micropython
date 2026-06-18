@@ -123,5 +123,3 @@ UIFLOW2 Example:
     Set the gain multiple for reading data.
 
     UIFLOW2:
-
-        

@@ -110,9 +110,7 @@ UIFLOW2 Example:
     UIFLOW2:
 
 <!-- .. method:: Label.setVisible(visible: bool) -->
-    
+
     Set the visible property of the Label object, when ``visible`` is True, the Label object content will be visible, otherwise it will not be visible.
 
     UIFLOW2:
-
-        

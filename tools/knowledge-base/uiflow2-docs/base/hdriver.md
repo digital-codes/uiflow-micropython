@@ -21,7 +21,7 @@ UiFlow2 Code Block:
 Example output:
 
     None
- 
+
 ## MicroPython Example:
 
 #### Motor speed control

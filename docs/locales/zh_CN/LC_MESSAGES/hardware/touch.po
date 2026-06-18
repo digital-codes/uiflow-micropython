@@ -321,4 +321,3 @@ msgid ""
 "For single-touch scenarios, prefer ``getX()`` / ``getY()`` which handle "
 "rotation automatically."
 msgstr ""
-

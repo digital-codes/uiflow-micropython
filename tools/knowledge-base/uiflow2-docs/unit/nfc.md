@@ -4,7 +4,7 @@
 
 <!-- .. include:: ../refs/unit.nfc.ref -->
 
-This library drives **Unit NFC** (ST25R3916 on I2C). It discovers ISO14443 Type A tags, resolves chip type (Classic, Ultralight / NTAG family, DESFire, Plus, etc.), 
+This library drives **Unit NFC** (ST25R3916 on I2C). It discovers ISO14443 Type A tags, resolves chip type (Classic, Ultralight / NTAG family, DESFire, Plus, etc.),
 and exposes high-level read/write helpers for supported tag kinds.
 
 Support the following products:

@@ -448,5 +448,3 @@ UIFLOW2 Tag Example:
 <!-- .. data:: UWBUnit._mode_map -->
 
     device status
-
-    

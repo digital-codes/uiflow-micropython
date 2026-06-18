@@ -5,9 +5,9 @@
 <!-- .. note:: This module is only applicable to the CoreS3 Controller -->
 
 <!-- .. module:: code_scanner -->
-   :synopsis:  
+   :synopsis:
 
-``code_scanner`` module for qrcode scanning recognition 
+``code_scanner`` module for qrcode scanning recognition
 
 ## Micropython Example
 
@@ -72,11 +72,11 @@ if __name__ == "__main__":
 
 <!-- .. method:: find_qrcodes(img: image.Image) -> image.qrcode -->
 
-    QR code recognition 
+    QR code recognition
 
-    - ``img`` Image to be recognized 
+    - ``img`` Image to be recognized
 
-    Returns ``image.qrcode`` instance 
+    Returns ``image.qrcode`` instance
 
     UIFlow2.0
 
@@ -92,7 +92,6 @@ if __name__ == "__main__":
 
 <!-- .. method:: type_name() -> str -->
 
-    Return the type of the QR code  
+    Return the type of the QR code
 
     UIFlow2.0
-

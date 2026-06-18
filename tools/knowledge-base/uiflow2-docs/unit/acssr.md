@@ -342,5 +342,3 @@ UIFLOW2 Modbus Example:
     :param new_address: New I2C address. The range is 0x01-0x7f.
 
     UIFLOW2:
-
-        

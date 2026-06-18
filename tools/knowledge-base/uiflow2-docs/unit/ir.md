@@ -77,5 +77,3 @@ UIFLOW2 Example:
     Determine when the infrared signal is read and start to do some processing procedures.
 
     UIFLOW2:
-
-        

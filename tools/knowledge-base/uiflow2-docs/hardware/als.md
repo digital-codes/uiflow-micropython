@@ -10,7 +10,7 @@ The following are the details of the host's support for ALS:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |                 |   ALS   |
 
@@ -83,5 +83,3 @@ UIFLOW2 Example:
     Read the ambient light sensor value built into the host device.
 
     UIFLOW2:
-
-        

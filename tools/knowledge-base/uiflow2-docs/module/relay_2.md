@@ -134,4 +134,3 @@ UIFLOW2 Example:
     Get the current I2C address of the Relay2 Module.
 
     UIFLOW2:
-

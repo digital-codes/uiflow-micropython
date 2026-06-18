@@ -2,7 +2,7 @@
 ###### DinMeter
 
 <!-- .. include:: ../refs/controllers.dinmeter.ref -->
-###### 
+######
 
 ###### Startup UI
 

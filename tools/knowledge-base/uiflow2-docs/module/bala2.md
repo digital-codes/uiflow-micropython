@@ -388,7 +388,7 @@ Example output:
 
 <!-- .. method:: calibrate() -->
 
-        Calibrate sensor 
+        Calibrate sensor
 
         UiFlow2 Code Block:
 
@@ -399,8 +399,8 @@ Example output:
                 module_bala2_0.calibrate()
 
 <!-- .. method:: set_motor_speed(left, right) -->
-        
-        Set motor speed 
+
+        Set motor speed
 
         :param int left: The speed of the left motor. Range: -1023 ~ 1023.
         :param int right: The speed of the right motor. Range: -1023 ~ 1023.
@@ -430,7 +430,7 @@ Example output:
 
 <!-- .. method:: get_encoder_value() -->
 
-        The left, right encoder value returned in a 2-tuple  
+        The left, right encoder value returned in a 2-tuple
 
         :returns: left, right encoder value
         :rtype: tuple[int, int]
@@ -445,7 +445,7 @@ Example output:
 
 <!-- .. method:: set_servo_angle(pos, angle) -->
 
-        Set servo angle   
+        Set servo angle
 
         :param int pos: The position of the output cahnnel. Range: 1 ~ 4.
         :param int angle: The value of the right encoder. Range: 0 ~ 180.
@@ -460,7 +460,7 @@ Example output:
 
 <!-- .. method:: start() -->
 
-        Start the balance car (car upright balance) 
+        Start the balance car (car upright balance)
 
         UiFlow2 Code Block:
 
@@ -472,7 +472,7 @@ Example output:
 
 <!-- .. method:: stop() -->
 
-        Stop the balance car (stop the balance control of the car) 
+        Stop the balance car (stop the balance control of the car)
 
         UiFlow2 Code Block:
 
@@ -517,9 +517,9 @@ Example output:
 
 <!-- .. method:: get_angle_pid() -->
 
-        The angle loop PID parameters returned in a 3-tuple 
+        The angle loop PID parameters returned in a 3-tuple
 
-        :returns: kp, ki, kd parameters  
+        :returns: kp, ki, kd parameters
         :rtype: tuple[float, float, float]
 
         UiFlow2 Code Block:
@@ -546,10 +546,10 @@ Example output:
 
 <!-- .. method:: get_angle_pid_target() -->
 
-        Get angle loop PID control target  
+        Get angle loop PID control target
 
-        :returns: The angle loop PID control target 
-        :rtype: float 
+        :returns: The angle loop PID control target
+        :rtype: float
 
         UiFlow2 Code Block:
 
@@ -577,9 +577,9 @@ Example output:
 
 <!-- .. method:: get_speed_pid() -->
 
-        The speed loop PID parameters returned in a 3-tuple 
+        The speed loop PID parameters returned in a 3-tuple
 
-        :returns: kp, ki, kd parameters  
+        :returns: kp, ki, kd parameters
         :rtype: tuple[float, float, float]
 
         UiFlow2 Code Block:
@@ -606,10 +606,10 @@ Example output:
 
 <!-- .. method:: get_speed_pid_target() -->
 
-        Get speed loop PID control target  
+        Get speed loop PID control target
 
-        :returns: The speed loop PID control target 
-        :rtype: float 
+        :returns: The speed loop PID control target
+        :rtype: float
 
         UiFlow2 Code Block:
 
@@ -621,7 +621,7 @@ Example output:
 
 <!-- .. method:: set_turn_speed(speed) -->
 
-        Set turning speed 
+        Set turning speed
 
         :param float speed: The speed of the left and right motor offset
 

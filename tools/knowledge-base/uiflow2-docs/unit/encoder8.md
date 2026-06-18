@@ -125,7 +125,7 @@ UIFLOW2 Example:
     Get the incremental value of the specified channel.
 
     :param int channel: The encoder channel (1-8). Default is 1.
-    
+
     :return: The incremental value as an integer.
 
     UIFLOW2:

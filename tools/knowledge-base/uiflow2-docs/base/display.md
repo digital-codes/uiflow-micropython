@@ -17,7 +17,7 @@ Below is the detailed support for Atomic Display Base on the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | Status  |
 

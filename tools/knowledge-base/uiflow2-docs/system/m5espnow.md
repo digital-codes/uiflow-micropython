@@ -12,7 +12,7 @@ M5-ESPNOW is a connection-less wireless communication protocol supporting:
 
 - Message sizes up to 250 bytes,
 
-- Can operate alongside Wifi operation (network.WLAN) on ESP32 Series. 
+- Can operate alongside Wifi operation (network.WLAN) on ESP32 Series.
 
 It provides simpler and more user-friendly APIs.
 
@@ -57,24 +57,24 @@ UIFLOW2 Example:
         - ``wifi_ch``: The wifi channel (2.4GHz) to communicate with this peer.
           Must be an integer from 0 to 14. If channel is set to 0 the current
           channel of the wifi device will be used. (default=0)
-    
+
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow.deinit() -->
 
-    De-initialise the ESP-NOW software stack, disable callbacks, 
-    deallocate the recv data buffer and deregister all peers. 
+    De-initialise the ESP-NOW software stack, disable callbacks,
+    deallocate the recv data buffer and deregister all peers.
 
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow.get_mac(mode) -->
 
-    Get the device network MAC address. 
+    Get the device network MAC address.
 
 <!-- .. data:: Arguments: -->
 
         ``mode``: 0: M5ESPNow.STA  1: M5ESPNow.AP
-            
+
     - Return: ``bytes``
 
     UIFLOW2:
@@ -87,25 +87,25 @@ UIFLOW2 Example:
 
         ``encrypt``: 0: normal peer MAC address 1: encrypt peer MAC address
 
-    - Return: ``list``   
+    - Return: ``list``
 
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow.get_remote_mac(select, ssid) -->
 
-    To find remote mac by remote ssid. 
-    
+    To find remote mac by remote ssid.
+
 <!-- .. data:: Arguments: -->
 
         ``select``: 0: channel 1: MAC.
 
         ``ssid``: WiFi access point name in string.
-    
+
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow.set_ap_ssid(ssid) -->
 
-    Set the SSID configure in AP mode. 
+    Set the SSID configure in AP mode.
 
 <!-- .. data:: Arguments: -->
 
@@ -123,7 +123,7 @@ UIFLOW2 Example:
 
         - ``peer_mac``: The MAC address of the peer (as a Hex-string).
 
-        - ``peer_id``: The MAC address is stored in the ID list. 
+        - ``peer_id``: The MAC address is stored in the ID list.
           ID is must be an integer from 1 to 20
 
         - ``ifidx``:  Index of the wifi interface which will be
@@ -149,7 +149,7 @@ UIFLOW2 Example:
 
 <!-- .. data:: Arguments: -->
 
-        - ``peer_id``: The MAC address is stored in the ID list. 
+        - ``peer_id``: The MAC address is stored in the ID list.
           ID is must be an integer from 1 to 20
 
     UIFLOW2:
@@ -172,36 +172,36 @@ UIFLOW2 Example:
 
 <!-- .. data:: Arguments: -->
 
-        - ``peer_id``: The MAC address is stored in the ID list. 
+        - ``peer_id``: The MAC address is stored in the ID list.
           ID is must be an integer from 1 to 20
 
-        - ``msg``: int, float, list, string and byte-string up to 250 bytes 
+        - ``msg``: int, float, list, string and byte-string up to 250 bytes
 
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow.broadcast_data(msg) -->
 
-    All devices will also receive messages sent to the 
+    All devices will also receive messages sent to the
     ``broadcast`` MAC address (``b'\xff\xff\xff\xff\xff\xff'``)
 
 <!-- .. data:: Arguments: -->
 
-        - ``msg``: int, float, list, string and byte-string up to 250 bytes  
+        - ``msg``: int, float, list, string and byte-string up to 250 bytes
 
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow.set_irq_callback(callback) -->
 
-    Set a callback function to be called as soon as possible after a message has been received from another ESPNow device. 
-    The callback function will be called with the ESPNow instance object as an argument. For more reliable operation, 
+    Set a callback function to be called as soon as possible after a message has been received from another ESPNow device.
+    The callback function will be called with the ESPNow instance object as an argument. For more reliable operation,
     it is recommended to read out as many messages as are available when the callback is invoked. ::
 
             def espnow_recv_callback(espnow_obj):
                 espnow_mac, espnow_data = espnow_obj.recv_data()
                 print(espnow_mac, espnow_data)
-            
+
             M5ESPNow.set_irq_callback(espnow_recv_callback)
-        
+
 <!-- .. method:: M5ESPNow.recv_data() -->
 
         Wait for an incoming message and return values: ``[mac, msg]``.
@@ -215,19 +215,19 @@ UIFLOW2 Example:
 <!-- .. data:: Arguments: -->
 
         ``bytes``: bytearray
-    
+
     - Return: ``string``: Hex-string
-    
+
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow._hex_str_to_bytes(hexstr) -->
 
-    To get a bytes string from a hex string 
-    
+    To get a bytes string from a hex string
+
 <!-- .. data:: Arguments: -->
 
         ``hexstr``: Hex-string
-    
+
     - Return: ``bytes``: bytearray
 
     UIFLOW2:
@@ -235,27 +235,25 @@ UIFLOW2 Example:
 <!-- .. method:: M5ESPNow._bytes_to(bytes, format) -->
 
      To get a int or float or list valuefrom a bytes string.
-    
+
 <!-- .. data:: Arguments: -->
 
         ``bytes``: bytearray.
 
         ``format``: 0: int, 1: float.
-    
+
     - Return: ``int or float``
-    
+
     UIFLOW2:
 
 <!-- .. method:: M5ESPNow._to_bytes(variable) -->
 
-    To get a bytes string from a int or float or list value 
-    
+    To get a bytes string from a int or float or list value
+
 <!-- .. data:: Arguments: -->
 
         ``variable``: int or float or list
-    
+
     - Return: ``bytes``: bytearray
 
     UIFLOW2:
-
-        

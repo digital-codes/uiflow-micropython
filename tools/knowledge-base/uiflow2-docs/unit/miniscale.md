@@ -555,4 +555,3 @@ Example output:
 <!-- .. code-block:: python -->
 
                 ema_alpha = miniscale_0.get_ema_filter_alpha()
-

@@ -111,5 +111,3 @@ UIFLOW2 Example:
     Monitor the state transitions of a button based on its pin state and trigger appropriate handlers.
 
     UIFLOW2:
-
-        

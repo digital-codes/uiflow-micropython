@@ -6,8 +6,8 @@ The Barometric Pressure Sensor(BPS) ``BPS Unit`` is a barometer unit that uses B
 
 Support the following products:
 
-    ========= ============= 
-    |BPSUnit| |BPSUnit_V11|           
+    ========= =============
+    |BPSUnit| |BPSUnit_V11|
     ========= =============
 
 Micropython Example::
@@ -43,14 +43,14 @@ UIFLOW2 Example:
     Create a BPSUnit object
 
     :param i2c: the I2C object.
-    
+
     UIFLOW2:
 
 ## Methods
 
 <!-- .. method:: BPSUnit.get_temperature() -->
 
-    Get the temperature value in degrees celsius from the BMP280 or QMP6988 sensor. 
+    Get the temperature value in degrees celsius from the BMP280 or QMP6988 sensor.
 
     - Return: ``float``:  -40 ~ +85 °C
 
@@ -58,7 +58,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: BPSUnit.get_pressure() -->
 
-    Get the pressure value in pascals from the BMP280 or QMP6988 sensor. 
+    Get the pressure value in pascals from the BMP280 or QMP6988 sensor.
 
     - Return: ``float``:  300 ~ 1100 hPa
 
@@ -66,12 +66,10 @@ UIFLOW2 Example:
 
 <!-- .. method:: BPSUnit.get_altitude() -->
 
-    Get the altitude can be estimated using the pressure. 
-    which approximates the altitude relative to the pressure difference. 
+    Get the altitude can be estimated using the pressure.
+    which approximates the altitude relative to the pressure difference.
     The standard sea-level pressure is 1013.25 hPa.
 
     - Return: ``float``:  altitude in meters
 
     UIFLOW2:
-
-        

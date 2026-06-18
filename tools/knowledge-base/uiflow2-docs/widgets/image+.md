@@ -119,5 +119,3 @@ UIFLOW2 Example:
     Check if the fetched image is valid. Returns `True` if the image is valid, otherwise `False`.
 
     UIFLOW2:
-
-        

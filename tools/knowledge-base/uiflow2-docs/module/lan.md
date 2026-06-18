@@ -3,7 +3,7 @@
 <!-- .. include:: ../refs/module.lan.ref -->
 
 Supported Products:
-###### 
+######
 
 ###### | |LAN Module|            |
 
@@ -146,11 +146,11 @@ Example output:
 <!-- .. code-block:: python -->
 
                 lan_0.isconnected()
-                
+
 <!-- .. method:: LANModule.status() -->
 
         Get the LAN connect status.
- 
+
         :return: LAN status code, possible values:
 
             - network.ETH_INITIALIZED(0): Ethernet interface initialized
@@ -159,9 +159,9 @@ Example output:
             - network.ETH_CONNECTED(3): Physical link established (cable connected)
             - network.ETH_DISCONNECTED(4): Physical link lost (cable disconnected)
             - network.ETH_GOT_IP(5): IP address obtained, network ready
-            
-        :rtype: int 
-        
+
+        :rtype: int
+
         UiFlow2 Code Block:
 
         MicroPython Code Block:
@@ -169,7 +169,7 @@ Example output:
 <!-- .. code-block:: python -->
 
                 lan_0.status()
-                   
+
 <!-- .. method:: LANModule.ifconfig()[0] -->
 
         Get the local IP address.
@@ -320,7 +320,7 @@ Example output:
         :param int subnet: Subnet mask as a CIDR prefix length (e.g. `24` means `255.255.255.0`).
         :param str gateway: IP address of the network gateway/router.
         :param str dns: DNS server IP address.
-        
+
         UiFlow2 Code Block:
 
         MicroPython Code Block:

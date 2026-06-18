@@ -146,7 +146,7 @@ MicroPython Code Block:
 
 <!-- .. py:method:: set_cell_value(row, col, value) -->
 
-        Set the value of a cell. 
+        Set the value of a cell.
 
         New rows/columns are added automatically if required.
 

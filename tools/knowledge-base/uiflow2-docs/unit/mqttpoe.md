@@ -51,7 +51,7 @@ UIFLOW2 Example:
 
     The parameters is:
         - ``port`` uart pin tuple, which contains: ``(tx_pin, rx_pin)``.
-    
+
     UIFLOW2:
 
 ## Methods
@@ -133,7 +133,7 @@ UIFLOW2 Example:
         other foreground tasks to perform (i.e. your app just reacts to
         subscribed MQTT messages).
 
-        Note that you don't need to call :py:meth:`check_msg()` if you only 
+        Note that you don't need to call :py:meth:`check_msg()` if you only
         publish messages.
 
     check for a server message.
@@ -142,7 +142,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: MQTTPoEUnit.check_modem_is_ready() -->
 
-    To check whether the communication with the MQTT unit has been successful. 
+    To check whether the communication with the MQTT unit has been successful.
 
     - Return: ``bool``:  True or False
 
@@ -150,15 +150,15 @@ UIFLOW2 Example:
 
 <!-- .. method:: MQTTPoEUnit.get_firmware_version() -->
 
-    Get the current firmware version number. 
+    Get the current firmware version number.
 
-    - Return: ``string``   
+    - Return: ``string``
 
     UIFLOW2:
 
 <!-- .. method:: MQTTPoEUnit.get_baudrate() -->
 
-    Get the current baud rate of the module and the default baud rate is 9600. 
+    Get the current baud rate of the module and the default baud rate is 9600.
 
     - Return: ``int``:  4800, 9600, 19200, 34800, 115200, 230400
 
@@ -166,7 +166,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: MQTTPoEUnit.get_network_status() -->
 
-    To check whether the network status is connected or disconnected. 
+    To check whether the network status is connected or disconnected.
 
     - Return: ``int``: 0 ~ 1
 
@@ -174,16 +174,16 @@ UIFLOW2 Example:
 
 <!-- .. method:: MQTTPoEUnit.get_network_parameters(param) -->
 
-    Get the current actual IP address, subnet mask, gateway and DNS server of the module. 
-    
+    Get the current actual IP address, subnet mask, gateway and DNS server of the module.
+
     The parameters is:
         - ``param``: IP address = 0, subnet mask = 1, gateway = 2, DNS server = 3.
-    
+
     UIFLOW2:
 
 <!-- .. method:: MQTTPoEUnit.get_mac_address() -->
 
-    Get the current MAC address of the module and MAC address the format is: XX-XX-XX-XX-XX-XX. 
+    Get the current MAC address of the module and MAC address the format is: XX-XX-XX-XX-XX-XX.
 
     - Return: ``string``: "XX-XX-XX-XX-XX-XX"
 
@@ -191,25 +191,25 @@ UIFLOW2 Example:
 
 <!-- .. method:: MQTTPoEUnit.get_static_ip(param) -->
 
-    Get the current actual IP address, subnet mask and gateway of the module. 
-    
+    Get the current actual IP address, subnet mask and gateway of the module.
+
     The parameters is:
         - ``param``: IP address = 0, subnet mask = 1, gateway = 2, DNS server = 3.
-    
+
     UIFLOW2:
 
 <!-- .. method:: MQTTPoEUnit.get_dhcp_status() -->
 
-    Get the inquire about enable/disable DHCP status 
-    
+    Get the inquire about enable/disable DHCP status
+
     - Return: ``int``: 1: Enable, 0: Disable
-    
+
     UIFLOW2:
 
 <!-- .. method:: MQTTPoEUnit.set_dhcp_state(state) -->
 
-    Set the enable/disable DHCP 
-    
+    Set the enable/disable DHCP
+
     The parameters is:
         - ``state``: Disable = 0, Enable = 1.
 
@@ -218,7 +218,7 @@ UIFLOW2 Example:
 <!-- .. method:: MQTTPoEUnit.set_static_ip(ip, subnet, gateway) -->
 
     Set the static IP address of the MQTT module.
-    
+
 <!-- .. NOTE:: When the DHCP function is enabled, the static IP setting will not be enabled. -->
 
     The parameters is:
@@ -227,5 +227,3 @@ UIFLOW2 Example:
         - ``gateway``:  "xxx.xxx.xxx.xxx"
 
     UIFLOW2:
-
-        

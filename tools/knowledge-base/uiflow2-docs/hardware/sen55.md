@@ -11,7 +11,7 @@ The specific support of the host for SEN55 is as follows:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### | Controller        | SEN55           |
 
@@ -180,7 +180,7 @@ UIFLOW2 Example:
 <!-- .. method:: SEN55.get_nox_algo_tuning_params() -->
 
     Get the current NOx algorithm tuning parameters.
-    
+
     :return: A tuple of NOx tuning parameters: index offset, offset hours, gain hours, max gate duration, and gain factor.
 
 <!-- .. method:: SEN55.set_rht_acceleration_mode(mode) -->
@@ -323,5 +323,3 @@ UIFLOW2 Example:
     :return: NOx concentration in ppb.
 
     UIFLOW2:
-
-        

@@ -6,7 +6,7 @@
 COM.GPS is a satellite positioning module in the M5Stack stacking module series. It is developed based on the NEO-M8N module.
 
 Support the following products:
-###### 
+######
 
 ###### | |GPSModule|             | |COM.GPSModule|         |
 
@@ -246,5 +246,3 @@ UIFLOW2 Example:
     :return (bool): locate status, true is locate, false is not locate.
 
     UIFLOW2:
-
-        

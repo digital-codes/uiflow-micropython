@@ -43,7 +43,7 @@ Example output:
 
 Open the |cores3_example_human_face_recognition.m5f2| project in UiFlow2.
 
-To run this example, you will need the `CoreS3 <https://docs.m5stack.com/en/core/CoreS3>`_ 
+To run this example, you will need the `CoreS3 <https://docs.m5stack.com/en/core/CoreS3>`_
 and the `Unit Dual Button <https://docs.m5stack.com/en/unit/dual_button>`_.
 
 This example uses a face recognition algorithm to detect faces in real time from
@@ -567,5 +567,3 @@ The ``RecognitionResult`` is returned by `HumanFaceRecognizer.recognize(img, key
     Gets the face ID. A value greater than 0 indicates that the face recognition was successful.
 
     UiFlow2 Code Block:
-
-        

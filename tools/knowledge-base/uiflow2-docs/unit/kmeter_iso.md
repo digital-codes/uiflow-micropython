@@ -4,7 +4,7 @@
 
 Supported Products:
 
-    |KmeterISOUnit| 
+    |KmeterISOUnit|
 
 Micropython Example::
 
@@ -85,7 +85,7 @@ UIFLOW2 Example:
 
     Get the firmware version of the KmeterISO Unit. Returns an integer version number.
 
-    :param int mode: 
+    :param int mode:
 
     ====    ==========
     int     mode

@@ -169,7 +169,7 @@ UIFLOW2 Example:
     :param int id: UART controllers id, the range is 0 to 2.
     :param int rx: UART rx pin.
     :param int tx: UART tx pin.
-    :param int address: 
+    :param int address:
 
     UIFLOW2:
 
@@ -223,7 +223,7 @@ UIFLOW2 Example:
 
     Set the gyroscope scale range.
 
-    :param  gyro_scale: 
+    :param  gyro_scale:
         Options:
         - ``125``: 125
         - ``250``: 250
@@ -235,7 +235,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: GNSSModule.set_magnet_odr(magnet_odr) -->
 
-    :param  magnet_odr: 
+    :param  magnet_odr:
         Options:
         - ``2``: 2
         - ``6``: 6
@@ -421,4 +421,3 @@ UIFLOW2 Example:
     :return (bool): locate status, true is locate, false is not locate.
 
     UIFLOW2:
-

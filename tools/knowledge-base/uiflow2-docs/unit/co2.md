@@ -4,7 +4,7 @@
 <!-- .. sku:U103 -->
 <!-- .. include:: ../refs/unit.co2.ref -->
 
-CO2Unit is a hardware module designed for measuring CO2 concentration, temperature, and humidity. 
+CO2Unit is a hardware module designed for measuring CO2 concentration, temperature, and humidity.
 It communicates via I2C and provides functions for calibration, measurement, and configuration.
 
 Support the following products:
@@ -257,4 +257,3 @@ UIFLOW2 Example:
     Calculate the CRC-8 checksum for a given buffer.
 
     :param bytearray buffer: The buffer of bytes to calculate the CRC for.
-

@@ -434,4 +434,3 @@ msgstr "Classes"
 #~ "Very large numbers or dashboards -> "
 #~ "``lv.font_montserrat_40`` / ``44`` / ``48``"
 #~ msgstr ""
-

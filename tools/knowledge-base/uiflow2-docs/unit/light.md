@@ -88,5 +88,3 @@ UIFLOW2 Example:
     Gets the resistance value (returns an integer).
 
     UIFLOW2:
-
-        

@@ -9,7 +9,7 @@ The specific support of the host for IR is as follows:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### | Controller        | IR Transmitter  | IR Receiver |
 
@@ -43,7 +43,7 @@ The specific support of the host for IR is as follows:
 
 Open the |sticks3_ir_tx_example.m5f2| project in UiFlow2.
 
-This example demonstrates infrared (IR) transmission functionality. When button A is pressed, it sends IR data with a specified address and data value. 
+This example demonstrates infrared (IR) transmission functionality. When button A is pressed, it sends IR data with a specified address and data value.
 The example displays the address and data being transmitted.
 
 UiFlow2 Code Block:
@@ -56,7 +56,7 @@ Example output:
 
 Open the |sticks3_ir_rx_example.m5f2| project in UiFlow2.
 
-This example demonstrates infrared (IR) reception functionality using NEC decode protocol. 
+This example demonstrates infrared (IR) reception functionality using NEC decode protocol.
 When IR data is received, it displays the address and data values on the screen.
 
 UiFlow2 Code Block:
@@ -69,7 +69,7 @@ Example output:
 
 #### IR Transmission
 
-This example demonstrates infrared (IR) transmission functionality. When button A is pressed, it sends IR data with a specified address and data value. 
+This example demonstrates infrared (IR) transmission functionality. When button A is pressed, it sends IR data with a specified address and data value.
 The example displays the address and data being transmitted.
 
 MicroPython Code Block:
@@ -142,7 +142,7 @@ Example output:
 
 #### IR Reception
 
-This example demonstrates infrared (IR) reception functionality using NEC decode protocol. 
+This example demonstrates infrared (IR) reception functionality using NEC decode protocol.
 When IR data is received, it displays the address and data values on the screen.
 
 MicroPython Code Block:
@@ -239,5 +239,3 @@ Example output:
     :param cb: Callback function with signature ``cb(data, addr)``. ``data`` and ``addr`` are 8-bit values (0–255).
 
     UiFlow2:
-
-        

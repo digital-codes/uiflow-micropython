@@ -9,7 +9,7 @@ device. Below is the detailed IMU support for the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |                 | MPU6886 | BMI270 | BMM150 |
 

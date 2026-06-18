@@ -9,7 +9,7 @@ This is the driver library for the Atom DTU LoRaWAN-Series Base to accept and se
 Support the following products:
 
     ===================== ===================== =====================
-    |Atom DTU LoRaWAN470| |Atom DTU LoRaWAN868| |Atom DTU LoRaWAN915| 
+    |Atom DTU LoRaWAN470| |Atom DTU LoRaWAN868| |Atom DTU LoRaWAN915|
     ===================== ===================== =====================
 
 ## UiFlow2 Example

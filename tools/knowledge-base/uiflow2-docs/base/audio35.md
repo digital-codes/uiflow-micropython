@@ -13,7 +13,7 @@ Below is the detailed support for Atomic Audio-3.5 Base on the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | Atomic Audio-3.5 Base  |
 

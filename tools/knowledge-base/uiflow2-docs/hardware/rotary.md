@@ -8,7 +8,7 @@ is the detailed Rotary support for the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### | Controller      | Rotary |
 
@@ -122,5 +122,3 @@ UIFLOW2 Example:
     Sets the rotation value of the Rotary object.
 
     UIFLOW2:
-
-        

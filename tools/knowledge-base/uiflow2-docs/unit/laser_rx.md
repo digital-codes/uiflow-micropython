@@ -157,7 +157,7 @@ LaserRX UIFLOW2 Example:
     :param  byte: The number of bytes to read. If None, reads all available data.
 
     :returns: The data read from UART or None if no data is available.
-            
+
     UIFLOW2:
 
 <!-- .. method:: LaserRXUnit.readline() -->

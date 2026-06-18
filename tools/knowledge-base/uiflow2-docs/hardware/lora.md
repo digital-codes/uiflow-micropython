@@ -7,7 +7,7 @@ LoRa is used to control the built-in long-range wireless communication module in
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### | Controllers     | LoRa    |
 

@@ -282,5 +282,3 @@ UIFLOW2 RX Example:
     Broadcast data to all Zigbee modules.
 
     UIFLOW2:
-
-        

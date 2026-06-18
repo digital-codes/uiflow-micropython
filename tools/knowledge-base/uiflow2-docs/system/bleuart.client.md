@@ -138,5 +138,3 @@ UIFLOW2 Example:
     Deinitialize the ble uart server.
 
     UIFLOW2:
-
-        

@@ -98,5 +98,3 @@ UIFLOW2 Example:
     Polling method, placed in the loop function, constantly check.
 
     UIFLOW2:
-
-        

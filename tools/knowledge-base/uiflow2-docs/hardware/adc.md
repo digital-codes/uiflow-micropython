@@ -139,5 +139,3 @@ UIFLOW2 Example:
     - ``ADC.WIDTH_12BIT`` = 12
 
     UIFLOW2:
-
-        

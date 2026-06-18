@@ -52,5 +52,3 @@ UIFLOW2 Example:
     This method allows reading the voltage value of Angle, and the return value is a floating point value.
 
     UIFLOW2:
-
-        

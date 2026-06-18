@@ -10,17 +10,17 @@ The Atom DTU LoRaWAN-Series is a LoRaWAN programmable data transfer unit (DTU) b
 
 - **Frequency band support**: CN470 (470MHz), EU868 (868MHz), US915 (915MHz)
 - **Communication protocol**:
-  
+
   - Supports LoRaWAN Class A, Class B, Class C modes
   - Supports LoRa Point-to-Point (P2P) communication mode.
 
 - **Communication Interface**:
-  
+
   - UART interface: Used to send AT commands to control LoRaWAN network access, data sending/receiving, P2P mode communication, etc.
   - RS485 interface: supports wired communication of industrial equipment with high reliability.
 
 - **Internet access method**:
-  
+
   - OTAA (Over-The-Air Activation)
   - ABP (Activation By Personalization)
 

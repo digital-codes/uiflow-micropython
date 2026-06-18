@@ -47,14 +47,14 @@ UIFLOW2 Example:
     :param address: the I2C address of the device. Default is 0x21.
     :param id: 1: UART1, 2: UART2.
     :param port: uart pin tuple, which contains: ``(tx_pin, rx_pin)``
-    
+
     UIFLOW2:
 
 ## Methods
 
 <!-- .. method:: QRCodeUnit.get_qrcode_data_length() -->
 
-    Scan the QR code and get the available data length. 
+    Scan the QR code and get the available data length.
 
     - Return: ``int``:  available data length is int format
 
@@ -62,7 +62,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: QRCodeUnit.get_qrcode_data() -->
 
-    Scan the QR code and get the data in the string. 
+    Scan the QR code and get the data in the string.
 
     - Return: ``string``:  scanned data output is string format
 
@@ -70,7 +70,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: QRCodeUnit.set_trigger_mode(mode) -->
 
-    Set the trigger mode to Auto or Manual(Key). 
+    Set the trigger mode to Auto or Manual(Key).
 
     The parameters is:
         - ``mode``:  auto: 0 or manual: 1
@@ -79,7 +79,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: QRCodeUnit.set_manual_scan(ctrl) -->
 
-    Set the manual(use the key button) scanning control ON or OFF. 
+    Set the manual(use the key button) scanning control ON or OFF.
 
     The parameters is:
         - ``ctrl``:  off: 0 or on: 1
@@ -90,7 +90,7 @@ UIFLOW2 Example:
 
 <!-- .. method:: QRCodeUnit.set_event_cb(qrcode_0_event) -->
 
-    Set the callback event and callback function. 
+    Set the callback event and callback function.
 
     The callback function:
         - ``qrcode_0_event``
@@ -105,13 +105,13 @@ UIFLOW2 Example:
 
 <!-- .. method:: QRCodeUnit.event_poll_loop() -->
 
-    The calling event poll block must be used inside a loop. 
-    
+    The calling event poll block must be used inside a loop.
+
     UIFLOW2:
 
 <!-- .. method:: QRCodeUnit.get_qrcode_data_status() -->
 
-    Reading data scanned QR code after get the data status 
+    Reading data scanned QR code after get the data status
 
     - Return: ``int``:   0: not ready, 1: data available, 2: read again
 
@@ -119,18 +119,18 @@ UIFLOW2 Example:
 
 <!-- .. method:: QRCodeUnit.get_trigger_mode() -->
 
-    Get the auto or manual trigger mode status. 
-    
+    Get the auto or manual trigger mode status.
+
     - Return: ``int``:   0: auto, 1: manual
-    
+
     UIFLOW2:
 
 <!-- .. method:: QRCodeUnit.get_trigger_button_status() -->
 
-    Get the trigger button status 
-    
+    Get the trigger button status
+
     - Return: ``int``: 1: press, 0: not pressed
-    
+
     UIFLOW2:
 
 <!-- .. method:: QRCodeUnit.get_device_info(info) -->
@@ -152,7 +152,6 @@ UIFLOW2 Example:
 
     The i2c address can be changed by the user and this address should be between 0x01 and 0x7F.
 
-    - ``addr``: range of address(0x01 - 0x7F). 
+    - ``addr``: range of address(0x01 - 0x7F).
 
     UIFLOW2:
-

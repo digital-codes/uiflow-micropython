@@ -6,7 +6,7 @@ This is the driver library of CardKB2 Unit, which is used to obtain key input da
 
 Support the following products:
 
-    |CardKB2 Unit|    
+    |CardKB2 Unit|
 
 ## UiFlow2 Example
 

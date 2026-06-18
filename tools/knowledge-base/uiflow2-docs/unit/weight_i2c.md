@@ -148,5 +148,3 @@ UIFLOW2 Example:
     - ``info``: (0xFE, 0xFF)
 
     UIFLOW2:
-
-        

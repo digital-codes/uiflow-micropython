@@ -129,5 +129,3 @@ UIFLOW2 Example:
     :param int addr: The new I2C address, must be between 0x08 and 0x77.
 
     UIFLOW2:
-
-        

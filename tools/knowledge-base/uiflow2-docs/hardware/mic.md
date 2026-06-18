@@ -11,7 +11,7 @@ the detailed Mic support for the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | SPM1423 | ES7210 |
 

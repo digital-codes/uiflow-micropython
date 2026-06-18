@@ -147,7 +147,7 @@ if __name__ == "__main__":
 ## **API**
 
 <!-- .. class:: image.Image -->
- 
+
     The image.Image object is returned by `camera.snapshot()`.
 
 <!-- .. method:: width() -->
@@ -321,7 +321,7 @@ if __name__ == "__main__":
 
 <!-- .. method:: find_qrcodes() -->
 
-        Finds all QR codes returns a list of ``image.qrcode`` objects.  
+        Finds all QR codes returns a list of ``image.qrcode`` objects.
         Please see the image.qrcode object for more details.
 
         :returns qrcodes: list of detected QR codes.
@@ -524,13 +524,13 @@ if __name__ == "__main__":
     :type: int
 
     GRAYSCALE pixel format. Each pixel is 8-bits, 1-byte.
- 
+
 <!-- .. data:: JPEG -->
 
     :type: int
 
     A JPEG image.
- 
+
 <!-- .. data:: YUV422 -->
 
     :type: int
@@ -541,4 +541,3 @@ if __name__ == "__main__":
     methods work with YUV422.
 
     UiFlow2 Code Block:
-

@@ -151,7 +151,7 @@ if __name__ == "__main__":
             print("please update to latest firmware")
 
 ```
- 
+
 ###### Keyboard
 
 Implementing USB host to capture keyboard input
@@ -247,53 +247,53 @@ if __name__ == "__main__":
     UIFLOW2:
 
 <!-- .. method:: poll_data() -->
-    
-    poll data 
-    
+
+    poll data
+
     **Note**: It needs to be called in the main loop
 
     UIFlow2.0
 
 <!-- .. method:: is_left_btn_pressed() -> bool -->
-    
+
     Check if the left mouse button is pressed.
 
     UIFlow2.0
 
 <!-- .. method:: is_right_btn_pressed() -> bool -->
-    
+
     Check if the right mouse button is pressed.
 
     UIFlow2.0
 
 <!-- .. method:: is_middle_btn_pressed() -> bool -->
-    
+
     Check if the middle mouse button is pressed.
 
     UIFlow2.0
 
 <!-- .. method:: is_forward_btn_pressed() -> bool -->
-    
+
     Check if the forward mouse button is pressed.
 
     UIFlow2.0
 
 <!-- .. method:: is_back_btn_pressed() -> bool -->
-    
+
     Check if the back mouse button is pressed.
 
     UIFlow2.0
 
 <!-- .. method:: read_mouse_move() -> tuple[int, int] -->
-    
-    Read Mouse Cursor Movement 
+
+    Read Mouse Cursor Movement
 
     Returns a tuple (x, y) containing the horizontal displacement x and vertical displacement y of the mouse;
     x range: -127 to 127; 0 indicates no movement, negative values indicate movement to the left, and positive values indicate movement to the right;
     y range: -127 to 127; 0 indicates no movement, negative values indicate movement upward, and positive values indicate movement downward.
 
     **Example:**
-    
+
 ```
 ```
         move = usb_module.read_mouse_move()
@@ -303,16 +303,16 @@ if __name__ == "__main__":
     UIFlow2.0
 
 <!-- .. method:: read_wheel_move() -> int -->
-    
-    Read Mouse Wheel Movement 
+
+    Read Mouse Wheel Movement
 
     Returns a value in the range of -127 to 127, 0 indicates no movement, Positive values indicate forward scrolling, Negative values indicate backward scrolling.
- 
+
     UIFlow2.0
 
 <!-- .. method:: read_kb_input(convert: bool = True) -> list -->
-  
-    Read keyboard input  
+
+    Read keyboard input
 
     - ``convert`` Whether to convert HID Keycode to the corresponding string.
 
@@ -356,7 +356,7 @@ if __name__ == "__main__":
 
 <!-- .. method:: read_gpin(pin) -> int -->
 
-    Read input pin value 
+    Read input pin value
 
     - ``pin`` pin number
     - ``Return`` 1 represents high level, and 0 represents low level.
@@ -365,10 +365,9 @@ if __name__ == "__main__":
 
 <!-- .. method:: write_gpout(pin, value) -->
 
-    Write output pin value  
+    Write output pin value
 
     - ``pin`` pin number
     - ``Return`` 1 represents high level, and 0 represents low level.
 
     UIFlow2.0
-

@@ -91,5 +91,3 @@ UIFLOW2 Example:
     The polling method, placed in the loop function, constantly detects the state of the key.
 
     UIFLOW2:
-
-        

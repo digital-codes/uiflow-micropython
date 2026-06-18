@@ -191,5 +191,3 @@ UIFLOW2 Example:
     - ``new_address``: The new I2C address to set.
 
     UIFLOW2:
-
-        

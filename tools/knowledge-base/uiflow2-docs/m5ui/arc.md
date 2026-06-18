@@ -241,8 +241,8 @@ MicroPython Code Block:
         Set the mode of the arc.
 
         :param int mode: The mode of the arc.
-    
-            Option: 
+
+            Option:
                 - lv.arc.MODE.NORMAL: Normal mode.
                 - lv.arc.MODE.REVERSE: Reverse mode.
                 - lv.arc.MODE.SYMMETRICAL: Symmetrical mode.

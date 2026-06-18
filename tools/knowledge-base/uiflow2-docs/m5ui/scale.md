@@ -222,7 +222,7 @@ MicroPython Code Block:
 
         :param int show_mode: The display mode.
 
-            Optional: 
+            Optional:
 
                 - `lv.scale.MODE.HORIZONTAL_TOP`: Horizontal top scale.
                 - `lv.scale.MODE.HORIZONTAL_BOTTOM`: Horizontal bottom scale.
@@ -388,7 +388,7 @@ MicroPython Code Block:
                 scale_0.set_width(100)
 
 <!-- .. py:method:: set_height(height) -->
-        
+
         Set the height of the scale.
 
         :param int height: The height of the scale.

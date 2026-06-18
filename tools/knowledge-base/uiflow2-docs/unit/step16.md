@@ -17,13 +17,13 @@ Support the following products:
 Open the |cores3_step16_unit_example.m5f2| project in UiFlow2.
 
 This example shows how to read and display encoder readings.
- 
+
 UiFlow2 Code Block:
 
 Example output:
 
     None
- 
+
 ## MicroPython Example
 
 #### Read Encoder
@@ -386,4 +386,3 @@ MicroPython Code Block:
     .. code-block:: python
 
         addr = unit_step16_0.get_firmware_version()
-

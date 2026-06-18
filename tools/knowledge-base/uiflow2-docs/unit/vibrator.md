@@ -113,5 +113,3 @@ UIFLOW2 Example:
     Deinitialize the motor.
 
     UIFLOW2:
-
-        

@@ -99,5 +99,3 @@ UIFLOW2 Example:
    Set the relay status (True or false).
 
     UIFLOW2:
-
-        

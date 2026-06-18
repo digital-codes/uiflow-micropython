@@ -3,7 +3,7 @@
 <!-- .. include:: ../refs/module.dualkmeter.ref -->
 
 Supported Products:
-###### 
+######
 
 ###### | |DualKmeter Module13.2| |
 

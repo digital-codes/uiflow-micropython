@@ -100,7 +100,7 @@ UIFLOW2 Example:
 
     Set demodulator mixer value.
 
-    :param int value: demodulator mixer value. 
+    :param int value: demodulator mixer value.
 
     Options:
         - 0x00: 0dB
@@ -630,5 +630,3 @@ UIFLOW2 Example:
     :return bool: True if success, False if failed.
 
     UIFLOW2:
-
-        

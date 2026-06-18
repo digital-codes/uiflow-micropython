@@ -983,4 +983,3 @@ msgstr ""
 
 #~ msgid "Set the border width of the roller."
 #~ msgstr ""
-

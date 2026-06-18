@@ -104,5 +104,3 @@ UIFLOW2 Example:
     - ``voltage1``  Desired output voltage from 0.0 to range maximum (5V or 10V).
 
     UIFLOW2:
-
-        

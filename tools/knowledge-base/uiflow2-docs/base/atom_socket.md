@@ -171,5 +171,3 @@ UIFLOW2 Example:
     - ``receive_callback``: Callback function to handle the received data.
 
     UIFLOW2:
-
-        

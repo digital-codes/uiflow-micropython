@@ -80,5 +80,3 @@ UIFLOW2 Example:
     Acquire transmitting distance
 
     UIFLOW2:
-
-        

@@ -388,7 +388,7 @@ M5Dropdown
             |set_text.png|
 
         MicroPython Code Block:
-    
+
             .. code-block:: python
 
                 dropdown_0.set_text("Select an option")

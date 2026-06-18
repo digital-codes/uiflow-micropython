@@ -2,8 +2,8 @@
 
 <!-- .. include:: ../refs/chain.unit_bus.ref -->
 
-BusChainUnit is the helper class for Bus devices on the Chain bus. 
-It provides methods to configure GPIO pins (input, output, external interrupt), read ADC values, and communicate with I2C devices. 
+BusChainUnit is the helper class for Bus devices on the Chain bus.
+It provides methods to configure GPIO pins (input, output, external interrupt), read ADC values, and communicate with I2C devices.
 The class supports multiple work modes including GPIO output, GPIO input, external interrupt, ADC, and I2C.
 
 Support the following products:

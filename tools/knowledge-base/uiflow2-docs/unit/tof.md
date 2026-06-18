@@ -160,5 +160,3 @@ UIFLOW2 Example:
     :param new_address: new I2C address.
 
     UIFLOW2:
-
-        

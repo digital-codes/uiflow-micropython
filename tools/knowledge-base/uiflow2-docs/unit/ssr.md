@@ -94,4 +94,3 @@ UIFLOW2 Example:
     - ``state``: The state of the SSR.
 
     UIFLOW2:
-

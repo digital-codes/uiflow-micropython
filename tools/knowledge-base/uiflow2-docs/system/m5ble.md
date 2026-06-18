@@ -362,5 +362,3 @@ connected_client_handle is passed by the callback function's parameters, or obta
     Disconnects the link
 
     UIFLOW2:
-
-        

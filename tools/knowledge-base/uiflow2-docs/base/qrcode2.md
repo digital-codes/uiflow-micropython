@@ -443,12 +443,12 @@ Example output:
 
 <!-- .. method:: set_trig(value) -->
 
-        Set trigger pin value.  
+        Set trigger pin value.
 
-        :param int value: 
-        
-            - ``0`` : low level.  
-            - ``1`` : high level.  
+        :param int value:
+
+            - ``0`` : low level.
+            - ``1`` : high level.
 
         UiFlow2 Code Block:
 
@@ -456,11 +456,11 @@ Example output:
 
 <!-- .. code-block:: python -->
 
-                base_qrcode2.set_trig(value) 
+                base_qrcode2.set_trig(value)
 
 <!-- .. method:: start_decode() -->
 
-        Start decode. 
+        Start decode.
 
         UiFlow2 Code Block:
 
@@ -468,11 +468,11 @@ Example output:
 
 <!-- .. code-block:: python -->
 
-                base_qrcode2.start_decode() 
+                base_qrcode2.start_decode()
 
 <!-- .. method:: stop_decode() -->
 
-        Stop decode. 
+        Stop decode.
 
         UiFlow2 Code Block:
 
@@ -480,7 +480,7 @@ Example output:
 
 <!-- .. code-block:: python -->
 
-                base_qrcode2.stop_decode() 
+                base_qrcode2.stop_decode()
 
 <!-- .. method:: read() -->
 
@@ -501,7 +501,7 @@ Example output:
 
 <!-- .. method:: set_trigger_mode(mode) -->
 
-        Set trigger mode. 
+        Set trigger mode.
 
         :param int mode: The trigger mode. Available options:
 
@@ -521,7 +521,7 @@ Example output:
 
 <!-- .. method:: set_decode_delay(delay_ms) -->
 
-        Set decode delay.  
+        Set decode delay.
 
         :param int delay_ms: decode delay time(ms), 0 means continuous decoding until success.
 
@@ -535,7 +535,7 @@ Example output:
 
 <!-- .. method:: set_trigger_timeout(timeout_ms) -->
 
-        Set trigger timeout. 
+        Set trigger timeout.
 
         :param timeout_ms: trigger timeout time(ms), Decoding will automatically stop when the duration exceeds this value.
 
@@ -551,7 +551,7 @@ Example output:
 
         Set motion detection sensitivity. (in Motion Sensing Mode)
 
-        :param int level: sensitivity level. Range: 1~5. The higher the level, the more sensitive it is to scene changes. 
+        :param int level: sensitivity level. Range: 1~5. The higher the level, the more sensitive it is to scene changes.
 
         UiFlow2 Code Block:
 
@@ -563,7 +563,7 @@ Example output:
 
 <!-- .. method:: set_continuous_decode_delay(delay_ms) -->
 
-        Set continuous decode delay. (in Motion Sensing Mode) 
+        Set continuous decode delay. (in Motion Sensing Mode)
 
         :param int delay_ms: delay time(unit: 100ms), 0 means continuous decoding until timeout.
 
@@ -577,7 +577,7 @@ Example output:
 
 <!-- .. method:: set_trigger_decode_delay(delay_ms): -->
 
-        Set trigger decode delay. (in Motion Sensing Mode)  
+        Set trigger decode delay. (in Motion Sensing Mode)
 
         Sets the trigger decoding delay time. This is the delay between re-entering the scene change detection phase and starting recognition again after detecting a change.
 
@@ -590,12 +590,12 @@ Example output:
 <!-- .. code-block:: python -->
 
                 base_qrcode2.set_trigger_decode_delay(delay_ms)
- 
+
 <!-- .. method:: set_same_code_interval(interval_ms) -->
 
-        Set same code interval.  
+        Set same code interval.
 
-        :param int interval_ms: The interval time for repeated recognition of the same code (unit: ms). 
+        :param int interval_ms: The interval time for repeated recognition of the same code (unit: ms).
 
         UiFlow2 Code Block:
 
@@ -607,9 +607,9 @@ Example output:
 
 <!-- .. method:: set_diff_code_interval(interval_ms) -->
 
-        Set difference code interval.  
+        Set difference code interval.
 
-        :param int interval_ms: The interval time for repeated recognition of the difference code (unit: ms). 
+        :param int interval_ms: The interval time for repeated recognition of the difference code (unit: ms).
 
         UiFlow2 Code Block:
 
@@ -621,9 +621,9 @@ Example output:
 
 <!-- .. method:: set_same_code_no_delay(enable) -->
 
-        Set same code no delay.  
+        Set same code no delay.
 
-        :param bool enable: Whether to enable non-delay output for the same code. True means enabled, False means disabled. 
+        :param bool enable: Whether to enable non-delay output for the same code. True means enabled, False means disabled.
 
         UiFlow2 Code Block:
 
@@ -632,16 +632,16 @@ Example output:
 <!-- .. code-block:: python -->
 
                 base_qrcode2.set_same_code_no_delay(enable)
- 
+
 <!-- .. method:: set_fill_light_mode(mode) -->
 
-        Set fill light mode. 
+        Set fill light mode.
 
         :param int mode: The fill light mode. Available options:
 
-            - ``FILL_LIGHT_OFF``: Light off. 
-            - ``FILL_LIGHT_ON``: Light on. 
-            - ``FILL_LIGHT_ON_DECODE``: Light on during decoding.   
+            - ``FILL_LIGHT_OFF``: Light off.
+            - ``FILL_LIGHT_ON``: Light on.
+            - ``FILL_LIGHT_ON_DECODE``: Light on during decoding.
 
         UiFlow2 Code Block:
 
@@ -653,9 +653,9 @@ Example output:
 
 <!-- .. method:: set_fill_light_brightness(brightness) -->
 
-        Set fill light brightness.  
+        Set fill light brightness.
 
-        :param int brightness: The fill light brightness. Range: 0~100. 
+        :param int brightness: The fill light brightness. Range: 0~100.
 
         UiFlow2 Code Block:
 
@@ -667,13 +667,13 @@ Example output:
 
 <!-- .. method:: set_pos_light_mode(mode) -->
 
-        Set positioning light mode. 
+        Set positioning light mode.
 
         :param int mode: The positioning light mode. Available options:
 
         - ``POS_LIGHT_OFF``: Light off.
         - ``POS_LIGHT_ON_DECODE``: Light on during decoding.
-        - ``POS_LIGHT_FLASH_ON_DECODE``: Light flash during decoding. 
+        - ``POS_LIGHT_FLASH_ON_DECODE``: Light flash during decoding.
 
         UiFlow2 Code Block:
 
@@ -685,13 +685,13 @@ Example output:
 
 <!-- .. method:: set_startup_tone(mode) -->
 
-        Set startup tone. 
+        Set startup tone.
 
-        :param int mode: 
+        :param int mode:
 
-            - ``0``: Disable startup tone.  
-            - ``1``: Play 4 beeps. 
-            - ``2``: Play 2 beeps.  
+            - ``0``: Disable startup tone.
+            - ``1``: Play 4 beeps.
+            - ``2``: Play 2 beeps.
 
         UiFlow2 Code Block:
 
@@ -703,13 +703,13 @@ Example output:
 
 <!-- .. method:: set_decode_success_beep(count) -->
 
-        Set decode success beep.  
+        Set decode success beep.
 
-        :param int count: 
+        :param int count:
 
-            - ``0``: No prompt sound.  
-            - ``1``: Play prompt sound once.  
-            - ``2``: Play prompt sound twice.  
+            - ``0``: No prompt sound.
+            - ``1``: Play prompt sound once.
+            - ``2``: Play prompt sound twice.
 
         UiFlow2 Code Block:
 
@@ -718,7 +718,7 @@ Example output:
 <!-- .. code-block:: python -->
 
                 base_qrcode2.set_decode_success_beep(count)
- 
+
 <!-- .. method:: set_case_conversion(mode) -->
 
         Set case conversion.
@@ -726,8 +726,8 @@ Example output:
         :param int mode:
 
             - ``0``: Off (Original data).
-            - ``1``: Convert to uppercase. 
-            - ``2``: Convert to lowercase. 
+            - ``1``: Convert to uppercase.
+            - ``2``: Convert to lowercase.
 
         UiFlow2 Code Block:
 
@@ -753,14 +753,14 @@ Example output:
                 def crc16_calc(data: bytes) -> int:
                     ca_crc = 0
                     for byte in data:
-                        for i in range(7, -1, -1):  
+                        for i in range(7, -1, -1):
                             if ca_crc & 0x8000:
                                 ca_crc = (ca_crc << 1) ^ 0x18005
                             else:
                                 ca_crc <<= 1
                             if (byte & (1 << i)) != 0:
                                 ca_crc ^= 0x18005
-                    return ca_crc & 0xFFFF   
+                    return ca_crc & 0xFFFF
 
         UiFlow2 Code Block:
 
@@ -769,4 +769,3 @@ Example output:
 <!-- .. code-block:: python -->
 
                 base_qrcode2.set_protocol_format(mode)
-    

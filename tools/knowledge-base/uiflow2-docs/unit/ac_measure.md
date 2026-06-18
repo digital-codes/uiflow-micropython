@@ -255,4 +255,3 @@ UIFLOW2 Example:
     :param int addr: The new I2C address to set, between 0x01 and 0x7F.
 
     UIFLOW2:
-

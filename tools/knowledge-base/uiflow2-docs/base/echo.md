@@ -13,7 +13,7 @@ Below is the detailed support for Atomic Echo Base on the host:
 <!-- .. table:: -->
     :widths: auto
     :align: center
-###### 
+######
 
 ###### |Controller       | Atomic Echo Base  |
 

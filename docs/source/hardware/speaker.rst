@@ -7,7 +7,7 @@ Speaker
 .. include:: ../refs/hardware.speaker.ref
 
 
-The Speaker is used to control the built-in speaker inside the host device. 
+The Speaker is used to control the built-in speaker inside the host device.
 Below is the detailed support for Speaker on the host:
 
 .. table::

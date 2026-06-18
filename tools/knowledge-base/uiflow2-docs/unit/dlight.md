@@ -88,5 +88,3 @@ UIFLOW2 Example:
     Configure the measurement mode (continuous measurement/single measurement) and resolution.
 
     UIFLOW2:
-
-        
