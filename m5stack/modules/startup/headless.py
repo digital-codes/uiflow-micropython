@@ -17,6 +17,9 @@ class NullRGB:
     def fill_color(self, color: int) -> None:
         pass
 
+    def set_color(self, index: int, color: int) -> None:
+        pass
+
     def set_brightness(self, brightness: int) -> None:
         pass
 
@@ -26,12 +29,26 @@ class Headless_Startup:
     COLOR_RED = 0xFF0000  # WiFi not connected
     COLOR_BLUE = 0x0000FF  # WiFi connected, server not connected
     COLOR_GREEN = 0x00FF00  # WiFi connected, server connected
+    COLOR_WHITE = 0xFFFFFF
 
     def __init__(self) -> None:
-        has_rgb = M5.getBoard() not in [M5.BOARD.M5AtomS3R_CAM, M5.BOARD.M5AtomEchoS3R]
+        self._board = M5.getBoard()
+        has_rgb = self._board not in [M5.BOARD.M5AtomS3R_CAM, M5.BOARD.M5AtomEchoS3R]
         self.rgb = RGB() if has_rgb else NullRGB()
-        self.rgb.fill_color(self.COLOR_BLUE)
-        self.rgb.set_brightness(50)
+        if self._board is not M5.BOARD.M5PowerHub:
+            self.rgb.set_brightness(50)
+            self.rgb.fill_color(self.COLOR_BLUE)
+        else:
+            self.rgb.set_brightness(30)
+            self.rgb.fill_color(self.COLOR_WHITE)
+            self.rgb.set_color(5, self.COLOR_BLUE)
+
+    def _set_status_color(self, color: int) -> None:
+        if self._board is not M5.BOARD.M5PowerHub:
+            self.rgb.set_brightness(100)
+            self.rgb.fill_color(color)
+        else:
+            self.rgb.set_color(5, color)
 
     def show_hits(self, hits: str) -> None:
         pass
@@ -62,7 +79,6 @@ class Headless_Startup:
         timeout: int = 60,
     ) -> None:
         self.show_mac()
-        self.rgb.set_brightness(100)
 
         self._net_if = Startup(network_type=net_mode)  # type: ignore
         if self._net_if.connect_network(
@@ -88,7 +104,7 @@ class Headless_Startup:
                         print("Nickname: " + M5Things.nick_name())
                         print("Access Code: " + access_code)
                         print("=======================")
-                        self.rgb.fill_color(self.COLOR_GREEN)
+                        self._set_status_color(self.COLOR_GREEN)
                         success = True
                         break
                     else:
@@ -99,12 +115,12 @@ class Headless_Startup:
 
             if not success:
                 print(" ")
-                self.rgb.fill_color(self.COLOR_RED)
+                self._set_status_color(self.COLOR_RED)
                 self.show_error(ssid, "TIMEOUT")
                 print(
                     f"[NET]: {self._net_if.wifi_status_str(status)} | "
                     f"[MQTT]: {self._net_if.m5things_status_str(M5Things.status())}"
                 )
         else:
-            self.rgb.fill_color(self.COLOR_RED)
+            self._set_status_color(self.COLOR_BLUE)
             self.show_error("Not Found", "Please use M5Burner setup :)")

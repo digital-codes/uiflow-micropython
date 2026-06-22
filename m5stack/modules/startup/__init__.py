@@ -242,6 +242,7 @@ def startup(boot_opt, timeout: int = 60) -> None:
             M5.BOARD.M5StampP4,
             M5.BOARD.M5NanoC6,
             M5.BOARD.M5DualKey,
+            M5.BOARD.M5PowerHub,
         ):
             from .headless import Headless_Startup
 
@@ -360,11 +361,6 @@ def startup(boot_opt, timeout: int = 60) -> None:
 
             unit_c6l = UnitC6L_Startup()
             unit_c6l.startup(ssid, pswd, timeout=timeout)
-        elif board_id == M5.BOARD.M5PowerHub:
-            from .powerhub import PowerHub_Startup
-
-            powerhub = PowerHub_Startup()
-            powerhub.startup(ssid, pswd, timeout=timeout)
         elif board_id == M5.BOARD.ArduinoNessoN1:
             from .nesson1 import NessoN1_Startup
 
