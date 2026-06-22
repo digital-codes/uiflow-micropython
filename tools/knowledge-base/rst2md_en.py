@@ -2,12 +2,14 @@ import os
 import re
 import ast
 import shutil
+import argparse
 from typing import Dict, List, Optional, Tuple
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 SRC_ROOT = os.path.join(REPO_ROOT, 'docs', 'source')
-DST_ROOT = os.path.join(SCRIPT_DIR, 'uiflow2-docs')
+DEFAULT_DST_ROOT = os.path.join(SCRIPT_DIR, 'uiflow2-coder', 'docs')
+DST_ROOT = os.environ.get('UIFLOW2_DOCS_DST', DEFAULT_DST_ROOT)
 PYTHON_ROOT = os.path.join(REPO_ROOT, 'm5stack', 'libs')
 REFS_DIR = os.path.join(SRC_ROOT, 'refs')
 IMAGE_EXT_PATTERN = r'(?:png|jpg|jpeg|gif|webp|bmp|svg)'
@@ -28,12 +30,18 @@ def parse_python_docstring(python_file: str, class_name: str) -> str:
             break
 
     if not class_node:
-        return f"<!-- Failed to find class {class_name} in {python_file} -->"
+        display_file = os.path.relpath(python_file, REPO_ROOT).replace(os.path.sep, '/')
+        return f"<!-- Failed to find class {class_name} in {display_file} -->"
 
     md = []
 
     # 添加类的文档字符串
-    if class_node.body and isinstance(class_node.body[0], ast.Expr) and isinstance(class_node.body[0].value, ast.Str):
+    if (
+        class_node.body
+        and isinstance(class_node.body[0], ast.Expr)
+        and isinstance(class_node.body[0].value, ast.Constant)
+        and isinstance(class_node.body[0].value.value, str)
+    ):
         md.append(ast.get_docstring(class_node, clean=True))
         md.append("")
 
@@ -187,7 +195,11 @@ def cleanup_md_text(md_text: str, image_map: Dict[str, str]) -> str:
         md_text = md_text.replace(f']{filename}[', '')
         md_text = md_text.replace(f']{filename}|', '')
     md_text = ''.join(ch for ch in md_text if ch in '\n\r\t' or ord(ch) >= 32)
-    return re.sub(r'\n\s*\n\s*\n+', '\n\n', md_text)
+    md_text = re.sub(r'\n\s*\n\s*\n+', '\n\n', md_text)
+    lines = [line.rstrip() for line in md_text.splitlines()]
+    while lines and not lines[-1].strip():
+        lines.pop()
+    return '\n'.join(lines) + '\n'
 
 def rst_to_md(rst_text, current_rst_path=None):
     """
@@ -310,14 +322,14 @@ def convert_rst_to_md(src_path, dst_path):
     with open(dst_path, 'w', encoding='utf-8') as f:
         f.write(md_text)
 
-def main():
-    if os.path.exists(DST_ROOT):
-        shutil.rmtree(DST_ROOT)
-    os.makedirs(DST_ROOT, exist_ok=True)
+def main(dst_root: str = DST_ROOT):
+    if os.path.exists(dst_root):
+        shutil.rmtree(dst_root)
+    os.makedirs(dst_root, exist_ok=True)
 
     for root, _, files in os.walk(SRC_ROOT):
         for f in files:
-            if f.endswith('.rst') and f.lower() != 'index.rst':
+            if f.endswith('.rst'):
                 src_file = os.path.join(root, f)
                 # 跳过内容少于20字符的文件
                 with open(src_file, encoding='utf-8') as rf:
@@ -325,9 +337,17 @@ def main():
                 if len(''.join(content.split())) < 20:
                     continue
                 rel_path = os.path.relpath(src_file, SRC_ROOT)
-                dst_file = os.path.join(DST_ROOT, rel_path).replace('.rst', '.md')
+                if f.lower() == 'index.rst':
+                    rel_dir = os.path.dirname(rel_path)
+                    rel_out = os.path.join(rel_dir, '_overview.md') if rel_dir else '_overview.md'
+                else:
+                    rel_out = rel_path[:-4] + '.md'
+                dst_file = os.path.join(dst_root, rel_out)
                 convert_rst_to_md(src_file, dst_file)
-                print(f"Converted: {rel_path} -> {os.path.relpath(dst_file, DST_ROOT)}")
+                print(f"Converted: {rel_path} -> {os.path.relpath(dst_file, dst_root)}")
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description="Convert UIFlow2 Sphinx RST docs to Markdown.")
+    parser.add_argument("--dst", default=DST_ROOT, help="Output docs directory.")
+    args = parser.parse_args()
+    main(args.dst)
