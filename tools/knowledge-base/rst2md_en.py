@@ -13,6 +13,14 @@ DST_ROOT = os.environ.get('UIFLOW2_DOCS_DST', DEFAULT_DST_ROOT)
 PYTHON_ROOT = os.path.join(REPO_ROOT, 'm5stack', 'libs')
 REFS_DIR = os.path.join(SRC_ROOT, 'refs')
 IMAGE_EXT_PATTERN = r'(?:png|jpg|jpeg|gif|webp|bmp|svg)'
+INDEX_MIN_SUBSTANTIVE_CHARS = 80
+LOW_VALUE_INDEX_BLOCKS = (
+    '.. toctree::',
+    '.. include::',
+    '.. module::',
+    '.. currentmodule::',
+    '.. only::',
+)
 
 def parse_python_docstring(python_file: str, class_name: str) -> str:
     """
@@ -201,6 +209,57 @@ def cleanup_md_text(md_text: str, image_map: Dict[str, str]) -> str:
         lines.pop()
     return '\n'.join(lines) + '\n'
 
+def _is_heading_underline(line: str, title_line: str) -> bool:
+    stripped = line.strip()
+    title = title_line.strip()
+    return (
+        bool(title)
+        and len(stripped) >= len(title)
+        and bool(re.match(r'^[=~\-\^"`#\*\+]{3,}$', stripped))
+    )
+
+def strip_index_noise(rst_text: str) -> str:
+    """Return index.rst text minus navigation/meta-only RST blocks."""
+    lines = rst_text.splitlines()
+    useful_lines = []
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        if i + 1 < len(lines) and _is_heading_underline(lines[i + 1], line):
+            i += 2
+            continue
+
+        if any(stripped.startswith(block) for block in LOW_VALUE_INDEX_BLOCKS):
+            i += 1
+            while i < len(lines):
+                next_line = lines[i]
+                if not next_line.strip():
+                    i += 1
+                    continue
+                if next_line.startswith((' ', '\t')):
+                    i += 1
+                    continue
+                break
+            continue
+
+        if stripped.startswith(':') or re.match(r'^[=\-\s`|]+$', stripped):
+            i += 1
+            continue
+
+        useful_lines.append(line)
+        i += 1
+
+    return '\n'.join(useful_lines)
+
+def should_skip_index_rst(rst_text: str) -> bool:
+    """Skip overview pages that only duplicate the generated file tree."""
+    stripped = strip_index_noise(rst_text)
+    substantive = ''.join(ch for ch in stripped if not ch.isspace())
+    return len(substantive) < INDEX_MIN_SUBSTANTIVE_CHARS
+
 def rst_to_md(rst_text, current_rst_path=None):
     """
     简单 rst 转 md
@@ -335,6 +394,10 @@ def main(dst_root: str = DST_ROOT):
                 with open(src_file, encoding='utf-8') as rf:
                     content = rf.read()
                 if len(''.join(content.split())) < 20:
+                    continue
+                if f.lower() == 'index.rst' and should_skip_index_rst(content):
+                    rel_path = os.path.relpath(src_file, SRC_ROOT)
+                    print(f"Skipped low-value overview: {rel_path}")
                     continue
                 rel_path = os.path.relpath(src_file, SRC_ROOT)
                 if f.lower() == 'index.rst':

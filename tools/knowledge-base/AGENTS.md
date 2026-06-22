@@ -34,7 +34,7 @@ python tools\knowledge-base\sync_uiflow2_skill.py --source-docs C:\path\to\docs
 ## 维护规则
 
 - 不要手动编辑 skill 的 `docs` 目录；要改内容，优先改 `docs\source` 或转换脚本。
-- `index.rst` 会转换为 `_overview.md`；skill 使用时要求先读 `_overview.md`，再读具体 API 文档。
+- 只有包含实质性整体指导的 `index.rst` 会转换为 `_overview.md`；纯 `toctree` 目录页不要生成 overview，因为文件树已经覆盖导航信息。
 - `SKILL.md` 内嵌索引统一省略 `.md` 后缀，例如 `unit/env` 表示 `docs/unit/env.md`。
 - `file_tree.txt` 保留在 skill 根目录，只作为外部工具、人工 diff 和脚本验证的冗余索引。
 - 缺失 class 的注释必须使用仓库相对路径，不要写入 `D:\...` 或 `/tmp/...` 这类本机绝对路径。
