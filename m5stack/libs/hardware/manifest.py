@@ -22,6 +22,7 @@ package(
         "sdcard.py",
         "sen55.py",
         "sht30.py",
+        "sht4x.py",
         "stackchan.py",
     ),
     base_path="..",
