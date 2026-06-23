@@ -45,6 +45,82 @@ class KeyCode:
     KEYCODE_RIGHT = 183
 
 
+_V2_MOD_SHIFT = 0x22
+
+_V2_KEYCODE_TO_CHAR = {
+    0x1E: "1",
+    0x1F: "2",
+    0x20: "3",
+    0x21: "4",
+    0x22: "5",
+    0x23: "6",
+    0x24: "7",
+    0x25: "8",
+    0x26: "9",
+    0x27: "0",
+    0x28: "\n",
+    0x29: "\x1b",
+    0x2A: "\b",
+    0x2B: "\t",
+    0x2C: " ",
+    0x2D: "-",
+    0x2E: "=",
+    0x2F: "[",
+    0x30: "]",
+    0x31: "\\",
+    0x33: ";",
+    0x34: "'",
+    0x35: "`",
+    0x36: ",",
+    0x37: ".",
+    0x38: "/",
+    0x4F: KeyCode.KEYCODE_RIGHT,
+    0x50: KeyCode.KEYCODE_LEFT,
+    0x51: KeyCode.KEYCODE_DOWN,
+    0x52: KeyCode.KEYCODE_UP,
+}
+
+_V2_SHIFT_KEYCODE_TO_CHAR = {
+    0x1E: "!",
+    0x1F: "@",
+    0x20: "#",
+    0x21: "$",
+    0x22: "%",
+    0x23: "^",
+    0x24: "&",
+    0x25: "*",
+    0x26: "(",
+    0x27: ")",
+    0x2D: "_",
+    0x2E: "+",
+    0x2F: "{",
+    0x30: "}",
+    0x31: "|",
+    0x33: ":",
+    0x34: '"',
+    0x35: "~",
+    0x36: "<",
+    0x37: ">",
+    0x38: "?",
+}
+
+
+def _v2_keycode_to_code(keycode, modifier=0):
+    if 0x04 <= keycode <= 0x1D:
+        base = ord("A" if modifier & _V2_MOD_SHIFT else "a")
+        return base + keycode - 0x04
+
+    if modifier & _V2_MOD_SHIFT:
+        value = _V2_SHIFT_KEYCODE_TO_CHAR.get(keycode)
+        if value is not None:
+            return ord(value)
+
+    value = _V2_KEYCODE_TO_CHAR.get(keycode)
+    if isinstance(value, str):
+        return ord(value)
+    return value
+
+
 class CardKBUnit:
     """Create a CardKBUnit object.
 
@@ -123,10 +199,15 @@ class CardKBBase:
 
     FRAME_HEADER = 0xAA
     FRAME_DATA_LEN = 0x03
+    V2_REPORT_LEN = 0x08
+    V2_FRAME_SIZE = V2_REPORT_LEN + 3
+    V2_KEY_SLOT_COUNT = 6
+    V2_ERROR_ROLLOVER = 0x01
 
     def __init__(self) -> None:
         self._keys = []
         self._handler = None
+        self._last_report = [0] * self.V2_REPORT_LEN
 
     def _is_valid_ack(self, buf):
         if not buf or len(buf) != 4:
@@ -136,6 +217,85 @@ class CardKBBase:
         if data_len != self.FRAME_DATA_LEN or checksum != calc:
             return None
         return (key_id, key_state)
+
+    def _is_valid_v2_frame(self, frame):
+        if not frame or len(frame) != self.V2_FRAME_SIZE:
+            return None
+        if frame[0] != self.FRAME_HEADER or frame[1] != self.V2_REPORT_LEN:
+            return None
+        checksum = 0
+        for value in frame[1:-1]:
+            checksum = (checksum + value) & 0xFF
+        if checksum != frame[-1]:
+            return None
+        return frame[2:-1]
+
+    def _report_keycodes(self, report):
+        if not report or len(report) != self.V2_REPORT_LEN:
+            return []
+        keycodes = []
+        for keycode in report[2:]:
+            if keycode:
+                keycodes.append(keycode)
+        if len(keycodes) == self.V2_KEY_SLOT_COUNT and keycodes[0] == self.V2_ERROR_ROLLOVER:
+            return []
+        return keycodes
+
+    def _queue_v2_report(self, report, as_char=False):
+        old_report = self._last_report
+        old_keys = self._report_keycodes(old_report)
+        new_keys = self._report_keycodes(report)
+        modifier = report[0] if report else 0
+        before = len(self._keys)
+
+        if as_char:
+            emit_keys = (
+                new_keys
+                if list(report) == list(old_report)
+                else [keycode for keycode in new_keys if keycode not in old_keys]
+            )
+            for keycode in emit_keys:
+                code = _v2_keycode_to_code(keycode, modifier)
+                if code is not None:
+                    self._keys.append(code)
+        elif list(report) == list(old_report):
+            for keycode in new_keys:
+                self._keys.append((keycode, CardKBUnit.KEY_STATE_PRESS))
+        else:
+            for keycode in old_keys:
+                if keycode not in new_keys:
+                    self._keys.append((keycode, CardKBUnit.KEY_STATE_RELEASE))
+            for keycode in new_keys:
+                if keycode not in old_keys:
+                    self._keys.append((keycode, CardKBUnit.KEY_STATE_PRESS))
+
+        self._last_report = list(report)
+        return len(self._keys) != before
+
+    def _handle_frame(self, frame):
+        if not frame or frame[0] != self.FRAME_HEADER:
+            return False
+
+        if len(frame) == 5 and frame[1] == self.FRAME_DATA_LEN:
+            buf = self._is_valid_ack(frame[1:])
+            if buf is not None:
+                self._keys.append(buf)
+                return True
+            return False
+
+        if len(frame) == self.V2_FRAME_SIZE and frame[1] == self.V2_REPORT_LEN:
+            report = self._is_valid_v2_frame(frame)
+            if report is not None:
+                return self._queue_v2_report(report)
+        return False
+
+    def get_report(self):
+        """Get the latest V2 keyboard report.
+
+        :return: The report ``(modifier, reserved, key1, ..., key6)``.
+        :rtype: tuple
+        """
+        return tuple(self._last_report)
 
     def _get_key(self):
         raise NotImplementedError("Subclasses should implement this method!")
@@ -160,9 +320,9 @@ class CardKBBase:
             return self._keys.pop(0)
         else:
             if self._get_key():
-                return None
+                return self._keys.pop(0) if self._keys else None
             else:
-                return self._keys.pop(0)
+                return None
 
     def get_string(self):
         """Get the next key as a string.
@@ -300,23 +460,59 @@ class CardKBI2C(CardKBBase):
 
     CardKB_I2C_ADDR = 0x5F
     CardKB_FW_REG = 0xF1
+    CardKB_STATUS_REG = 0x00
+    CardKB_SEQUENCE_REG = 0x01
+    CardKB_REPORT_LEN_REG = 0x02
+    CardKB_REPORT_REG = 0x03
 
     def __init__(self, i2c: I2C, address: int = CardKB_I2C_ADDR, mode=None) -> None:
         self._i2c = i2c
         self._i2c_addr = address
+        self._v2_report_mode = False
+        self._last_sequence = None
         if self._i2c_addr not in self._i2c.scan():
             raise Exception("CardKB unit not found in Grove")
         super().__init__()
 
         try:
+            report_len = self._i2c.readfrom_mem(
+                self._i2c_addr, CardKBI2C.CardKB_REPORT_LEN_REG, 1
+            )[0]
+            if report_len == self.V2_REPORT_LEN:
+                self._v2_report_mode = True
+                self._last_sequence = self._i2c.readfrom_mem(
+                    self._i2c_addr, CardKBI2C.CardKB_SEQUENCE_REG, 1
+                )[0]
+        except OSError:
+            pass
+
+        if self._v2_report_mode:
+            return
+
+        try:
             while True:
                 buf = self._i2c.readfrom(self._i2c_addr, 1)
-                if buf[0] is KeyCode.KEYCODE_UNKNOWN:
+                if buf[0] == KeyCode.KEYCODE_UNKNOWN:
                     break
         except OSError:
             pass
 
     def _get_key(self):
+        if self._v2_report_mode:
+            try:
+                sequence = self._i2c.readfrom_mem(
+                    self._i2c_addr, CardKBI2C.CardKB_SEQUENCE_REG, 1
+                )[0]
+                if sequence == self._last_sequence:
+                    return False
+                report = self._i2c.readfrom_mem(
+                    self._i2c_addr, CardKBI2C.CardKB_REPORT_REG, self.V2_REPORT_LEN
+                )
+                self._last_sequence = sequence
+                return self._queue_v2_report(report, as_char=True)
+            except OSError:
+                return False
+
         buf = self._i2c.readfrom(self._i2c_addr, 1)
         if buf[0] != 0:
             self._keys.append(buf[0])
@@ -363,21 +559,43 @@ class CardKBUART(CardKBBase):
     def __init__(self, id: Literal[0, 1, 2] = 1, port: list | tuple = None, mode=None) -> None:
         self._uart_bus = UART(id, tx=port[1], rx=port[0])
         self._uart_bus.init(115200, bits=8, parity=None, stop=1)
+        self._rx_buf = bytearray()
         super().__init__()
 
     def _get_key(self):
-        if self._uart_bus.any() < 5:
+        size = self._uart_bus.any()
+        if size <= 0:
             return False
 
-        frame = self._uart_bus.read(5)
-        if not frame or frame[0] != self.FRAME_HEADER:
+        data = self._uart_bus.read(size)
+        if not data:
             return False
 
-        buf = self._is_valid_ack(frame[1:])
-        if buf is not None:
-            self._keys.append(buf)
-            return True
-        return False
+        self._rx_buf.extend(data)
+        before = len(self._keys)
+
+        while len(self._rx_buf) >= 2:
+            if self._rx_buf[0] != self.FRAME_HEADER:
+                self._rx_buf = self._rx_buf[1:]
+                continue
+
+            data_len = self._rx_buf[1]
+            if data_len == self.FRAME_DATA_LEN:
+                frame_size = 5
+            elif data_len == self.V2_REPORT_LEN:
+                frame_size = self.V2_FRAME_SIZE
+            else:
+                self._rx_buf = self._rx_buf[1:]
+                continue
+
+            if len(self._rx_buf) < frame_size:
+                break
+
+            frame = self._rx_buf[:frame_size]
+            self._rx_buf = self._rx_buf[frame_size:]
+            self._handle_frame(frame)
+
+        return len(self._keys) != before
 
     def tick(self):
         """Poll the key buffer and trigger the callback if a key is available.
@@ -435,14 +653,7 @@ class CardKBESPNOW(CardKBBase):
         """
         _, event_data = espnow_obj.recv_data()
         frame = event_data
-        if not frame or frame[0] != self.FRAME_HEADER:
-            return False
-
-        buf = self._is_valid_ack(frame[1:])
-        if buf is not None:
-            self._keys.append(buf)
-            return True
-        return False
+        return self._handle_frame(frame)
 
     def get_key(self):
         """Get the next key from the buffer received via ESP-NOW.
