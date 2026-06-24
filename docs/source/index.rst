@@ -17,6 +17,7 @@ UiFlow2 documentation and references
     stamplc/index.rst
     hat/index.rst
     base/index.rst
+    addon/index.rst
     tab5/index.rst
     cap/index.rst
     chain/index.rst

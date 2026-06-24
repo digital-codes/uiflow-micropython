@@ -7,11 +7,22 @@ import M5
 
 
 class DisplayOut:
-    """Initialize the Display Output.
+    """Create an HDMI display output for Unit PoE-P4.
 
-    :param int width: The logical width of the Display Output. Default is 1280px.
-    :param int height: The logical height of the Display Output. Default is 720px.
-    :param int refresh_rate: The refresh rate of the Display Output. Default is 60Hz.
+    ``DisplayOut`` registers the Unit PoE-P4 HDMI output as an M5 display and
+    returns the display object created by ``M5.addDisplay``. The display can
+    then be used by the standard M5 display APIs.
+
+    :param int width: The logical width of the HDMI output. Default is ``1280``.
+    :param int height: The logical height of the HDMI output. Default is ``720``.
+    :param int refresh_rate: The refresh rate of the HDMI output in Hz. Default is ``60``.
+    :returns: The display object registered by ``M5.addDisplay``.
+    :rtype: object
+
+    .. note::
+
+        Unit PoE-P4 HDMI output supports ``1280x720@60Hz`` and
+        ``1920x1080@30Hz`` timings.
 
     UiFlow2 Code Block:
 
@@ -22,6 +33,7 @@ class DisplayOut:
         .. code-block:: python
 
             from AddOn import DisplayOut
+
             display = DisplayOut(1280, 720, 60)
     """
 
@@ -30,14 +42,14 @@ class DisplayOut:
         width: int = 1280,
         height: int = 720,
         refresh_rate: int = 60,
-    ) -> None:
+    ) -> object:
         return M5.addDisplay(
             None,
             0,
             {
                 "unit_poep4_hdmi": {
                     "enabled": True,
-                    # see to unit_poep4_hdmi::config_t
+                    # Keep these keys aligned with unit_poep4_hdmi::config_t.
                     "width": width,
                     "height": height,
                     "refresh_rate": refresh_rate,
