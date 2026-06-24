@@ -354,7 +354,6 @@ M5UNIFIED_PATCH_SERIES = \
 	2007-Support-UnitC6L.patch \
 	2009-fix-SoftI2C.patch \
 	2010-Support-Nesso-N1.patch \
-	2018-fix-Rtc-setAlarmIRQ.patch \
 	2019-fix-touch-sensor.patch
 
 ADF_PATCH_SERIES = \
