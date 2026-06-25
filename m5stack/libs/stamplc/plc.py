@@ -26,6 +26,11 @@ def _get_i2c():
     return _i2c
 
 
+def get_i2c():
+    """Get the shared I2C bus used by StamPLC peripherals."""
+    return _get_i2c()
+
+
 def _get_aw9523():
     global _aw9523
     if _aw9523 is not None:
