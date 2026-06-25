@@ -880,7 +880,7 @@ class LauncherApp(AppBase):
                 last_battery = M5.Power.getBatteryLevel()
                 self._battery_label.set_text(str(last_battery) + "%")
 
-            await asyncio.sleep_ms(200)
+            await asyncio.sleep_ms(500)
 
     def on_exit(self):
         del self._bg_img, self._icon_selector
@@ -988,6 +988,7 @@ class StickS3_Startup:
             ssid, pswd, protocol=protocol, ip=ip, netmask=netmask, gateway=gateway, dns=dns
         )
         M5.Power.setExtOutput(False)
+        M5.Power.setBatteryCharge(True)
         M5.Speaker.setVolume(100)
         M5.Speaker.tone(4000, 50)
 

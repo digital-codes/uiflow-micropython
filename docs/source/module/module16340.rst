@@ -1,7 +1,7 @@
 16340 Module
 ============
 
-.. py:currentmodule:: module.ina226
+.. py:currentmodule:: module.module16340
 
 .. include:: ../refs/module.module16340.ref
 
@@ -49,7 +49,7 @@ API
 Module16340
 ^^^^^^^^^^^
 
-.. autoclass:: module.ina226.INA226
+.. autoclass:: module.module16340.Module16340
     :members:
     :inherited-members:
     :member-order: bysource

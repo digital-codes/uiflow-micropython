@@ -6,15 +6,17 @@ from .. import app_base
 import M5
 
 
-_MESSAGE = "Coming soon..."
+_MESSAGE = "Coming soon ..."
 _FONT = M5.Lcd.FONTS.Montserrat24
 _CONTENT_W = 320
 _CONTENT_H = 160
+_TEXT_COLOR = 0x008FD7
+_BG_COLOR = 0xEEEEEF
 
 
 def _draw_center_message(parent):
     parent.setFont(_FONT)
-    parent.setTextColor(0x008FD7, 0x000000)
+    parent.setTextColor(_TEXT_COLOR, _BG_COLOR)
     text_x = (_CONTENT_W - parent.textWidth(_MESSAGE)) // 2
     text_y = (_CONTENT_H - parent.fontHeight()) // 2
     parent.drawString(_MESSAGE, text_x, text_y)

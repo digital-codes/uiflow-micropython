@@ -14,7 +14,7 @@ _CONTENT_H = 160
 
 def _draw_center_message(parent):
     parent.setFont(_FONT)
-    parent.setTextColor(0x008FD7, 0x000000)
+    parent.setTextColor(0x008FD7, 0xEEEEEF)
     text_x = (_CONTENT_W - parent.textWidth(_MESSAGE)) // 2
     text_y = (_CONTENT_H - parent.fontHeight()) // 2
     parent.drawString(_MESSAGE, text_x, text_y)
