@@ -5,6 +5,10 @@
 
 .. include:: ../refs/module.module16340.ref
 
+The following products are supported:
+
+    |Module 16340|
+
 ``Module16340`` is a power monitor battery module. It uses the onboard INA226 sensor on the Module I2C bus to read bus voltage, shunt voltage, current, and power.
 
 UiFlow2 Example
