@@ -1,4 +1,4 @@
-AddOn DisplayOut
+addon DisplayOut
 =================
 
 .. py:currentmodule:: addon.display_out

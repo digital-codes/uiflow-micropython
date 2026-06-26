@@ -32,7 +32,7 @@ class DisplayOut:
 
         .. code-block:: python
 
-            from AddOn import DisplayOut
+            from addon import DisplayOut
 
             display = DisplayOut(1280, 720, 60)
     """

@@ -5,7 +5,7 @@
 import os, sys, io
 import M5
 from M5 import *
-from AddOn import DisplayOut
+from addon import DisplayOut
 
 
 title = None
@@ -24,7 +24,7 @@ def setup():
     addon_display_out_0 = DisplayOut(1280, 720, 60)
     Widgets.fillScreen(0x000000, addon_display_out_0)
     title = Widgets.Title(
-        "AddOn Display Out For PoE-P4 Example",
+        "addon Display Out For PoE-P4 Example",
         3,
         0xFFFFFF,
         0x0000FF,

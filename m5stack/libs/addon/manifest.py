@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 package(
-    "AddOn",
+    "addon",
     (
         "__init__.py",
         "display_out.py",
