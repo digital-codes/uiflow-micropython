@@ -10,6 +10,7 @@ Hardware
     can.rst
     display.rst
     imu.rst
+    i2c.rst
     ir.rst
     lora.rst
     mic.rst
