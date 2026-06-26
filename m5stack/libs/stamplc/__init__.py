@@ -5,6 +5,7 @@
 _attrs = {
     "StamPLC": "plc",
     "ACStamPLC": "ac",
+    "IOStamPLC": "io",
     "PoEStamPLC": "poe",
 }
 

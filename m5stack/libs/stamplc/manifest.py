@@ -7,6 +7,7 @@ package(
     (
         "__init__.py",
         "ac.py",
+        "io.py",
         "poe.py",
         "plc.py",
     ),
