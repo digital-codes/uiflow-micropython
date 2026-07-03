@@ -1,0 +1,424 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016 - 2026 M5Stack Technology Co., Ltd
+# This file is distributed under the same license as the UIFlow2 Programming
+# Guide package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: UIFlow2 Programming Guide \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-03 14:54+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/stamplc/io.rst:2 6539a1f372754e90aa468e034634cdbc
+msgid "StamPLC IO"
+msgstr "StamPLC IO"
+
+#: ../../source/stamplc/io.rst:6 afc845ec246e4d96b7aeeee1faf3c00e
+msgid "``IOStamPLC`` controls the StamPLC IO extension board over I2C."
+msgstr "``IOStamPLC`` 通过 I2C 控制 StamPLC IO 扩展板。"
+
+#: ../../source/stamplc/io.rst:9 934277cd1dd145fabab39aed4b77fcaf
+msgid "UiFlow2 Example"
+msgstr "UiFlow2 应用示例"
+
+#: ../../source/stamplc/io.rst:12 ../../source/stamplc/io.rst:30
+#: 0ac795d539c14614b7bb08b95feaae88 0e822920476e491aa3aae289a145e1a9
+msgid "Voltage and current monitor"
+msgstr "电压和电流监测"
+
+#: ../../source/stamplc/io.rst:14 59c20e6ed968492b9afbcb659b8b15e6
+msgid "Open the |stamplc_io_example.m5f2| project in UiFlow2."
+msgstr "在 UiFlow2 中打开 |stamplc_io_example.m5f2| 项目。"
+
+#: ../../source/stamplc/io.rst:16 ../../source/stamplc/io.rst:32
+#: d2a83735c618491cbe95ffc1123dd647 eac9cc366d52471dada01cde1ceefae6
+msgid ""
+"This example sets the two output channels to PWM mode, then displays the "
+"voltage and current of channel 0 and channel 1."
+msgstr ""
+"该示例将两个输出通道设置为 PWM 模式，然后显示通道 0 和通道 1 的电压与电流。"
+
+#: ../../source/stamplc/io.rst:18 ../../source/stamplc/io.rst:57
+#: ../../source/stamplc/io.rst:77 ../../source/stamplc/io.rst:95
+#: ../../source/stamplc/io.rst:112 ../../source/stamplc/io.rst:122
+#: ../../source/stamplc/io.rst:133 ../../source/stamplc/io.rst:151
+#: ../../source/stamplc/io.rst:162 ../../source/stamplc/io.rst:174
+#: ../../source/stamplc/io.rst:184 ../../source/stamplc/io.rst:195
+#: ../../source/stamplc/io.rst:205 ../../source/stamplc/io.rst:222
+#: ../../source/stamplc/io.rst:233 ../../source/stamplc/io.rst:245
+#: ../../source/stamplc/io.rst:257 ../../source/stamplc/io.rst:275
+#: ../../source/stamplc/io.rst:286 ../../source/stamplc/io.rst:303
+#: ../../source/stamplc/io.rst:317 0c117d6856614e30a39f95d2dd7afd66
+#: 15be2989c25947c1a6287eab0e11ce7d 160bffca893b416aa76ed2bdea16776b
+#: 205745867ccc4866b97693eb6f2fd86a 29d315d0240d41219d44b0d7eb7229a0
+#: 3b494a690d0249b9839055efde38895b 4f84e0605efc4f35a0eec3b2e9655ead
+#: 57d5cb7bad5c40f88a501b033a771ebe 60549ee374684c87b0558f0e112451b7
+#: 79514016f30a48c0b71cf9556949d9c5 92b1552e10a04b60bcfce99a58f4a2cb
+#: 9374834da9ea472b8d881969a2aa6c53 9cac93522b4f4a0799a61c77f8479c9d
+#: 9e9f57d10de04948acc4112a113cfc64 aabdd86d01c343e6aea4d2bdc0601b70
+#: c15c7520f0164c9593cb37b3ea6e8c55 c77e10b5af2e4adfbff52428af5036c3
+#: c9489664f60340bfa662e54d6b0e96d6 d4123eefe8084fce8a8823cafddc37d2
+#: df233d9d5df1444eb01a5b5b7ca24822 df5978a0ca4843679e12681f07cb0c0c
+msgid "UiFlow2 Code Block:"
+msgstr "UiFlow2 代码块："
+
+#: ../../source/stamplc/io.rst:20 64e6f7254f004213a3b7ba1a7f3fb7fe
+msgid "|stamplc_io_example.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:21 c2423e71930e4807b338d4fa7087f953
+msgid "stamplc_io_example.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:22 ../../source/stamplc/io.rst:40
+#: aa1b76d9b793425dae69135a99d36476 f8cd88b43bde4dc1a9d18312c1c0f237
+msgid "Example output:"
+msgstr "示例输出："
+
+#: ../../source/stamplc/io.rst:24 ../../source/stamplc/io.rst:42
+#: 149fe277ba74448498c8e9e5c155ab19 372889613c814c77aaaad2cea4e3bdce
+msgid "None"
+msgstr "无"
+
+#: ../../source/stamplc/io.rst:27 c74c373ca681414bb43c24f636c86857
+msgid "MicroPython Example"
+msgstr "MicroPython 应用示例"
+
+#: ../../source/stamplc/io.rst:34 ../../source/stamplc/io.rst:61
+#: ../../source/stamplc/io.rst:81 ../../source/stamplc/io.rst:99
+#: ../../source/stamplc/io.rst:137 ../../source/stamplc/io.rst:209
+#: ../../source/stamplc/io.rst:261 ../../source/stamplc/io.rst:290
+#: ../../source/stamplc/io.rst:307 2f2447b08c49433fa6bfdc4b4221cd6a
+#: 7af5da4b846d4d00b4672428e73b4d1f bfa4dcad28e44094b59b61848e32c73c
+#: c2bc08ba978b463c85daf0b768172036 cab98cc5050649d1aeb4b09dd3b6d814
+#: cd436cc2c6524f67b096624244368252 defab742ecc44aedb5d5892cde47ab23
+#: ee27fc917e124d279014335555172020 eeb5230238514a72a5fb0b8cce88bac8
+msgid "MicroPython Code Block:"
+msgstr "MicroPython 代码块："
+
+#: ../../source/stamplc/io.rst:45 6034c88606f24f25811a533cd67f471b
+msgid "**API**"
+msgstr "**API参考**"
+
+#: ../../source/stamplc/io.rst:48 cc8a4b722b944a59af5cc46a36ef0291
+msgid "IOStamPLC"
+msgstr "IOStamPLC"
+
+#: ../../source/stamplc/io.rst:52 cc2197aedec7480f939cbe15b4cb3f93
+msgid "Create a StamPLC IO extension object."
+msgstr "创建一个 StamPLC IO 扩展对象。"
+
+#: ../../source/stamplc/io.rst 108be040319e4e03bd7edc3241917b54
+#: 3d74e1a4783a430698c6a12801e99e01 3f8d72a01a9945f4b5c9a3d96e705793
+#: 4073836fdaf7408db3a836c9a5e40288 4b19c2fdaa1d42259141180bd52b05fa
+#: 4c3d4848370645a98e5d3bb6605ac125 4d73f333bf134d9ba1f67ba75b1e43e4
+#: 5df4be5431014eb08b372d844f563acb 9ad710a51058457dbef8200c3081f41e
+#: ae2c8a54b42f42fdbebaf7a86007211f bbfe9c8f8f24417ea7eca1a3ceb00f33
+#: c5925fcf98ec400cb52648dd5beaa92d e89cb1a1c2d34f878b7953b65abbc96f
+#: ea2971bad6c8498ca09f05a6249d0fb9
+msgid "Parameters"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:54 e70c5c5152fa473583c6ae675bc21fa1
+msgid "I2C interface. If omitted, the shared StamPLC I2C bus is used."
+msgstr "I2C 接口。省略时使用共享的 StamPLC I2C 总线。"
+
+#: ../../source/stamplc/io.rst:55 c12df9e080aa4c35894fee88e0a17185
+msgid "I2C address of the StamPLC IO extension."
+msgstr "StamPLC IO 扩展的 I2C 地址。"
+
+#: ../../source/stamplc/io.rst:59 2644316ed0f24cadb56ffe29d491bb03
+msgid "|init.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:1 8ad7a195485747b69e79809109297179
+msgid "init.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:71 454f16e85b224bf9b3d91fcb08845da8
+msgid "Get the voltage of one channel."
+msgstr "获取单个通道的电压。"
+
+#: ../../source/stamplc/io.rst:73 ../../source/stamplc/io.rst:91
+#: ../../source/stamplc/io.rst:130 ../../source/stamplc/io.rst:147
+#: ../../source/stamplc/io.rst:159 ../../source/stamplc/io.rst:170
+#: ../../source/stamplc/io.rst:230 ../../source/stamplc/io.rst:241
+#: ../../source/stamplc/io.rst:253 ../../source/stamplc/io.rst:271
+#: 38ad9589d25f459e9f14f427f7cb91a3 4ca05086669b4a3484e6540b93cc404c
+#: 7d3f04229fe7418286aa324d469bc27b 9f0a8450a87a4ff080df0ee9e9817818
+#: a2078f9e4fd94870a57a7e31b22c265b afab95262a93437ca0ceb431a8151872
+#: cf0d15567d224b1699e67ed9de320ce3 d78824a2f7c84a4dbb2cba3442bbe7ee
+#: e14b2558f6984e0e9748c95d65fca935 f57f4cbfef8748c48f06c825b45527a9
+msgid "Channel index, ``0`` or ``1``."
+msgstr "通道索引，``0`` 或 ``1``。"
+
+#: ../../source/stamplc/io.rst 1f5f2b97c3ac47d8908df6a5781de1db
+#: 28d6d4ba7d1349a1bd8ceb8a5c9e0944 42050fc59c7848f68f7acbb27a23c3f3
+#: 520651527c9c4f50a68329b565b6f787 6425fca71e1a442bb48c48c46b96b19d
+#: 7918a346b4324e6780db3c04139fe1ee 7fe2aebf3de14dedb11f80d3e2999605
+#: ba266275fba3413a8cd12df4f6970e9e df8c9a5c8a7d4a5aa24c77e3c5e032f7
+#: f0c9b62deaab4a3b81dc4bee01806fe9 ff430aba9ff04bd3901304dadd2c2aa7
+msgid "Returns"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:74 3a7e096113f8485ba77e5fc48581cac8
+msgid "Voltage in mV."
+msgstr "电压，单位为 mV。"
+
+#: ../../source/stamplc/io.rst 246988448edc4350972ecbc268e101b6
+#: 553681dd8255438ab28fd0f078d83f38 6a13f6a7d3184b6893ccc9d32eb2d4f4
+#: 6fea4a99157c4bbdb7220838dd3b7d74 7ce46cc4467f443b9129f12ab2b259b7
+#: 824ab26fc7b544d9951fc7d72352d68d 89896256a83a4fa0b0e7d865198de82b
+#: 9d71ef11934942cf9278788f5d1d267f b55e303b6c234beea7676c0a86ad993c
+#: cda42bea1cdc4dcc85e04d1c17e37614 ce86ae6a8c574f4080298c62040c3a47
+msgid "Return type"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:79 abbdab35bad34e1480a730067effaa1d
+msgid "|get_voltage.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:16 960c1917c1ce4f8698cf62c5b264bb5c
+msgid "get_voltage.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:89 c6cb5a89f9b04bd3b50eb1c1dd848683
+msgid "Get the current of one channel."
+msgstr "获取单个通道的电流。"
+
+#: ../../source/stamplc/io.rst:92 76383887bffd41339aea662cde48d5a2
+msgid "Current in uA."
+msgstr "电流，单位为 uA。"
+
+#: ../../source/stamplc/io.rst:97 d02b683e8fef46cab37edd5f98fd6652
+msgid "|get_current.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:17 1c4d6a3792aa42ae9cde7e614667af1c
+msgid "get_current.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:107 1e5d0354394c4f18898bf72f347906f9
+msgid "Get the IO control register value."
+msgstr "获取 IO 控制寄存器的值。"
+
+#: ../../source/stamplc/io.rst:109 ../../source/stamplc/io.rst:120
+#: 0d0165e22f5e4e359558228b06424707 22781a1cbf12476f8e1824c0d971a9ed
+msgid "IO control register value."
+msgstr "IO 控制寄存器值。"
+
+#: ../../source/stamplc/io.rst:118 aeed7f73b4ab4c4684a97fd9c368dc15
+msgid "Set the IO control register value."
+msgstr "设置 IO 控制寄存器的值。"
+
+#: ../../source/stamplc/io.rst:128 e32f0959d049441db9b8c12c5d7ed12a
+msgid "Set the solid-state relay output of one channel."
+msgstr "设置单个通道的固态继电器输出。"
+
+#: ../../source/stamplc/io.rst:131 5adb3dd83bca4ef08044fe35a80a3dc2
+msgid "``True`` turns the output on, ``False`` turns it off."
+msgstr "``True`` 打开输出，``False`` 关闭输出。"
+
+#: ../../source/stamplc/io.rst:135 e4bb430dea2240ca9cd935724315d7dc
+msgid "|set_solid_relay.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:6 8a1553e72e1d424983579d7f46b20725
+msgid "set_solid_relay.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:145 4b0ad9a6b53c4426bf1ca5a385592603
+msgid "Get the solid-state relay output state of one channel."
+msgstr "获取单个通道的固态继电器输出状态。"
+
+#: ../../source/stamplc/io.rst:148 ade13728acca4edbbea8e15e6b905a81
+msgid "Output state."
+msgstr "输出状态。"
+
+#: ../../source/stamplc/io.rst:153 8eccdf497c714e3b867bb1ac91d258d1
+msgid "|get_solid_relay.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:7 e4dd70aca219445eb73441c3abd596c8
+msgid "get_solid_relay.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:157 3625acf685f1423090ea40499403cda4
+msgid "Enable or disable the INA226 pull-up of one channel."
+msgstr "启用或禁用单个通道的 INA226 上拉。"
+
+#: ../../source/stamplc/io.rst:160 b52c741277b14cdf8773e2cec310b42a
+msgid "``True`` enables the pull-up, ``False`` disables it."
+msgstr "``True`` 启用上拉，``False`` 禁用上拉。"
+
+#: ../../source/stamplc/io.rst:164 13c2e4d2fdcf4abb9780250f6c975573
+msgid "|set_ina226_pullup.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:8 0edcc14d477048ffac65ca765f5d24a3
+msgid "set_ina226_pullup.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:168 7262b70c58844f3ba8318619ab27780a
+msgid "Get the INA226 pull-up state of one channel."
+msgstr "获取单个通道的 INA226 上拉状态。"
+
+#: ../../source/stamplc/io.rst:171 ee4529dae1b44874ad70b74cc7252bf7
+msgid "Pull-up state."
+msgstr "上拉状态。"
+
+#: ../../source/stamplc/io.rst:176 97e8248227104d118c2239ab6eae1c58
+msgid "|get_ina226_pullup.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:9 b017439820b34d09a38332f35796fff2
+msgid "get_ina226_pullup.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:180 15a930a3226b4750ba716382f78fdc97
+msgid "Set the onboard relay output."
+msgstr "设置板载继电器输出。"
+
+#: ../../source/stamplc/io.rst:182 b93b679415754208b316d95528762a69
+msgid "``True`` turns the relay on, ``False`` turns it off."
+msgstr "``True`` 打开继电器，``False`` 关闭继电器。"
+
+#: ../../source/stamplc/io.rst:186 939856f5cf6042c48250c35984be494e
+msgid "|set_relay.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:10 50ae671a357f461c92ea3572b7a625db
+msgid "set_relay.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:190 a48ac4e549a84b4f9f0c0bd33fbf9c68
+msgid "Get the onboard relay output state."
+msgstr "获取板载继电器输出状态。"
+
+#: ../../source/stamplc/io.rst:192 0579cd33b5f348e5bf415279f2fd2ebf
+msgid "Relay state."
+msgstr "继电器状态。"
+
+#: ../../source/stamplc/io.rst:197 888bf766d3d242d3a64955b7ea015ec3
+msgid "|get_relay.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:11 022afc7467f9447abb9aa75eb483cdde
+msgid "get_relay.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:201 a63ea9aea9994c199d0a063c4830f9d0
+msgid "Set the output mode."
+msgstr "设置输出模式。"
+
+#: ../../source/stamplc/io.rst:203 ../../source/stamplc/io.rst:219
+#: 52d9a48bcd0f4dccbea85cb1f700fb77 b6a5ab3de5754fcf9b305010d72320f3
+msgid "``IOStamPLC.OUTPUT_IO_MODE`` or ``IOStamPLC.PWM_MODE``."
+msgstr "``IOStamPLC.OUTPUT_IO_MODE`` 或 ``IOStamPLC.PWM_MODE``。"
+
+#: ../../source/stamplc/io.rst:207 cb258c2309d04aeab0745c2d00e836cc
+msgid "|set_output_mode.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:4 8bf41906060a4102a633be7dbff771c0
+msgid "set_output_mode.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:217 ad7515ff222642a2b6fa30e6eca3c5d2
+msgid "Get the output mode."
+msgstr "获取输出模式。"
+
+#: ../../source/stamplc/io.rst:224 bcc0f99f54124a1ab8c27777dafc0cfc
+msgid "|get_output_mode.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:5 380bf28d22f04f3fba9368ce938791d9
+msgid "get_output_mode.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:228 2c4a097d53ec47a182274b67602f4b4d
+msgid "Set the INA226 configuration register of one channel."
+msgstr "设置单个通道的 INA226 配置寄存器。"
+
+#: ../../source/stamplc/io.rst:231 ../../source/stamplc/io.rst:242
+#: 3d89022960254fe3acf09efae3ec7c2a 53988b2e666d4e3093a49cae3f26a4eb
+msgid "Register value."
+msgstr "寄存器值。"
+
+#: ../../source/stamplc/io.rst:239 d8e82293ecd84b8999e5671886966731
+msgid "Get the INA226 configuration register of one channel."
+msgstr "获取单个通道的 INA226 配置寄存器。"
+
+#: ../../source/stamplc/io.rst:251 ab04a7ff43ff4f5289019ea0e658176e
+msgid "Set the PWM frequency and duty of one channel."
+msgstr "设置单个通道的 PWM 频率和占空比。"
+
+#: ../../source/stamplc/io.rst:254 02cd7d1af18b42408c471c81f5d4e7e4
+msgid "PWM frequency, ``1`` to ``100``."
+msgstr "PWM 频率，``1`` 到 ``100``。"
+
+#: ../../source/stamplc/io.rst:255 ed1839afc65f41dfb66c986f7307979e
+msgid "PWM duty, ``0`` to ``1000``."
+msgstr "PWM 占空比，``0`` 到 ``1000``。"
+
+#: ../../source/stamplc/io.rst:259 e6aec812ae144f3d9e9c2737a5ff8d9b
+msgid "|set_pwm_config.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:12 2d201ecc4bcb4c5d93ce5d5c9fad9492
+msgid "set_pwm_config.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:269 7a6898e7019a40bf93eec86edeb6490a
+msgid "Get the PWM frequency and duty of one channel."
+msgstr "获取单个通道的 PWM 频率和占空比。"
+
+#: ../../source/stamplc/io.rst:272 c6118c3fd9b146f5b3a88417946ca3cc
+msgid "``(freq, duty)``."
+msgstr "``(freq, duty)``。"
+
+#: ../../source/stamplc/io.rst:281 26beccc09c6d46848f8b27ecd8da2f01
+msgid "Get the firmware version."
+msgstr "获取固件版本。"
+
+#: ../../source/stamplc/io.rst:283 b9f0a1f5e1cf40a794483c4fa4d77880
+msgid "Firmware version."
+msgstr "固件版本。"
+
+#: ../../source/stamplc/io.rst:288 369f21c50a1c4a0d83f14bbb9817e470
+msgid "|get_firmware_version.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:18 04e44045e9de4f84b32f1f2be5e64ae5
+msgid "get_firmware_version.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:298 664aca16409845c59d766c7d81d8655e
+msgid "Get the configured I2C address."
+msgstr "获取已配置的 I2C 地址。"
+
+#: ../../source/stamplc/io.rst:300 31a52e0381084e3fae9d5706d2745e80
+msgid "I2C address."
+msgstr "I2C 地址。"
+
+#: ../../source/stamplc/io.rst:305 45d794229e5947e395f67681caad6e3a
+msgid "|get_i2c_address.png|"
+msgstr ""
+
+#: ../../source/refs/stamplc.io.ref:19 0e042ba8ff2e4ad19dc1dedf56d18f01
+msgid "get_i2c_address.png"
+msgstr ""
+
+#: ../../source/stamplc/io.rst:315 0bde2a1543a74e4585e966a404e78e24
+msgid "Refresh the active I2C address from the device."
+msgstr "从设备刷新当前使用的 I2C 地址。"

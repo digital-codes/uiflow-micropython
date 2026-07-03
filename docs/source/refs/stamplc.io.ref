@@ -1,0 +1,24 @@
+.. |init.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/init.png
+.. |set_output_mode.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/set_output_mode.png
+.. |get_output_mode.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_output_mode.png
+.. |set_solid_relay.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/set_solid_relay.png
+.. |get_solid_relay.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_solid_relay.png
+.. |set_ina226_pullup.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/set_ina226_pullup.png
+.. |get_ina226_pullup.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_ina226_pullup.png
+.. |set_relay.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/set_relay.png
+.. |get_relay.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_relay.png
+.. |set_pwm_config.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/set_pwm_config.png
+.. |get_voltage.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_voltage.png
+.. |get_current.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_current.png
+.. |get_firmware_version.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_firmware_version.png
+.. |get_i2c_address.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/get_i2c_address.png
+.. |stamplc_io_example.png| image:: https://static-cdn.m5stack.com/mpy_docs/plc_module/io/example.png
+
+.. |stamplc_io_example.m5f2| raw:: html
+
+    <a
+        href="https://uiflow2.m5stack.com/?example=https://raw.githubusercontent.com/m5stack/uiflow-micropython/develop/examples/stamplc/io/stamplc_io_example.m5f2"
+        target="_blank"
+    >
+        stamplc_io_example.m5f2
+    </a>
