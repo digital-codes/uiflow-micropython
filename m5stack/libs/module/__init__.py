@@ -38,6 +38,7 @@ _attrs = {
     "LTEModule": "lte",
     "Module16340": "module16340",
     "Module4In8Out": "module_4in8out",
+    "ModuleBaseX": "basex",
     "NBIOTModule": "nbiot",
     "ODriveModule": "odrive",
     "PLUSModule": "plus",

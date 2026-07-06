@@ -10,6 +10,7 @@ package(
         "asr.py",
         "audio.py",
         "bala2.py",
+        "basex.py",
         "cc1101.py",
         "commu.py",
         "dc_motor.py",
