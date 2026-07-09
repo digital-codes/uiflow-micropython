@@ -27,7 +27,9 @@ if (BOARD_TYPE STREQUAL "atoms3r_cam")
 endif()
 
 # add m5can module
-include(${CMAKE_CURRENT_LIST_DIR}/m5can/m5can.cmake)
+if(NOT IDF_TARGET STREQUAL "esp32c5")
+    include(${CMAKE_CURRENT_LIST_DIR}/m5can/m5can.cmake)
+endif()
 
 # add m5unified module
 include(${CMAKE_CURRENT_LIST_DIR}/m5unified/m5unified.cmake)

@@ -762,4 +762,6 @@ const mp_obj_module_t m5can_module = {
     .globals = (mp_obj_dict_t *)&m5can_module_globals,
 };
 
+#if !defined(CONFIG_IDF_TARGET_ESP32C5)
 MP_REGISTER_MODULE(MP_QSTR_m5can, m5can_module);
+#endif

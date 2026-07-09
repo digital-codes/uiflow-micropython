@@ -88,6 +88,7 @@ jobs:
           - M5STACK_PaperS3
           - M5STACK_PowerHub
           - M5STACK_Stamp_PICO
+          - M5STACK_StampC5
           - M5STACK_StamPLC
           - M5STACK_StampS3
           - M5STACK_Station

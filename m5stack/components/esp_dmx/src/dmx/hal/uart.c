@@ -423,7 +423,7 @@ void dmx_uart_set_baud_rate(dmx_port_t dmx_num, uint32_t baud_rate) {
 
 void DMX_ISR_ATTR dmx_uart_invert_tx(dmx_port_t dmx_num, int invert) {
     struct dmx_uart_t *uart = &dmx_uart_context[dmx_num];
-    #if CONFIG_IDF_TARGET_ESP32C6 || CONFIG_IDF_TARGET_ESP32P4
+    #if CONFIG_IDF_TARGET_ESP32C5 || CONFIG_IDF_TARGET_ESP32C6 || CONFIG_IDF_TARGET_ESP32P4
     uart->dev->conf0_sync.txd_inv = invert;
     uart_ll_update(uart->dev);
     #else
@@ -433,7 +433,7 @@ void DMX_ISR_ATTR dmx_uart_invert_tx(dmx_port_t dmx_num, int invert) {
 
 int dmx_uart_get_rts(dmx_port_t dmx_num) {
     struct dmx_uart_t *uart = &dmx_uart_context[dmx_num];
-    #if CONFIG_IDF_TARGET_ESP32C6 || CONFIG_IDF_TARGET_ESP32P4
+    #if CONFIG_IDF_TARGET_ESP32C5 || CONFIG_IDF_TARGET_ESP32C6 || CONFIG_IDF_TARGET_ESP32P4
     return uart->dev->conf0_sync.sw_rts;
     #else
     return uart->dev->conf0.sw_rts;

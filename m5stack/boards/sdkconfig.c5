@@ -1,0 +1,4 @@
+# Workaround for https://github.com/espressif/esp-idf/issues/14456
+CONFIG_ESP_SYSTEM_HW_STACK_GUARD=n
+CONFIG_ESP32C5_REV_MAX_FULL=199
+CONFIG_ESP_REV_MAX_FULL=199

@@ -34,7 +34,8 @@ class Headless_Startup:
     def __init__(self) -> None:
         self._board = M5.getBoard()
         has_rgb = self._board not in [M5.BOARD.M5AtomS3R_CAM, M5.BOARD.M5AtomEchoS3R]
-        self.rgb = RGB() if has_rgb else NullRGB()
+        rgb = RGB() if has_rgb else None
+        self.rgb = rgb if rgb is not None else NullRGB()
         if self._board is not M5.BOARD.M5PowerHub:
             self.rgb.set_brightness(50)
             self.rgb.fill_color(self.COLOR_BLUE)
